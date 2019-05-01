@@ -41,9 +41,9 @@ CREATE TABLE `authusers` (
   `Password` varchar(255) NOT NULL,
   `LastLogin` timestamp NULL DEFAULT NULL,
   `LastPasswordReset` timestamp NULL DEFAULT NULL,
-  `CreatedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` timestamp NOT NULL,
   `CreatedBy` varchar(100) NOT NULL,
-  `UpdatedDate` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `UpdatedDate` timestamp NOT NULL,
   `UpdatedBy` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -72,9 +72,9 @@ CREATE TABLE `orgprofile` (
   `PhoneNumber` varchar(20) DEFAULT NULL,
   `Twitter` varchar(200) DEFAULT NULL,
   `LinkedIn` varchar(200) DEFAULT NULL,
-  `CreatedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` timestamp NOT NULL,
   `CreatedBy` varchar(100) NOT NULL,
-  `UpdatedDate` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `UpdatedDate` timestamp NOT NULL,
   `UpdatedBy` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -98,9 +98,9 @@ CREATE TABLE `orgproject` (
   `Region` varchar(100) DEFAULT NULL,
   `Country` varchar(100) DEFAULT NULL,
   `PostalCode` varchar(20) DEFAULT NULL,
-  `CreatedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` timestamp NOT NULL,
   `CreatedBy` varchar(100) NOT NULL,
-  `UpdatedDate` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `UpdatedDate` timestamp NOT NULL,
   `UpdatedBy` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -116,7 +116,7 @@ CREATE TABLE `orgprojectskills` (
   `SkillID` int(11) NOT NULL,
   `Description` text,
   `IsRequired` tinyint(4) NOT NULL DEFAULT '0',
-  `CreatedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` timestamp NOT NULL,
   `CreatedBy` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -133,9 +133,9 @@ CREATE TABLE `skills` (
   `Description` text,
   `ExperienceMin` int(11) DEFAULT NULL,
   `ExperienceMax` int(11) DEFAULT NULL,
-  `CreatedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` timestamp NOT NULL,
   `CreatedBy` varchar(100) NOT NULL,
-  `UpdatedDate` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `UpdatedDate` timestamp NOT NULL,
   `UpdatedBy` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -151,9 +151,9 @@ CREATE TABLE `volbio` (
   `Description` text NOT NULL,
   `WorkHistory` text,
   `Interests` text,
-  `CreatedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` timestamp NOT NULL,
   `CreatedBy` varchar(100) NOT NULL,
-  `UpdatedDate` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `UpdatedDate` timestamp NOT NULL,
   `UpdatedBy` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -177,9 +177,9 @@ CREATE TABLE `volprofile` (
   `EmailAddress` varchar(200) NOT NULL,
   `PhoneNumber` varchar(20) DEFAULT NULL,
   `ContactPref` varchar(5) NOT NULL DEFAULT 'E' COMMENT 'E - Email\nP - Phone',
-  `CreatedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` timestamp NOT NULL,
   `CreatedBy` varchar(100) NOT NULL,
-  `UpdatedDate` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `UpdatedDate` timestamp NOT NULL,
   `UpdatedBy` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -195,7 +195,7 @@ CREATE TABLE `volskills` (
   `SkillID` int(11) NOT NULL,
   `ExperienceLevel` int(11) DEFAULT NULL,
   `IsCurrent` tinyint(4) DEFAULT '0',
-  `CreatedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` timestamp NOT NULL,
   `CreatedBy` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
