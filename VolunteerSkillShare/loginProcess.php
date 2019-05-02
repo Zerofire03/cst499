@@ -1,31 +1,25 @@
 <?php
+
+    include "storedProcedureCalls.php";
+    
     //using session varaibles to store admin name and display on other pages
     session_start();
     
-    include "dbConnection.php";
-    
-    $conn = getDatabaseConnection("cst499-vss");
-    
     $username = $_POST['username'];
-    $password = sha1($_POST['password']);
-    //echo $username;
-    $sql;
+    $password = $_POST['password'];
     
-    // calling stored procedure command
-    $sql = 'CALL AuthenticateUser(:_UserName,@level)';
- 
-    // prepare for execution of the stored procedure
-    $stmt = $pdo->prepare($sql);
- 
-    // pass value to the command
-    $stmt->bindParam(':id', $customerNumber, PDO::PARAM_INT);
+    $authSuccess = getAuthenticatedUser($username, $password);
     
-    $np = array();
-    $np[":username"] = $username;
-    $np[":password"] = $password;
- 
-    // execute the stored procedure
-    $stmt->execute();
     
+    if($authSuccess == 1)
+    {
+        $_SESSION['incorrect'] = false;
+        header("Location:testPass.html");
+    }
+    else
+    {
+        $_SESSION['incorrect'] = true;
+        header("Location:testFail.html");
+    }
     
 ?>
