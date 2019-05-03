@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+
+.jumbotron{
+    background-color: rgb(109, 109, 105) !important;
+    color: rgb(216, 195, 34);
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+#activePage{
+    background-color: white;
+}
+
+.instructions{
+    display: block;
+    margin-left: auto;
+    margin-right:auto;
+    text-align:center;
+}
+
+#loginBox{
+    color: black !important;
+}
+
+footer, #hr_footer, #csumb{
+    color: black;
+    font-size:12px;
+    clear: left;
+    text-align: center;
+}
+#hr_footer{
+    width:25%;
+}
+
