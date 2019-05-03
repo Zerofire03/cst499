@@ -234,7 +234,8 @@ ALTER TABLE `orgprojectskills`
 -- Indexes for table `skills`
 --
 ALTER TABLE `skills`
-  ADD PRIMARY KEY (`SkillID`);
+  ADD PRIMARY KEY (`SkillID`),
+  ADD UNIQUE KEY `Name_UNIQUE` (`Name`);
 
 --
 -- Indexes for table `volbio`

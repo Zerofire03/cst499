@@ -1,3 +1,20 @@
+-----------------
+-- add some skill records
+-----------------
+insert into skills (Name, Description, ExperienceMin, ExperienceMax, CreatedDate, CreatedBy, UpdatedDate, UpdatedBy)
+select 'SQL Development', 'Ability to code in sql, mysql, MSSQL, etc.', 0, 10, current_timestamp, 'rootuser', current_timestamp, 'rootuser'
+union select 'HTML', 'Ability write html for web pages', 0, 10, current_timestamp, 'rootuser', current_timestamp, 'rootuser'
+union select 'JavaScript', 'Ability write javascript for web pages', 0, 10, current_timestamp, 'rootuser', current_timestamp, 'rootuser'
+union select 'Printer Setup', 'Ability to set up and connect a printer', 0, 10, current_timestamp, 'rootuser', current_timestamp, 'rootuser'
+union select 'Desktop Administration', 'Desktop computer administration and maintenance', 0, 10, current_timestamp, 'rootuser', current_timestamp, 'rootuser'
+union select 'Database Administration', 'Administer and maintain an application database', 0, 10, current_timestamp, 'rootuser', current_timestamp, 'rootuser'
+union select 'Carpentry', 'Light office and home carpentry', 0, 10, current_timestamp, 'rootuser', current_timestamp, 'rootuser'
+union select 'Painting', 'Indoor or Outdoor painting', 0, 10, current_timestamp, 'rootuser', current_timestamp, 'rootuser'
+union select 'Bookkeeping', 'Financial bookkeeping and management', 0, 10, current_timestamp, 'rootuser', current_timestamp, 'rootuser'
+union select 'Human Resources', 'Human resources management', 0, 10, current_timestamp, 'rootuser', current_timestamp, 'rootuser'
+union select 'Process Definition', 'Process definition and documentation', 0, 10, current_timestamp, 'rootuser', current_timestamp, 'rootuser'
+union select 'Tax Preparation', 'Nonprofit tax preparation', 0, 10, current_timestamp, 'rootuser', current_timestamp, 'rootuser';
+
 --------------------------------
 -- volunteer 1
 --------------------------------
@@ -26,6 +43,20 @@ set @_Interests = null;
 set @_CreatedBy = '0';
 call `cst499-vss`.sp_InsertVolBio(@_VolunteerID, @_Description, @_WorkHistory, @_Interests, @_CreatedBy);
 -- select @_VolunteerID, @_Description, @_WorkHistory, @_Interests, @_CreatedBy;
+
+set @_VolunteerID = @vol1;
+set @_SkillID = (select skillid from skills where Name like '%Development%');
+set @_ExperienceLevel = 5;
+set @_IsCurrent = 1;
+set @_CreatedBy = 'rootuser';
+call `cst499-vss`.sp_InsertVolSkill(@_VolunteerID, @_SkillID, @_ExperienceLevel, @_IsCurrent, @_CreatedBy);
+
+set @_VolunteerID = @vol1;
+set @_SkillID = (select skillid from skills where Name like '%Paint%');
+set @_ExperienceLevel = 3;
+set @_IsCurrent = 1;
+set @_CreatedBy = 'rootuser';
+call `cst499-vss`.sp_InsertVolSkill(@_VolunteerID, @_SkillID, @_ExperienceLevel, @_IsCurrent, @_CreatedBy);
 
 -- insert user auth
 set @_Role = 'V';
