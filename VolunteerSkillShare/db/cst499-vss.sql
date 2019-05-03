@@ -207,7 +207,8 @@ CREATE TABLE `volskills` (
 -- Indexes for table `authusers`
 --
 ALTER TABLE `authusers`
-  ADD PRIMARY KEY (`UserID`);
+  ADD PRIMARY KEY (`UserID`),
+  ADD UNIQUE KEY `UserName_UNIQUE` (`UserName`);
 
 --
 -- Indexes for table `orgprofile`
@@ -363,6 +364,18 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_DeleteVolSkills` (`_VolunteerID` INT)  B
     Delete From VolSkills WHERE VolunteerID = _VolunteerID;
 	
 END$$
+
+DROP PROCEDURE IF EXISTS `sp_GetAuthUserByUserName`$$
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_GetAuthUserByUserName` (`_UserName` VARCHAR(100))  BEGIN
+    
+    Select UserID, Role, VolunteerID, OrgID, FirstName, LastName,
+		UserName, LastLogin, LastPasswordReset, CreatedDate, CreatedBy,
+        UpdatedDate, UpdatedBy
+	From AuthUsers
+    Where UserName = _UserName;
+	
+END$$
+
 
 DROP PROCEDURE IF EXISTS `sp_GetOrgProfileByOrgID`$$
 CREATE DEFINER=`root`@`%` PROCEDURE `sp_GetOrgProfileByOrgID` (IN `_OrgID` INT)  BEGIN
