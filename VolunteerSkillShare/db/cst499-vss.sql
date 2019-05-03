@@ -452,8 +452,8 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_GetOrgProjectSkillsByOrgProjectID` (IN `
     
 END$$
 
-DROP PROCEDURE IF EXISTS `sp_GetSKills`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_GetSKills` ()  BEGIN
+DROP PROCEDURE IF EXISTS `sp_GetSkills`$$
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_GetSkills` ()  BEGIN
     
     SELECT SkillID,
 		Name,
@@ -605,8 +605,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProjectSkills` (`_OrgProjectID`
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertVolProfile`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertVolProfile` (`_FirstName` VARCHAR(100), 
-		`_LastName` VARCHAR(100), `_City` VARCHAR(100), 
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertVolProfile` (`_City` VARCHAR(100), 
         `_State` VARCHAR(100), `_Region` VARCHAR(100), 
         `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), 
         `_Url` VARCHAR(200), `_EmailAddress` VARCHAR(200), 
@@ -848,3 +847,7 @@ BEGIN
 	WHERE VolunteerID = _VolunteerID;
     
 END$$
+
+GRANT ALL ON `cst499-vss`.* TO 'root'@'%';$$
+GRANT ALL ON `cst499-vss`.* TO 'root'@'127.0.0.1';$$
+
