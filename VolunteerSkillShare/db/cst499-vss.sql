@@ -204,6 +204,12 @@ CREATE TABLE `volskills` (
 --
 
 --
+-- Indexes for table `authusers`
+--
+ALTER TABLE `authusers`
+  ADD PRIMARY KEY (`UserID`);
+
+--
 -- Indexes for table `orgprofile`
 --
 ALTER TABLE `orgprofile`
@@ -252,6 +258,12 @@ ALTER TABLE `volskills`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `authusers`
+--
+ALTER TABLE `authusers`
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `orgprofile`
@@ -528,7 +540,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertAuthUser` (`_Role` VARCHAR(2), `_V
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertOrgProfile`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProfile` (`_OrgID` INT, `_Description` TEXT, 
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProfile` (`_Description` TEXT, 
 					`_Mission` TEXT, `_TaxIdentifier` VARCHAR(45), 
                     `_ContactName` VARCHAR(200), `_ContactEmail` VARCHAR(200), 
                     `_ContactPhone` VARCHAR(20), `_Address1` VARCHAR(200), 
@@ -541,14 +553,14 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProfile` (`_OrgID` INT, `_Descr
     
     INSERT INTO OrgProfile
     (
-		OrgID, Description, Mission, TaxIdentifier, ContactName, ContactEmail,
+		Description, Mission, TaxIdentifier, ContactName, ContactEmail,
         ContactPhone, Address1, Address2, City, State, Region,
         Country, PostalCode, EmailAddress, PhoneNumber, Twitter,
         LinkedIn, CreatedDate, CreatedBy, UpdatedDate, UpdatedBy
 	)
     VALUES
     (
-		_OrgID, _Description, _Mission, _TaxIdentifier, _ContactName, _ContactEmail,
+		_Description, _Mission, _TaxIdentifier, _ContactName, _ContactEmail,
         _ContactPhone, _Address1, _Address2, _City, _State, _Region,
         _Country, _PostalCode, _EmailAddress, _PhoneNumber, _Twitter,
         _LinkedIn, CURRENT_TIMESTAMP, _CreatedBy, CURRENT_TIMESTAMP, _CreatedBy
@@ -599,9 +611,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProjectSkills` (`_OrgProjectID`
     (
 		_OrgProjectID, _SkillID, _Description, _IsRequired, CURRENT_TIMESTAMP, _CreatedBy
 	);
-    
-    SELECT LAST_INSERT_ID();
-    
+        
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertVolProfile`$$
@@ -626,6 +636,23 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertVolProfile` (`_City` VARCHAR(100),
 	
     SELECT LAST_INSERT_ID();
     
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_InsertVolBio`$$
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertVolBio` (`_VolunteerID` INT, 
+		`_Description` text, `_WorkHistory` text, `_Interests` text, 
+        `_CreatedBy` VARCHAR(100))  BEGIN
+    
+    INSERT INTO VolBio (
+        VolunteerID, Description, WorkHistory, Interests,
+        CreatedDate, CreatedBy, UpdatedDate, UpdatedBy
+	)
+	Values
+    (
+		_VolunteerID, _Description, _WorkHistory, _Interests,
+        CURRENT_TIMESTAMP, _CreatedBy, CURRENT_TIMESTAMP, _CreatedBy
+    );
+	    
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertVolSkill`$$
