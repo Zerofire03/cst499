@@ -37,6 +37,8 @@ CREATE TABLE `authusers` (
   `Role` varchar(2) NOT NULL DEFAULT 'V' COMMENT 'V - volunteer, O - organization, A - admin',
   `VolunteerID` int(11) DEFAULT NULL,
   `OrgID` int(11) DEFAULT NULL,
+  `FirstName` varchar(100) NULL,
+  `LastName` varchar(100) NULL,
   `UserName` varchar(100) NOT NULL,
   `Password` varchar(255) NOT NULL,
   `LastLogin` timestamp NULL DEFAULT NULL,
@@ -166,8 +168,6 @@ CREATE TABLE `volbio` (
 DROP TABLE IF EXISTS `volprofile`;
 CREATE TABLE `volprofile` (
   `VolunteerID` int(11) NOT NULL,
-  `FirstName` varchar(100) NOT NULL,
-  `LastName` varchar(100) DEFAULT NULL,
   `City` varchar(100) DEFAULT NULL,
   `State` varchar(100) DEFAULT NULL,
   `Region` varchar(100) DEFAULT NULL,
@@ -500,23 +500,27 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_GetVolSkillsByVolunteerID` (`_VolunteerI
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertAuthUser`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertAuthUser` (`_Role` VARCHAR(2), `_VolunteerID` INT, `_OrgID` INT, `_UserName` VARCHAR(100), `_Password` VARCHAR(255), `_LastLogin` TIMESTAMP, `_LastPasswordReset` TIMESTAMP, `_CreatedBy` VARCHAR(100), `_UpdatedBy` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertAuthUser` (`_Role` VARCHAR(2), `_VolunteerID` INT, 
+		`_OrgID` INT, `_FirstName` VARCHAR(100),
+        `_LastName` VARCHAR(100), `_UserName` VARCHAR(100), 
+        `_Password` VARCHAR(255), `_LastLogin` TIMESTAMP, 
+        `_LastPasswordReset` TIMESTAMP, `_CreatedBy` VARCHAR(100))  BEGIN
     
     INSERT INTO AuthUsers
     (
 		Role, VolunteerID, 
-		OrgID, UserName, 
-        Password, LastLogin, 
+		OrgID, FirstName, LastName,
+        UserName, Password, LastLogin, 
         LastPasswordReset, CreatedDate, 
         CreatedBy, UpdatedDate, UpdatedBy
 	)
     VALUES
     (
 		_Role, _VolunteerID, 
-		_OrgID, _UserName, 
-        PASSWORD(_Password), _LastLogin, 
+		_OrgID, _FirstName, _LastName,
+        _UserName, PASSWORD(_Password), _LastLogin, 
         _LastPasswordReset, CURRENT_TIMESTAMP, 
-        _CreatedBy, CURRENT_TIMESTAMP, _UpdatedBy
+        _CreatedBy, CURRENT_TIMESTAMP, _CreatedBy
 	);
     
     SELECT LAST_INSERT_ID();
@@ -524,7 +528,16 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertAuthUser` (`_Role` VARCHAR(2), `_V
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertOrgProfile`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProfile` (`_OrgID` INT, `_Description` TEXT, `_Mission` TEXT, `_TaxIdentifier` VARCHAR(45), `_ContactName` VARCHAR(200), `_ContactEmail` VARCHAR(200), `_ContactPhone` VARCHAR(20), `_Address1` VARCHAR(200), `_Address2` VARCHAR(200), `_City` VARCHAR(100), `_State` VARCHAR(100), `_Region` VARCHAR(100), `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), `_EmailAddress` VARCHAR(200), `_PhoneNumber` VARCHAR(20), `_Twitter` VARCHAR(200), `_LinkedIn` VARCHAR(200), `_CreatedBy` VARCHAR(100), `_UpdatedBy` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProfile` (`_OrgID` INT, `_Description` TEXT, 
+					`_Mission` TEXT, `_TaxIdentifier` VARCHAR(45), 
+                    `_ContactName` VARCHAR(200), `_ContactEmail` VARCHAR(200), 
+                    `_ContactPhone` VARCHAR(20), `_Address1` VARCHAR(200), 
+                    `_Address2` VARCHAR(200), `_City` VARCHAR(100), 
+                    `_State` VARCHAR(100), `_Region` VARCHAR(100), 
+                    `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), 
+                    `_EmailAddress` VARCHAR(200), `_PhoneNumber` VARCHAR(20), 
+                    `_Twitter` VARCHAR(200), `_LinkedIn` VARCHAR(200), 
+                    `_CreatedBy` VARCHAR(100))  BEGIN
     
     INSERT INTO OrgProfile
     (
@@ -538,7 +551,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProfile` (`_OrgID` INT, `_Descr
 		_OrgID, _Description, _Mission, _TaxIdentifier, _ContactName, _ContactEmail,
         _ContactPhone, _Address1, _Address2, _City, _State, _Region,
         _Country, _PostalCode, _EmailAddress, _PhoneNumber, _Twitter,
-        _LinkedIn, CURRENT_TIMESTAMP, _CreatedBy, CURRENT_TIMESTAMP, _UpdatedBy
+        _LinkedIn, CURRENT_TIMESTAMP, _CreatedBy, CURRENT_TIMESTAMP, _CreatedBy
 	);
     
     SELECT LAST_INSERT_ID();
@@ -546,7 +559,13 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProfile` (`_OrgID` INT, `_Descr
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertOrgProject`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProject` (`_OrgProjectID` INT, `_OrgID` INT, `_IsActive` TINYINT, `_Priority` VARCHAR(2), `_Description` TEXT, `_StartDate` DATETIME, `_TimelineDescription` TEXT, `_City` VARCHAR(100), `_State` VARCHAR(100), `_Region` VARCHAR(100), `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), `_CreatedBy` VARCHAR(100), `_UpdatedBy` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProject` (`_OrgProjectID` INT, `_OrgID` INT, 
+		`_IsActive` TINYINT, `_Priority` VARCHAR(2), 
+        `_Description` TEXT, `_StartDate` DATETIME, 
+        `_TimelineDescription` TEXT, `_City` VARCHAR(100), 
+        `_State` VARCHAR(100), `_Region` VARCHAR(100), 
+        `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), 
+        `_CreatedBy` VARCHAR(100))  BEGIN
     
     INSERT INTO OrgProject
     (
@@ -560,7 +579,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProject` (`_OrgProjectID` INT, 
 		_OrgProjectID, _OrgID, _IsActive, _Priority, _Description,
         _StartDate, _TimelineDescription, _City, _State, _Region,
         _Country, _PostalCode, CURRENT_TIMESTAMP, _CreatedBy, CURRENT_TIMESTAMP, 
-        _UpdatedBy
+        _CreatedBy
 	);
     
     SELECT LAST_INSERT_ID();
@@ -568,7 +587,9 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProject` (`_OrgProjectID` INT, 
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertOrgProjectSkills`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProjectSkills` (`_OrgProjectID` INT, `_SkillID` INT, `_Description` TEXT, `_IsRequired` TINYINT, `_CreatedBy` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProjectSkills` (`_OrgProjectID` INT, `_SkillID` INT, 
+		`_Description` TEXT, `_IsRequired` TINYINT, 
+        `_CreatedBy` VARCHAR(100))  BEGIN
     
     INSERT INTO OrgProjectSkills
     (
@@ -584,16 +605,22 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProjectSkills` (`_OrgProjectID`
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertVolProfile`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertVolProfile` (`_FirstName` VARCHAR(100), `_LastName` VARCHAR(100), `_City` VARCHAR(100), `_State` VARCHAR(100), `_Region` VARCHAR(100), `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), `_Url` VARCHAR(200), `_EmailAddress` VARCHAR(200), `_PhoneNumber` VARCHAR(20), `_ContactPref` VARCHAR(5), `_CreatedBy` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertVolProfile` (`_FirstName` VARCHAR(100), 
+		`_LastName` VARCHAR(100), `_City` VARCHAR(100), 
+        `_State` VARCHAR(100), `_Region` VARCHAR(100), 
+        `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), 
+        `_Url` VARCHAR(200), `_EmailAddress` VARCHAR(200), 
+        `_PhoneNumber` VARCHAR(20), `_ContactPref` VARCHAR(5), 
+        `_CreatedBy` VARCHAR(100))  BEGIN
     
     INSERT INTO VolProfile (
-        FirstName, LastName, City, State, Region, Country, 
+        City, State, Region, Country, 
         PostalCode, Url, EmailAddress, PhoneNumber, ContactPref, 
         CreatedDate, CreatedBy, UpdatedDate, UpdatedBy
 	)
 	Values
     (
-		_FirstName, _LastName, _City, _State, _Region, _Country,
+		_City, _State, _Region, _Country,
         _PostalCode, _Url, _EmailAddress, _PhoneNumber, _ContactPref,
         CURRENT_TIMESTAMP, _CreatedBy, CURRENT_TIMESTAMP, _CreatedBy
     );
@@ -603,7 +630,9 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertVolProfile` (`_FirstName` VARCHAR(
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertVolSkill`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertVolSkill` (`_VolunteerID` INT, `_SkillID` INT, `_ExperienceLevel` INT, `_IsCurrent` TINYINT, `_CreatedBy` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertVolSkill` (`_VolunteerID` INT, 
+		`_SkillID` INT, `_ExperienceLevel` INT, 
+        `_IsCurrent` TINYINT, `_CreatedBy` VARCHAR(100))  BEGIN
     
     INSERT INTO VolSkills
     (
@@ -617,7 +646,11 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertVolSkill` (`_VolunteerID` INT, `_S
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_SearchOrgProjectsByVarious`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_SearchOrgProjectsByVarious` (IN `_IsActive` TINYINT, IN `_StartDateBegin` DATETIME, IN `_StartDateEnd` DATETIME, IN `_City` VARCHAR(100), IN `_State` VARCHAR(100), IN `_Region` VARCHAR(100), IN `_Country` VARCHAR(100), IN `_PostalCode` VARCHAR(20))  BEGIN
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_SearchOrgProjectsByVarious` (IN `_IsActive` TINYINT, 
+		IN `_StartDateBegin` DATETIME, IN `_StartDateEnd` DATETIME, 
+        IN `_City` VARCHAR(100), IN `_State` VARCHAR(100), 
+        IN `_Region` VARCHAR(100), IN `_Country` VARCHAR(100), 
+        IN `_PostalCode` VARCHAR(20))  BEGIN
     
     SELECT OrgProjectID,
 		OrgID,
@@ -648,7 +681,11 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_SearchOrgProjectsByVarious` (IN `_IsActi
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_SearchVolunteersByVarious`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_SearchVolunteersByVarious` (`_City` VARCHAR(100), `_State` VARCHAR(100), `_Region` VARCHAR(100), `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), `_SkillID` INT, `_ExperienceLevel` INT, `_IsCurrent` TINYINT)  BEGIN
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_SearchVolunteersByVarious` (`_City` VARCHAR(100), 
+		`_State` VARCHAR(100), `_Region` VARCHAR(100), 
+        `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), 
+        `_SkillID` INT, `_ExperienceLevel` INT, 
+        `_IsCurrent` TINYINT)  BEGIN
     
     SELECT vp.VolunteerID,
 		vp.FirstName,
@@ -672,6 +709,8 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_SearchVolunteersByVarious` (`_City` VARC
 	FROM VolunteerProfile as vp
 		JOIN VolunteerBio as vb
 			on vp.VolunteerID = vb.VolunteerID
+		JOIN AuthUser as au
+			on au.VolunteerID = vp.VolunteerID
     WHERE vp.City = Coalesce(_City, vp.City)
         AND vp.State = Coalesce(_State, vp.State)
         AND vp.Region = Coalesce(_Region, vp.Region)
@@ -688,10 +727,16 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_SearchVolunteersByVarious` (`_City` VARC
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_UpdateAuthUser`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_UpdateAuthUser` (`_UserID` INT, `_Role` VARCHAR(2), `_UserName` VARCHAR(100), `_Password` VARCHAR(255), `_LastLogin` TIMESTAMP, `_LastPasswordReset` TIMESTAMP, `_UpdatedBy` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_UpdateAuthUser` (`_UserID` INT, 
+		`_Role` VARCHAR(2), `_FirstName` VARCHAR(100), 
+        `_LastName` VARCHAR(100), `_UserName` VARCHAR(100), 
+        `_Password` VARCHAR(255), `_LastLogin` TIMESTAMP, 
+        `_LastPasswordReset` TIMESTAMP, `_UpdatedBy` VARCHAR(100))  BEGIN
     
     Update AuthUsers
     SET Role = _Role,
+		FirstName = _FirstName,
+        LastName = _LastName,
 		UserName = _UserName,
         Password = Coalesce(PASSWORD(_Password), Password),
         LastLogin = Coalesce(_LastLogin, LastLogin),
@@ -704,7 +749,16 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_UpdateAuthUser` (`_UserID` INT, `_Role` 
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_UpdateOrgProfile`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_UpdateOrgProfile` (`_OrgID` INT, `_Description` TEXT, `_Mission` TEXT, `_TaxIdentifier` VARCHAR(45), `_ContactName` VARCHAR(200), `_ContactEmail` VARCHAR(200), `_ContactPhone` VARCHAR(20), `_Address1` VARCHAR(200), `_Address2` VARCHAR(200), `_City` VARCHAR(100), `_State` VARCHAR(100), `_Region` VARCHAR(100), `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), `_EmailAddress` VARCHAR(200), `_PhoneNumber` VARCHAR(20), `_Twitter` VARCHAR(200), `_LinkedIn` VARCHAR(200), `_UpdatedBy` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_UpdateOrgProfile` (`_OrgID` INT, `_Description` TEXT, 
+		`_Mission` TEXT, `_TaxIdentifier` VARCHAR(45), 
+        `_ContactName` VARCHAR(200), `_ContactEmail` VARCHAR(200), 
+        `_ContactPhone` VARCHAR(20), `_Address1` VARCHAR(200), 
+        `_Address2` VARCHAR(200), `_City` VARCHAR(100), 
+        `_State` VARCHAR(100), `_Region` VARCHAR(100), 
+        `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), 
+        `_EmailAddress` VARCHAR(200), `_PhoneNumber` VARCHAR(20), 
+        `_Twitter` VARCHAR(200), `_LinkedIn` VARCHAR(200), 
+        `_UpdatedBy` VARCHAR(100))  BEGIN
     
     UPDATE OrgProfile
 		SET Description = _Description,
@@ -731,7 +785,13 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_UpdateOrgProfile` (`_OrgID` INT, `_Descr
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_UpdateOrgProject`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_UpdateOrgProject` (`_OrgProjectID` INT, `_OrgID` INT, `_IsActive` TINYINT, `_Priority` VARCHAR(2), `_Description` TEXT, `_StartDate` DATETIME, `_TimelineDescription` TEXT, `_City` VARCHAR(100), `_State` VARCHAR(100), `_Region` VARCHAR(100), `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), `_UpdatedBy` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_UpdateOrgProject` (`_OrgProjectID` INT, 
+		`_OrgID` INT, `_IsActive` TINYINT, 
+        `_Priority` VARCHAR(2), `_Description` TEXT, 
+        `_StartDate` DATETIME, `_TimelineDescription` TEXT, 
+        `_City` VARCHAR(100), `_State` VARCHAR(100), 
+        `_Region` VARCHAR(100), `_Country` VARCHAR(100), 
+        `_PostalCode` VARCHAR(20), `_UpdatedBy` VARCHAR(100))  BEGIN
     
     UPDATE OrgProject
 		SET IsActive = _IsActive,
