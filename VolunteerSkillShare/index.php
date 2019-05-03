@@ -34,11 +34,11 @@
         <div class="instructions">
         <h3><font color="black">Sign Up</font></h3>
         <div id="accountBox">
-        <form method="post" action="insertAuthUser.php">
+        <form method="post" action="VolunteerSkillShare/insertAuthUser.php">
             <input type="text" name="fName" id="fName" placeholder="First Name" size="20"/> <input type="text" name="lName" id="lName" placeholder="Last Name" size="20"/> <br>
             <input type="text" name="email" id="email" placeholder="Email" size="42"/> <br>
             <input type="password" name="password" id="passwordA" placeholder="Password" size="42"/> <br>
-            <input type="radio" name="account" id="volunteer" value="v"> Volunteer <input type="radio" name="account" id="organization" value="o"> Organization<br>
+            <input type="radio" name="account" id="volunteer" value="V"> Volunteer <input type="radio" name="account" id="organization" value="O"> Organization<br>
             <button class="btn btn-primary" type="submit" value="signUp">Sign Up</button>
         </form>
         </div>

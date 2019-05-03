@@ -11,7 +11,7 @@
     $password = $_POST['password'];
     $accountType = $_POST['account'];
     
-    $insertAccount = setInsertAuthUser($accountType, $email, $password);
+    $insertAccount = setInsertAuthUser($accountType, $fname, $lname, $email, $password);
     
     
     if(empty($insertAccount))
