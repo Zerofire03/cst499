@@ -98,4 +98,40 @@
         return null;
     }
     
+    /**
+     * Get UserID
+     * @param string $username
+     * @return int
+     */
+     
+    function getUserID($username)
+    {
+        $conn = getDatabaseConnection("cst499-vss");
+        
+        try
+        {
+     
+            // calling stored procedure command
+            //CALL sp_GetUserIDByUserName('foo1@gmail.com')
+            $sql = 'CALL sp_GetUserIDByUserName(:_UserName)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindParam(':_UserName', $username, PDO::PARAM_STR);
+     
+            // execute the stored procedure
+            $stmt->execute();
+     
+            $stmt->closeCursor();
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    
 ?>

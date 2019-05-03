@@ -14,6 +14,8 @@
     if($authSuccess == 1)
     {
         $_SESSION['incorrect'] = false;
+        $_SESSION['username'] = $username;
+        $_SESSION['userid'] = getUserID($username);
         header("Location:testPass.html");
     }
     else
