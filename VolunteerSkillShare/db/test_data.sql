@@ -4,6 +4,8 @@ Install a set of test data into vss tables
 This script truncates all tables and inserts a new set of base test data.
 */
 
+USE `cst499-vss`;
+
 -- turn off foreign key checks
 SET FOREIGN_KEY_CHECKS=0;
 
