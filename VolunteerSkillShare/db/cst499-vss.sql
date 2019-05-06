@@ -292,10 +292,6 @@ ALTER TABLE `volprofile`
   MODIFY `VolunteerID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
---
-
---
 -- Constraints for table `orgproject`
 --
 ALTER TABLE `orgproject`
@@ -585,7 +581,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProfile` (`_Description` TEXT,
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertOrgProject`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProject` (`_OrgProjectID` INT, `_OrgID` INT, 
+CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProject` (`_OrgID` INT, 
 		`_IsActive` TINYINT, `_Priority` VARCHAR(2), 
         `_Description` TEXT, `_StartDate` DATETIME, 
         `_TimelineDescription` TEXT, `_City` VARCHAR(100), 
@@ -595,14 +591,14 @@ CREATE DEFINER=`root`@`%` PROCEDURE `sp_InsertOrgProject` (`_OrgProjectID` INT, 
     
     INSERT INTO OrgProject
     (
-		OrgProjectID, OrgID, IsActive, Priority, Description,
+		OrgID, IsActive, Priority, Description,
         StartDate, TimelineDescription, City, State, Region,
         Country, PostalCode, CreatedDate, CreatedBy, UpdatedDate, 
         UpdatedBy
 	)
     VALUES
     (
-		_OrgProjectID, _OrgID, _IsActive, _Priority, _Description,
+		_OrgID, _IsActive, _Priority, _Description,
         _StartDate, _TimelineDescription, _City, _State, _Region,
         _Country, _PostalCode, CURRENT_TIMESTAMP, _CreatedBy, CURRENT_TIMESTAMP, 
         _CreatedBy
