@@ -15,7 +15,8 @@
     {
         $_SESSION['incorrect'] = false;
         $_SESSION['username'] = $username;
-        $_SESSION['userid'] = getUserID($username);
+        $_SESSION['userid'] = 0;
+        //$_SESSION['userid'] = getUserID($username);
         header("Location:testPass.html");
     }
     else

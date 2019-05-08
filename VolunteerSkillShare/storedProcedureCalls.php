@@ -30,7 +30,7 @@
      
             // execute the stored procedure
             $stmt->execute();
-     
+            
             $stmt->closeCursor();
      
             // execute the second query to get customer's level
@@ -120,6 +120,44 @@
      
             // pass value to the command
             $stmt->bindParam(':_UserName', $username, PDO::PARAM_STR);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            
+            $stmt->closeCursor();
+            
+            $userID = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $userID;
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * Delete AuthUser
+     * @param int $userID
+     * @return int
+     */
+     
+    function deleteAuthUser($userID)
+    {
+        $conn = getDatabaseConnection("cst499-vss");
+        
+        try
+        {
+     
+            // calling stored procedure command
+            //CALL sp_DeleteAuthUser(0)
+            $sql = 'CALL sp_GetUserIDByUserName(:_UserID, @UserIDOut)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_UserID', $userID, PDO::PARAM_INT);
      
             // execute the stored procedure
             $stmt->execute();
