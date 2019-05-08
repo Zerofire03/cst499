@@ -61,7 +61,7 @@
      */
      
      
-    function setInsertAuthUser($role, $username, $password)
+    function setInsertAuthUser($role, $fName, $lName, $username, $password)
     {
         $conn = getDatabaseConnection("cst499-vss");
         
@@ -69,8 +69,7 @@
         {
      
             // calling stored procedure command
-            //Call sp_InsertAuthUser('V', NULL, NULL, 'foo@gmail.com', 'foo', NULL, NULL, 'foo@gmail.com', 'foo@gmail.com')
-            $sql = 'CALL sp_InsertAuthUser(:_Role, :_VolunteerID, :_OrgID, :_UserName, :_Password, :_LastLogin, :_LastPasswordReset, :_CreatedBy, :_UpdatedBy)';
+            $sql = 'CALL sp_InsertAuthUser(:_Role, :_VolunteerID, :_OrgID, :_FirstName, :_LastName, :_UserName, :_Password, :_LastLogin, :_LastPasswordReset, :_CreatedBy)';
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
@@ -79,12 +78,13 @@
             $stmt->bindParam(':_Role', $role, PDO::PARAM_STR);
             $stmt->bindValue(':_VolunteerID', null, PDO::PARAM_INT);
             $stmt->bindValue(':_OrgID', null, PDO::PARAM_INT);
+            $stmt->bindParam(':_FirstName', $fName, PDO::PARAM_STR);
+            $stmt->bindParam(':_LastName', $lName, PDO::PARAM_STR);
             $stmt->bindParam(':_UserName', $username, PDO::PARAM_STR);
             $stmt->bindParam(':_Password', $password, PDO::PARAM_STR);
             $stmt->bindValue(':_LastLogin', null, PDO::PARAM_INT);
             $stmt->bindValue(':_LastPasswordReset', null, PDO::PARAM_INT);
             $stmt->bindParam(':_CreatedBy', $username, PDO::PARAM_STR);
-            $stmt->bindParam(':_UpdatedBy', $username, PDO::PARAM_STR);
      
             // execute the stored procedure
             $stmt->execute();
@@ -98,6 +98,40 @@
         return null;
     }
     
+    /**
+     * Get UserID
+     * @param string $username
+     * @return int
+     */
+     
+    function getUserID($username)
+    {
+        $conn = getDatabaseConnection("cst499-vss");
+        
+        try
+        {
+     
+            // calling stored procedure command
+            //CALL sp_GetUserIDByUserName('foo1@gmail.com')
+            $sql = 'CALL sp_GetUserIDByUserName(:_UserName)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindParam(':_UserName', $username, PDO::PARAM_STR);
+     
+            // execute the stored procedure
+            $stmt->execute();
+     
+            $stmt->closeCursor();
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
     
     function getauthuser ($userid, $role, $volunteerid, $username){
         $conn = getDatabaseConnection("cst499-vss");
@@ -385,5 +419,5 @@
         $stmt = $conn->prepare($sql);
         $stmt->execute();
     }
-    
+
 ?>
