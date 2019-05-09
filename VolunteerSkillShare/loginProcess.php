@@ -17,7 +17,14 @@
         $_SESSION['username'] = $username;
         $_SESSION['userid'] = getAuthUserID($username);
         $_SESSION['role'] = getAuthUserRole($username);
-        header("Location:testPass.html");
+        if($_SESSION['role'] == 'V')
+        {
+            header("Location:volProfile.php");
+        }
+        elseif($_SESSION['role'] == 'O')
+        {
+            header("Location:orglProfile.php");
+        }
     }
     else
     {

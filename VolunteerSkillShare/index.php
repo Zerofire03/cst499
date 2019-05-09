@@ -1,22 +1,8 @@
 <?php
-    //session_start();
-    
-    //include "dbConnection.php";
-    
-    //$conn = getDatabaseConnection("cst499-vss");
-    
+    session_start();
 ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Volunteer Skill Share</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <style>@import url("css/styles.css");</style>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates" rel="stylesheet">
-    </head>
-    
+
+    <?php include '_header.php';?>
     <body id="activePage">
         
         <div class="jumbotron text-center">
@@ -32,7 +18,7 @@
         </ul>
         
        <!--Login Process-->
-        <div class="<?php echo $_SESSION['incorrect'] == "false" ? 'show' : 'hidden';?>"
+        <div class="<?php echo empty($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
         <h3><font color="black">Please Login</font></h3>
         <div id="loginBox">
         <form method="post" action="loginProcess.php">
@@ -46,7 +32,7 @@
         
         <!--Create Account Process-->
         
-        <div class="<?php echo $_SESSION['incorrect'] == "false" ? 'show' : 'hidden';?>"
+        <div class="<?php echo empty($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
         <h3><font color="black">Sign Up</font></h3>
         <div id="accountBox">
         <form method="post" action="insertAuthUser.php">
@@ -59,19 +45,4 @@
         </div>
         </div>
         
-        <!-- This is the footer -->
-        <footer>
-            <hr id="hr_footer">
-                CST 499 Group Capstone. 2019&copy; Buckey, Gonzalez, Holmes, Loeser<br />
-                <strong>Disclaimer:</strong> The information in this webpage is fictious.<br />
-                It is used for academic purposes only.
-                
-                <figure id="csumb">
-                    <img src="Images/csumb_logo.png" alt="CSUMB Logo">
-                </figure>
-            
-        </footer>
-        <!-- closing footer -->
-    </body>
-    
-</html>
+<?php include '_footer.php';

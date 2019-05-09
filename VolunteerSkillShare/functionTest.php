@@ -13,19 +13,6 @@
 
     include "storedProcedureCalls.php";
     session_start();
-    
-    if( $_SESSION['incorrect'] == false )
-    {
-        ?>
-        <script type="text/javascript">$('#logoutButton').hide()</script>
-        <?php
-    }
-    else
-    {
-        ?>
-        <script type="text/javascript">$('#logoutButton').hide()</script>
-        <?php
-    }
 ?>
 
 
@@ -34,7 +21,7 @@
     <body>
         
         <!--Login Process-->
-        <div class="<?php echo $_SESSION['incorrect'] == "false" ? 'show' : 'hidden';?>"
+        <div class="<?php echo !isset($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
         <h3><font color="black">Please Login</font></h3>
         <div id="loginBox">
         <form method="post" action="loginProcess.php">
@@ -47,13 +34,13 @@
         </div>
         
         <!--Logout Process-->
-        <div class="logout">
         <div id="logoutButton">
-        <form method="post" action="logout.php">
-            <br>
-            <button class="btn btn-logout" type="submit" value="Logout">Logout</button>
-        </form>
-        </div>
+            <div class="<?php echo isset($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
+                <form method="post" action="logout.php">
+                    <br>
+                    <button class="btn btn-logout" type="submit" value="Logout">Logout</button>
+                </form>
+            </div>
         </div>
         
     </body>
