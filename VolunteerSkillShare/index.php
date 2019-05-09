@@ -34,7 +34,7 @@
         <div class="instructions">
         <h3><font color="black">Please Login</font></h3>
         <div id="loginBox">
-        <form method="post" action="VolunteerSkillShare/loginProcess.php">
+        <form method="post" action="loginProcess.php">
             <input type="text" name="username" id="username" placeholder="UserName"/>
             <input type="password" name="password" id="password" placeholder="Password"/>
             <br>
