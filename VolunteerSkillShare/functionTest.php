@@ -11,3 +11,13 @@
     //deleteAuthUser($_SESSION['userid']);
     //unset($_SESSION['userid']);
 ?>
+
+<!--Logout Process-->
+        <div class="logout">
+        <div id="loginBox">
+        <form method="post" action="logout.php">
+            <br>
+            <button class="btn btn-logout" type="submit" value="Logout">Logout</button>
+        </form>
+        </div>
+        </div>
