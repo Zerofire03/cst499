@@ -12,6 +12,7 @@
         <title>Volunteer Skill Share</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <style>@import url("css/styles.css");</style>
         <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates" rel="stylesheet">
     </head>
@@ -31,7 +32,7 @@
         </ul>
         
        <!--Login Process-->
-        <div class="instructions">
+        <div class="<?php echo $_SESSION['incorrect'] == "false" ? 'show' : 'hidden';?>"
         <h3><font color="black">Please Login</font></h3>
         <div id="loginBox">
         <form method="post" action="loginProcess.php">
@@ -45,7 +46,7 @@
         
         <!--Create Account Process-->
         
-        <div class="instructions">
+        <div class="<?php echo $_SESSION['incorrect'] == "false" ? 'show' : 'hidden';?>"
         <h3><font color="black">Sign Up</font></h3>
         <div id="accountBox">
         <form method="post" action="insertAuthUser.php">
