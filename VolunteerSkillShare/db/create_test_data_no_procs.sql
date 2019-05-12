@@ -195,14 +195,15 @@ Values
 -- create an organization
 INSERT INTO orgprofile
     (
-		Description, Mission, TaxIdentifier, ContactName, ContactEmail,
+		Name, Description, Mission, TaxIdentifier, ContactName, ContactEmail,
         ContactPhone, Address1, Address2, City, State, Region,
         Country, PostalCode, EmailAddress, PhoneNumber, Twitter,
         LinkedIn, CreatedDate, CreatedBy, UpdatedDate, UpdatedBy
 	)
     VALUES
     (
-		'VSS Test NonProfit', 'To boldly finish CST499', 'TestTaxID', 
+		'VSS Test NonProfit', 'VSS Test NonProfit is a test nonprofit organization',
+        'To boldly finish CST499', 'TestTaxID', 
         'Test Org User', 'testorg1contact@test.com',
         '987-999-0123', '123 Main St', '10th floor', 'Test City', 
         'NY', 'Manhattan', 'USA', '14301', 'testorg1@test.com', 

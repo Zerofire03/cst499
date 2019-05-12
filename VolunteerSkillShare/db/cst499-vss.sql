@@ -57,6 +57,7 @@ CREATE TABLE `authusers` (
 DROP TABLE IF EXISTS `orgprofile`;
 CREATE TABLE `orgprofile` (
   `OrgID` int(11) NOT NULL,
+  `Name` VARCHAR(100) NOT NULL,
   `Description` text NOT NULL,
   `Mission` text,
   `TaxIdentifier` VARCHAR(50) NULL,
@@ -214,7 +215,8 @@ ALTER TABLE `authusers`
 -- Indexes for table `orgprofile`
 --
 ALTER TABLE `orgprofile`
-  ADD PRIMARY KEY (`OrgID`);
+  ADD PRIMARY KEY (`OrgID`),
+  ADD UNIQUE KEY `Name_UNIQUE` (`Name`);
 
 --
 -- Indexes for table `orgproject`
@@ -378,6 +380,7 @@ DROP PROCEDURE IF EXISTS `sp_GetOrgProfileByOrgID`$$
 CREATE PROCEDURE `sp_GetOrgProfileByOrgID` (IN `_OrgID` INT)  BEGIN
     
     SELECT OrgID,
+		Name,
 		Description,
         Mission,
         TaxIdentifier,
@@ -550,7 +553,7 @@ CREATE PROCEDURE `sp_InsertAuthUser` (`_Role` VARCHAR(2), `_VolunteerID` INT,
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertOrgProfile`$$
-CREATE PROCEDURE `sp_InsertOrgProfile` (`_Description` TEXT, 
+CREATE PROCEDURE `sp_InsertOrgProfile` (`_Name` VARCHAR(100), `_Description` TEXT, 
 					`_Mission` TEXT, `_TaxIdentifier` VARCHAR(45), 
                     `_ContactName` VARCHAR(200), `_ContactEmail` VARCHAR(200), 
                     `_ContactPhone` VARCHAR(20), `_Address1` VARCHAR(200), 
@@ -563,14 +566,14 @@ CREATE PROCEDURE `sp_InsertOrgProfile` (`_Description` TEXT,
     
     INSERT INTO orgprofile
     (
-		Description, Mission, TaxIdentifier, ContactName, ContactEmail,
+		Name, Description, Mission, TaxIdentifier, ContactName, ContactEmail,
         ContactPhone, Address1, Address2, City, State, Region,
         Country, PostalCode, EmailAddress, PhoneNumber, Twitter,
         LinkedIn, CreatedDate, CreatedBy, UpdatedDate, UpdatedBy
 	)
     VALUES
     (
-		_Description, _Mission, _TaxIdentifier, _ContactName, _ContactEmail,
+		_Name, _Description, _Mission, _TaxIdentifier, _ContactName, _ContactEmail,
         _ContactPhone, _Address1, _Address2, _City, _State, _Region,
         _Country, _PostalCode, _EmailAddress, _PhoneNumber, _Twitter,
         _LinkedIn, CURRENT_TIMESTAMP, _CreatedBy, CURRENT_TIMESTAMP, _CreatedBy
@@ -707,13 +710,56 @@ CREATE PROCEDURE `sp_SearchOrgProjectsByVarious` (IN `_IsActive` TINYINT,
 	FROM orgproject
     WHERE IsActive = Coalesce(_IsActive, IsActive)
 		AND (StartDate >= Coalesce(_StartDateBegin, StartDate) AND StartDate <= Coalesce(_StartDateEnd, StartDate))
-        AND City = Coalesce(_City, City)
-        AND State = Coalesce(_State, State)
-        AND Region = Coalesce(_Region, Region)
-        AND Country = Coalesce(_Country, Country)
-        AND PostalCode = Coalesce(_PostalCode, PostalCode);
+        AND City LIKE CONCAT('%', _City, '%')
+        AND State LIKE CONCAT('%', _State, '%')
+        AND Region LIKE CONCAT('%', _Region, '%')
+        AND Country LIKE CONCAT('%', _Country, '%')
+        AND PostalCode LIKE CONCAT('%', _PostalCode, '%');
 
     
+END$$
+
+
+DROP PROCEDURE IF EXISTS `sp_SearchOrgsByVarious`$$
+CREATE PROCEDURE `sp_SearchOrgsByVarious` (IN `_Name` VARCHAR(100), 
+        IN `_TaxIdentifier` VARCHAR(50), 
+        IN `_City` VARCHAR(100), IN `_State` VARCHAR(100), 
+        IN `_Region` VARCHAR(100), IN `_Country` VARCHAR(100), 
+        IN `_PostalCode` VARCHAR(20))  BEGIN
+    
+    SELECT OrgID,
+		Name,
+        Description,
+        Mission,
+        TaxIdentifier,
+        ContactName,
+        ContactEmail,
+        ContactPhone,
+        Address1,
+        Address2,
+        City,
+        State,
+        Region,
+        Country,
+        PostalCode,
+        EmailAddress,
+        PhoneNumber,
+        Twitter,
+        LinkedIn,
+        CreatedDate,
+        CreatedBy,
+        UpdatedDate,
+        UpdatedBy
+	FROM orgprofile
+    WHERE Name like CONCAT('%', _Name, '%') 
+		AND TaxIdentifier like CONCAT('%', _TaxIdentifier, '%') 
+        AND City like CONCAT('%', _City, '%') 
+        AND State like CONCAT('%', _State, '%') 
+        AND Region like CONCAT('%', _Region, '%') 
+        AND Country like CONCAT('%', _Country, '%') 
+        AND PostalCode like CONCAT('%', _PostalCode, '%');
+
+
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_SearchVolunteersByVarious`$$
@@ -785,7 +831,8 @@ CREATE PROCEDURE `sp_UpdateAuthUser` (`_UserID` INT,
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_UpdateOrgProfile`$$
-CREATE PROCEDURE `sp_UpdateOrgProfile` (`_OrgID` INT, `_Description` TEXT, 
+CREATE PROCEDURE `sp_UpdateOrgProfile` (`_OrgID` INT, `_Name` VARCHAR(100),
+		`_Description` TEXT, 
 		`_Mission` TEXT, `_TaxIdentifier` VARCHAR(45), 
         `_ContactName` VARCHAR(200), `_ContactEmail` VARCHAR(200), 
         `_ContactPhone` VARCHAR(20), `_Address1` VARCHAR(200), 
@@ -797,7 +844,8 @@ CREATE PROCEDURE `sp_UpdateOrgProfile` (`_OrgID` INT, `_Description` TEXT,
         `_UpdatedBy` VARCHAR(100))  BEGIN
     
     UPDATE orgprofile
-		SET Description = _Description,
+		SET Name = _Name,
+			Description = _Description,
 			Mission = _Mission,
             TaxIdentifier = _TaxIdentifier,
             ContactName = _ContactName,
