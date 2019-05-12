@@ -250,5 +250,91 @@
         }
         return null;
     }
+    
+    function searchOrgsByVarious($name, $taxIdentifier, $city, $state,
+        $region, $country, $postalCode)
+    {
+        /*
+        // test output        
+        echo("searchOrgs found - " .
+                    "\nname = " . $name . 
+                    "\ntaxidentifier = " . $taxIdentifier .
+                    "\ncity = " . $city . 
+                    "\nstate = " . $state .
+                    "\nregion = " . $region .
+                    "\ncountry = " . $country .
+                    "\npostalcode = " . $postalCode);
+        
+        return;
+        */
+        
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_SearchOrgsByVarious(?, ?, ?, ?, ?, ?, ?)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindParam(1, $name, PDO::PARAM_STR);
+            $stmt->bindParam(2, $taxIdentifier, PDO::PARAM_STR);
+            $stmt->bindParam(3, $city, PDO::PARAM_STR);
+            $stmt->bindParam(4, $state, PDO::PARAM_STR);
+            $stmt->bindParam(5, $region, PDO::PARAM_STR);
+            $stmt->bindParam(6, $country, PDO::PARAM_STR);
+            $stmt->bindParam(7, $postalCode, PDO::PARAM_STR);
+            
+            // execute the stored procedure
+            $stmt->execute();
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            return $records;
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+
+    function searchOrgProjectsByVarious($isActive, $startDateBegin, $startDateEnd,
+        $city, $state, $region, $country, $postalCode)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_SearchOrgProjectsByVarious(?, ?, ?, ?, ?, ?, ?, ?)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+
+            // pass value to the command
+            $stmt->bindParam(1, $isActive, PDO::PARAM_INT);
+            $stmt->bindParam(2, $startDateBegin, PDO::PARAM_STR);
+            $stmt->bindParam(3, $startDateEnd, PDO::PARAM_STR);
+            $stmt->bindParam(4, $city, PDO::PARAM_STR);
+            $stmt->bindParam(5, $state, PDO::PARAM_STR);
+            $stmt->bindParam(6, $region, PDO::PARAM_STR);
+            $stmt->bindParam(7, $country, PDO::PARAM_STR);
+            $stmt->bindParam(7, $postalCode, PDO::PARAM_STR);
+            
+            // execute the stored procedure
+            $stmt->execute();
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            return $records;
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
 
 ?>
