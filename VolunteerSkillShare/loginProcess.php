@@ -15,8 +15,16 @@
     {
         $_SESSION['incorrect'] = false;
         $_SESSION['username'] = $username;
-        $_SESSION['userid'] = getUserID($username);
-        header("Location:testPass.html");
+        $_SESSION['userid'] = getAuthUserID($username);
+        $_SESSION['role'] = getAuthUserRole($username);
+        if($_SESSION['role'] == 'V')
+        {
+            header("Location:volProfile.php");
+        }
+        elseif($_SESSION['role'] == 'O')
+        {
+            header("Location:orglProfile.php");
+        }
     }
     else
     {

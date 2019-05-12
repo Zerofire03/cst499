@@ -1,7 +1,7 @@
 <?php
 
     include "dbConnection.php";
-    
+    $dbName = "cst499-vss";
     
     
     /**
@@ -13,7 +13,8 @@
      
     function getAuthenticatedUser($username, $password)
     {
-        $conn = getDatabaseConnection("cst499-vss");
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
         
         try
         {
@@ -30,7 +31,7 @@
      
             // execute the stored procedure
             $stmt->execute();
-     
+            
             $stmt->closeCursor();
      
             // execute the second query to get customer's level
@@ -63,7 +64,8 @@
      
     function setInsertAuthUser($role, $fName, $lName, $username, $password)
     {
-        $conn = getDatabaseConnection("cst499-vss");
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
         
         try
         {
@@ -106,7 +108,8 @@
      
     function getUserID($username)
     {
-        $conn = getDatabaseConnection("cst499-vss");
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
         
         try
         {
@@ -123,6 +126,45 @@
      
             // execute the stored procedure
             $stmt->execute();
+            
+            $stmt->closeCursor();
+            
+            $userID = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $userID;
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * Delete AuthUser
+     * @param int $userID
+     * @return int
+     */
+     
+    function deleteAuthUser($userID)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            //CALL sp_DeleteAuthUser(0)
+            $sql = 'CALL sp_GetUserIDByUserName(:_UserID, @UserIDOut)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_UserID', $userID, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
      
             $stmt->closeCursor();
         }
@@ -133,5 +175,80 @@
         return null;
     }
     
+    /**
+     * Get GetAuthUserIDByUserName
+     * @param username
+     */
+     
+    function getAuthUserID($userName)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_GetAuthUserByUserName(:_UserName)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_UserName', $userName, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            $return_value = $stmt->fetch();
+            $userID = $return_value['UserID'];
+     
+            $stmt->closeCursor();
+            return $userID;
+            
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
     
+    /**
+     * Get GetAuthUserIDByUserName
+     * @param username
+     */
+     
+    function getAuthUserRole($userName)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_GetAuthUserByUserName(:_UserName)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_UserName', $userName, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            $return_value = $stmt->fetch();
+            $role = $return_value['Role'];
+     
+            $stmt->closeCursor();
+            return $role;
+            
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+
 ?>

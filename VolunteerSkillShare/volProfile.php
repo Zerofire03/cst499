@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Volunteer Skill Share</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <style>@import url("css/styles.css");</style>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates" rel="stylesheet">
-    </head>
+<?php 
+    include '_header.php';
+    include '_enforceLogin.php';
+?>
+
+
     
     <body id="activePage">
         
