@@ -300,6 +300,7 @@
         return null;
     }
 
+
     function searchOrgProjectsByVarious($isActive, $startDateBegin, $startDateEnd,
         $city, $state, $region, $country, $postalCode)
     {
@@ -316,13 +317,30 @@
 
             // pass value to the command
             $stmt->bindParam(1, $isActive, PDO::PARAM_INT);
-            $stmt->bindParam(2, $startDateBegin, PDO::PARAM_STR);
-            $stmt->bindParam(3, $startDateEnd, PDO::PARAM_STR);
+
+            // handle date params            
+            if (is_null($startDateBegin))
+            {
+                $stmt->bindParam(2, $startDateBegin, PDO::PARAM_NULL);
+            }
+            else
+            {
+                $stmt->bindParam(2, $startDateBegin, PDO::PARAM_STR);
+            }
+            if (is_null($startDateEnd))
+            {
+                $stmt->bindParam(3, $startDateEnd, PDO::PARAM_NULL);
+            }
+            else
+            {
+                $stmt->bindParam(3, $startDateEnd, PDO::PARAM_STR);
+            }
+
             $stmt->bindParam(4, $city, PDO::PARAM_STR);
             $stmt->bindParam(5, $state, PDO::PARAM_STR);
             $stmt->bindParam(6, $region, PDO::PARAM_STR);
             $stmt->bindParam(7, $country, PDO::PARAM_STR);
-            $stmt->bindParam(7, $postalCode, PDO::PARAM_STR);
+            $stmt->bindParam(8, $postalCode, PDO::PARAM_STR);
             
             // execute the stored procedure
             $stmt->execute();

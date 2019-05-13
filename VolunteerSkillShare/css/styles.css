@@ -34,15 +34,36 @@ footer, #hr_footer, #csumb{
 
 .tableInput {
     display: inline-block;
-    margin: 10px;
     text-align: center;
 }
 
-tr {
-    
+.resultsDiv {
+    display: inline-block;
+    padding: 10px;
+    text-align: left;
 }
-td {
-    
+
+.resultsTbl {
+    display: inline-block;
+    text-align: center;
+}
+
+.resultsTh {
+    font-weight: bold;
+    padding: 10px;
+    text-align: Left;
+    border: 1px solid #ccc;
+}
+
+.resultsTdLeft {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+.resultsTdRight {
+    padding: 10px;
+    text-align: right;
 }
 
 .inputHeading {
