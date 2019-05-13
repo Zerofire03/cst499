@@ -15,25 +15,39 @@
     $postalcode = $_REQUEST['postalcode'];
 
     // grab the results for orgprojectsearch
-    $isactive = $_REQUEST['isactive'];
+    //$projectpriority = $_REQUEST['projectpriority'];
+    $projectpriority = ($_REQUEST['projectpriority'] == "on" ? 'H':NULL);
     $projectcity = $_REQUEST['projectcity'];
     $projectstate = $_REQUEST['projectstate'];
     $projectregion = $_REQUEST['projectregion'];
     $projectcountry = $_REQUEST['projectcountry'];
     $projectpostalcode = $_REQUEST['projectpostalcode'];
     
-    // $new_date = date('Y-m-d', strtotime($_POST['dateFrom']));
-
-    /*    
     if (isset($_REQUEST['startdatebegin']))
     {
+        if (!(empty(trim($_REQUEST['startdatebegin']))))
+        {
         $startdatebegin = date('Y-m-d', strtotime($_REQUEST['startdatebegin']));
+        }
+        else
+        {
+        $startdatebegin = date('Y-m-d', strtotime('1900-01-01'));
+        }
     }
     if (isset($_REQUEST['startdateend']))
     {
+        if (!(empty(trim($_REQUEST['startdateend']))))
+        {
         $startdateend = date('Y-m-d', strtotime($_REQUEST['startdateend']));
+        }
+        else
+        {
+        $startdateend = date('Y-m-d', strtotime('2199-12-31'));
+        }
     }
-    */
+
+    // testing
+    //echo "projectpriority = " . $projectpriority . " - startdatebegin = " . $startdatebegin . " - startdateend = " . $startdateend . "<br/>";
 
     // determine which items to show
     // write the script element to open the orgsearch if no search form was passed
@@ -53,10 +67,6 @@
     {
         $openOrgs = TRUE;
     }
-
-    // testing
-    //echo "startdatebegin = " . date_format($startdatebegin, 'Y-m-d H:i:s') . " - startdateend = " . date_format($startdateend, 'Y-m-d H:i:s') . "<br/>";
-
 ?>
 
     <body id="activePage">
@@ -198,9 +208,9 @@
             <br/>
             <form id="orgprojectsearch" name="orgprojectsearch" method="post">
             <table class="tableInput">
-               <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Active Only: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="checkbox" name="isactive" id="isactive"/></td>
+                <tr>
+                    <td class="tdRightAlign"><label class="inputHeading">High Priority Project: </label></td>
+                    <td class="tdLeftAlign"><input class="search" type="checkbox" name="projectpriority" id="projectpriority"/></td>
                 </tr>
                 <tr>
                     <td class="tdRightAlign"><label class="inputHeading">Date Range - Start: </label></td>
@@ -231,20 +241,19 @@
                     <td class="tdLeftAlign"><input class="search" type="text" name="projectpostalcode" id="projectpostalcode"/></td>
                 </tr>
             </table>
-            
-            <br/>
+            <br/><br/>
             <input type="submit" name="searchOrgProjects" id="searchOrgProjects" class="btn btn-primary" value="Search Projects">
             </form>
             
-            <div id="searchOrgProjectResults" name="searchOrgProjectResults">
+            <div id="searchOrgProjectResults" name="searchOrgProjectResults" class="resultsDiv">
 <?php
 
     if (isset($_REQUEST['searchOrgProjects']))
     {
-        $orgProjectResults = searchOrgProjectsByVarious($isactive, 
+        $orgProjectResults = searchOrgProjectsByVarious($projectpriority, 
                 $startdatebegin, $startdateend, $projectcity, $projectstate, 
                 $projectregion, $projectcountry, $projectpostalcode);
-        
+
         // test values
         //echo count($orgProjectResults);
         

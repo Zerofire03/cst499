@@ -18,7 +18,6 @@
         
         try
         {
-     
             // calling stored procedure command
             $sql = 'CALL sp_AuthenticateUser(:_UserName, :_Password, @AuthSuccess)';
      
@@ -301,7 +300,7 @@
     }
 
 
-    function searchOrgProjectsByVarious($isActive, $startDateBegin, $startDateEnd,
+    function searchOrgProjectsByVarious($isPriority, $startDateBegin, $startDateEnd,
         $city, $state, $region, $country, $postalCode)
     {
         global $dbName;
@@ -316,26 +315,9 @@
             $stmt = $conn->prepare($sql);
 
             // pass value to the command
-            $stmt->bindParam(1, $isActive, PDO::PARAM_INT);
-
-            // handle date params            
-            if (is_null($startDateBegin))
-            {
-                $stmt->bindParam(2, $startDateBegin, PDO::PARAM_NULL);
-            }
-            else
-            {
-                $stmt->bindParam(2, $startDateBegin, PDO::PARAM_STR);
-            }
-            if (is_null($startDateEnd))
-            {
-                $stmt->bindParam(3, $startDateEnd, PDO::PARAM_NULL);
-            }
-            else
-            {
-                $stmt->bindParam(3, $startDateEnd, PDO::PARAM_STR);
-            }
-
+            $stmt->bindParam(1, $isPriority, PDO::PARAM_STR);
+            $stmt->bindParam(2, $startDateBegin, PDO::PARAM_NULL);
+            $stmt->bindParam(3, $startDateEnd, PDO::PARAM_NULL);
             $stmt->bindParam(4, $city, PDO::PARAM_STR);
             $stmt->bindParam(5, $state, PDO::PARAM_STR);
             $stmt->bindParam(6, $region, PDO::PARAM_STR);

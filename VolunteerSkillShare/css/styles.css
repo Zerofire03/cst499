@@ -40,7 +40,7 @@ footer, #hr_footer, #csumb{
 .resultsDiv {
     display: inline-block;
     padding: 10px;
-    text-align: left;
+    text-align: inherit;
 }
 
 .resultsTbl {
