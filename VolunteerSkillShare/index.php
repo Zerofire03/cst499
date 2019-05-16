@@ -1,8 +1,5 @@
-<?php
-    session_start();
-?>
-
     <?php include '_header.php';?>
+    
     <body id="activePage">
         
         <div class="jumbotron text-center">
@@ -10,7 +7,7 @@
         </div>
         
         <!-- Navigation Bar-->
-        <ul class="nav nav-pills">
+        <ul class="nav nav-pills" id="navBar">
           <li role="presentation" class="active"><a href="index.php">Login</a></li>
           <?php 
             if(isset($_SESSION['incorrect']))
@@ -22,7 +19,13 @@
           <li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>
         </ul>
         
+        <br>
+        
        <!--Login Process-->
+       <button class="accordion" id="userLogin">Returning Users</button>
+        <div class="panel">
+         
+        <p>
         <div class="<?php echo empty($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
         <h3><font color="black">Please Login</font></h3>
         <div id="loginBox">
@@ -34,9 +37,16 @@
         </form>
         </div>
         </div>
+        </p>   
+        
+        </div>
+        
+        
         
         <!--Create Account Process-->
-        
+        <button class="accordion" id="createUser">New Users</button>
+        <div class="panel">
+            
         <div class="<?php echo empty($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
         <h3><font color="black">Sign Up</font></h3>
         <div id="accountBox">
@@ -49,5 +59,27 @@
         </form>
         </div>
         </div>
+        
+        </div>
+        
+       <!-- Action: Button Click -->
+       <script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+            
+            for (i = 0; i < acc.length; i++) {
+              acc[i].addEventListener("click", function() {
+                this.classList.toggle("open");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight){
+                  panel.style.maxHeight = null;
+                } else {
+                  panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+              });
+            }
+        </script>
+        
+    
         
 <?php include '_footer.php';
