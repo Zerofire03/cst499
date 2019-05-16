@@ -2,13 +2,22 @@
 
 
 .jumbotron{
-    background-color: rgb(109, 109, 105) !important;
-    color: rgb(216, 195, 34);
-    font-family: 'Montserrat Alternates', sans-serif;
+    background-color: rgb(80, 86, 89) !important;
+    color: rgb(97, 182, 189);
+    font-family: 'Baloo Bhai', cursive;
+
 }
 
 #activePage{
     background-color: white;
+     text-align: center;
+     font-family: 'Baloo Bhai', cursive;
+}
+
+
+li a:hover {
+  background-color: #555;
+  color: rgb(153,94,187);
 }
 
 .instructions{
@@ -22,6 +31,13 @@
     color: black !important;
 }
 
+.bg
+{
+  width: 100%;
+  height:255px;
+  z-index: 0;
+}
+
 footer, #hr_footer, #csumb{
     color: black;
     font-size:12px;
@@ -32,3 +48,106 @@ footer, #hr_footer, #csumb{
     width:25%;
 }
 
+/*///////////////////////*/
+.tableInput {
+    display: inline-block;
+    text-align: center;
+}
+
+.resultsDiv {
+    display: inline-block;
+    padding: 10px;
+    text-align: inherit;
+}
+
+.resultsTbl {
+    display: inline-block;
+    text-align: center;
+}
+
+.resultsTh {
+    font-weight: bold;
+    padding: 10px;
+    text-align: Left;
+    border: 1px solid #ccc;
+}
+
+.resultsTdLeft {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+.resultsTdRight {
+    padding: 10px;
+    text-align: right;
+}
+
+.inputHeading {
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.tdRightAlign {
+    text-align: right;
+    border: 1px solid rgb(109, 109, 105);
+}
+
+.tdLeftAlign {
+    text-align: left;
+    border: 1px solid rgb(109, 109, 105);
+}
+
+.search {
+    margin: 10px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+/*Accordion Styling*/
+.accordion {
+  background-color: #ccc;
+  color: #000;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  font-weight: bold;
+  transition: 0.4s;
+  font-size: 25px;
+}
+
+.active, .open, .accordion:hover {
+  background-color: rgb(245, 208, 74);
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  text-align: center;
+}
+
+.accordion:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 15px;
+  font-weight: normal;
+  color: #777;
+  float: right;
+  margin-left: 5px;
+}
+
+.open:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+#userLogin, #createUser{
+    text-align: center;
+}

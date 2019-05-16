@@ -220,7 +220,8 @@ call `cst499-vss`.sp_InsertVolSkill(@_VolunteerID, @_SkillID, @_ExperienceLevel,
 -- org 1
 --------------------------------
 -- create an organization
-set @_Description = 'VSS Test NonProfit';
+set @_OrgName = 'VSS Test NonProfit';
+set @_Description = 'VSS Test NonProfit is a test nonprofit organization';
 set @_Mission = 'To boldly finish CST499';
 set @_TaxIdentifier = 'TestTaxID';
 set @_ContactName = 'Test User';
@@ -238,7 +239,7 @@ set @_PhoneNumber = '(999)555-0101';
 set @_Twitter = '0';
 set @_LinkedIn = '0';
 set @_CreatedBy = 'rootuser';
-call `cst499-vss`.sp_InsertOrgProfile(@_Description, @_Mission, @_TaxIdentifier, @_ContactName, @_ContactEmail, @_ContactPhone, @_Address1, @_Address2, @_City, @_State, @_Region, @_Country, @_PostalCode, @_EmailAddress, @_PhoneNumber, @_Twitter, @_LinkedIn, @_CreatedBy);
+call `cst499-vss`.sp_InsertOrgProfile(@_OrgName, @_Description, @_Mission, @_TaxIdentifier, @_ContactName, @_ContactEmail, @_ContactPhone, @_Address1, @_Address2, @_City, @_State, @_Region, @_Country, @_PostalCode, @_EmailAddress, @_PhoneNumber, @_Twitter, @_LinkedIn, @_CreatedBy);
 
 set @org1 = (select last_insert_id());
 select @org1 as Org1ID;
@@ -261,6 +262,8 @@ select @_Role, @_VolunteerID, @_OrgID, @_FirstName, @_LastName, @_UserName, @_Pa
 set @_OrgID = @org1;
 set @_IsActive = 1;
 set @_Priority = 'H';
+
+set @_ProjectName = 'Sample Network Installation';
 set @_Description = 'Sample Network Installation
 
 Test Org is looking to install a new network in our 
@@ -294,7 +297,7 @@ set @_Region = 'Manhattan';
 set @_Country = 'USA';
 set @_PostalCode = '14301';
 set @_CreatedBy = 'rootuser';
-call `cst499-vss`.sp_InsertOrgProject(@_OrgID, @_IsActive, @_Priority, @_Description, @_StartDate, @_TimelineDescription, @_City, @_State, @_Region, @_Country, @_PostalCode, @_CreatedBy);
+call `cst499-vss`.sp_InsertOrgProject(@_OrgID, @_ProjectName, @_IsActive, @_Priority, @_Description, @_StartDate, @_TimelineDescription, @_City, @_State, @_Region, @_Country, @_PostalCode, @_CreatedBy);
 
 set @org1project = (select last_insert_id());
 select @org1project as Org1ProjectID;

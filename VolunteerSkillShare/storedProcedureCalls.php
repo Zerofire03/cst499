@@ -1,7 +1,7 @@
 <?php
 
     include "dbConnection.php";
-    
+    $dbName = "cst499-vss";
     
     
     /**
@@ -13,11 +13,11 @@
      
     function getAuthenticatedUser($username, $password)
     {
-        $conn = getDatabaseConnection("cst499-vss");
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
         
         try
         {
-     
             // calling stored procedure command
             $sql = 'CALL sp_AuthenticateUser(:_UserName, :_Password, @AuthSuccess)';
      
@@ -30,7 +30,7 @@
      
             // execute the stored procedure
             $stmt->execute();
-     
+            
             $stmt->closeCursor();
      
             // execute the second query to get customer's level
@@ -63,7 +63,8 @@
      
     function setInsertAuthUser($role, $fName, $lName, $username, $password)
     {
-        $conn = getDatabaseConnection("cst499-vss");
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
         
         try
         {
@@ -106,7 +107,8 @@
      
     function getUserID($username)
     {
-        $conn = getDatabaseConnection("cst499-vss");
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
         
         try
         {
@@ -123,6 +125,45 @@
      
             // execute the stored procedure
             $stmt->execute();
+            
+            $stmt->closeCursor();
+            
+            $userID = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $userID;
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * Delete AuthUser
+     * @param int $userID
+     * @return int
+     */
+     
+    function deleteAuthUser($userID)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            //CALL sp_DeleteAuthUser(0)
+            $sql = 'CALL sp_GetUserIDByUserName(:_UserID, @UserIDOut)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_UserID', $userID, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
      
             $stmt->closeCursor();
         }
@@ -133,207 +174,187 @@
         return null;
     }
     
-    function getauthuser ($userid, $role, $volunteerid, $username){
-        $conn = getDatabaseConnection("cst499-vss");
+    /**
+     * Get GetAuthUserIDByUserName
+     * @param username
+     */
+     
+    function getAuthUserID($userName)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
         
-        $sql = "SELECT * FROM authusers WHERE 1=1";
-        
-        if (!empty($userid)){
-            $sql .= " AND UserID = :userid";
-        }
-        if (!empty($role)){
-            $sql .= " AND Role = :role";
-        }
-        if (!empty($volunteerid)){
-            $sql .= " AND VolunteerID = :volunteerid";
-        }
-        if (!empty($username)){
-            $sql .= " AND UserName = :username";
-        }
-        
-        $stmt = $conn->prepare($sql);
-        
-        $stmt->bindParam('UserID', $userid);
-        $stmt->bindParam('Role', $role);
-        $stmt->bindParam('VolunteerID', $volunteerid);
-        $stmt->bindParam('username', $username);
-    }
-
-    function getorgprofile($orgid, $description, $mission, $taxid, $name, $email, $phone, $address, $city, $state, $region, $country, $postalcode, $twitter, $linkedin){
-        $conn = getDatabaseConnection("cst499-vss");
-        
-        $sql = "SELECT * FROM orgprofile WHERE 1=1";
-    
-        if (!empty($description)){
-            $sql .= " AND Description = :description";
-        }
-                if (!empty($mission)){
-            $sql .= " AND Mission = :mission";
-        }
-                if (!empty($taxid)){
-            $sql .= " AND TaxIdentifier = :taxid";
-        }
-                if (!empty($name)){
-            $sql .= " AND ContactName = :name";
-        }
-                if (!empty($email)){
-            $sql .= " AND ContactEmail = :email";
-        }
-                if (!empty($phone)){
-            $sql .= " AND ContactPhone = :phone";
-        }
-                if (!empty($address)){
-            $sql .= " AND Address1 = :address";
-        }
-                if (!empty($city)){
-            $sql .= " AND City = :city";
-        }
-                if (!empty($state)){
-            $sql .= " AND State = :state";
-        }
-                if (!empty($region)){
-            $sql .= " AND Region = :region";
-        }
-                if (!empty($country)){
-            $sql .= " AND Country = :country";
-        }
-                if (!empty($postalcode)){
-            $sql .= " AND PostalCode = :postalcode";
-        }
-                if (!empty($twitter)){
-            $sql .= " AND Twitter = :twitter";
-        }
-                if (!empty($linkedin)){
-            $sql .= " AND LinkedIn = :linkedin";
-        }
-
-        $stmt = $conn->prepare($sql);
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_GetAuthUserByUserName(:_UserName)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_UserName', $userName, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            $return_value = $stmt->fetch();
+            $userID = $return_value['UserID'];
+     
+            $stmt->closeCursor();
+            return $userID;
             
-        $stmt->bindParam('OrgID', $orgid);
-        $stmt->bindParam('Description', $description);
-        $stmt->bindParam('Mission', $mission);
-        $stmt->bindParam('TaxIdentifier', $taxid);
-        $stmt->bindParam('ContactName', $name);
-        $stmt->bindParam('ContactEmail', $email);
-        $stmt->bindParam('ContactPhone', $phone);
-        $stmt->bindParam('Address1', $address);
-        $stmt->bindParam('City', $city);
-        $stmt->bindParam('State', $state);
-        $stmt->bindParam('Region', $region);
-        $stmt->bindParam('Country', $country);
-        $stmt->bindParam('PostalCode', $postalcode);
-        $stmt->bindParam('Twitter', $twitter);
-        $stmt->bindParam('Linkedin', $linkedin);
-        
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
     }
     
-    function getorgproject($orgprojectid, $orgID, $isActive, $priority, $descripton, $startdate, $timelinedescription, $city, $state, $region, $country, $postalcode){
-        $conn = getDatabaseConnection("cst499-vss");
+    /**
+     * Get GetAuthUserIDByUserName
+     * @param username
+     */
+     
+    function getAuthUserRole($userName)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
         
-        $sql = "SELECT * FROM orgprofile WHERE 1=1";
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_GetAuthUserByUserName(:_UserName)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_UserName', $userName, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            $return_value = $stmt->fetch();
+            $role = $return_value['Role'];
+     
+            $stmt->closeCursor();
+            return $role;
+            
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
     
-        if (!empty($orgprojectid)){
-            $sql .= " AND OrgProjectID = :prgprojectid";
-        }
-        if (!empty($orgID)){
-            $sql .= " AND OrgID = :orgID";
-        }
-        if (!empty($isActive)){
-            $sql .= " AND isActive = :isActive";
-        }
-        if (!empty($priority)){
-            $sql .= " AND Priority = :priority";
-        }
-        if (!empty($description)){
-            $sql .= " AND Description = :description";
-        }
-        if (!empty($startdate)){
-            $sql .= " AND StartDate = :phone";
-        }
-        if (!empty($timelinedescription)){
-            $sql .= " AND TimelineDescription = :timelinedescripition";
-        }
-        if (!empty($city)){
-            $sql .= " AND City = :city";
-        }
-        if (!empty($state)){
-            $sql .= " AND State = :state";
-        }
-        if (!empty($region)){
-            $sql .= " AND Region = :region";
-        }
-        if (!empty($country)){
-            $sql .= " AND Country = :country";
-        }
-        if (!empty($postalcode)){
-            $sql .= " AND PostalCode = :postalcode";
-        }
+    function searchOrgsByVarious($name, $taxIdentifier, $city, $state,
+        $region, $country, $postalCode)
+    {
+        /*
+        // test output        
+        echo("searchOrgs found - " .
+                    "\nname = " . $name . 
+                    "\ntaxidentifier = " . $taxIdentifier .
+                    "\ncity = " . $city . 
+                    "\nstate = " . $state .
+                    "\nregion = " . $region .
+                    "\ncountry = " . $country .
+                    "\npostalcode = " . $postalCode);
+        
+        return;
+        */
+        
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_SearchOrgsByVarious(?, ?, ?, ?, ?, ?, ?)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
 
-        $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $name, PDO::PARAM_STR);
+            $stmt->bindParam(2, $taxIdentifier, PDO::PARAM_STR);
+            $stmt->bindParam(3, $city, PDO::PARAM_STR);
+            $stmt->bindParam(4, $state, PDO::PARAM_STR);
+            $stmt->bindParam(5, $region, PDO::PARAM_STR);
+            $stmt->bindParam(6, $country, PDO::PARAM_STR);
+            $stmt->bindParam(7, $postalCode, PDO::PARAM_STR);
+            
+            // execute the stored procedure
+            $stmt->execute();
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        $stmt->bindParam('OrgProjectID', $orgprojectid);    
-        $stmt->bindParam('OrgID', $orgid);
-        $stmt->bindParam('isActive', $isActice);
-        $stmt->bindParam('Priority', $priority);
-        $stmt->bindParam('Description', $description);
-        $stmt->bindParam('StartDate', $startdate);
-        $stmt->bindParam('TimlelineDescription', $timelinedescription);
-        $stmt->bindParam('City', $city);
-        $stmt->bindParam('State', $state);
-        $stmt->bindParam('Region', $region);
-        $stmt->bindParam('Country', $country);
-        $stmt->bindParam('PostalCode', $postalcode);
+            return $records;
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
 
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
+
+    function searchOrgProjectsByVarious($isPriority, $startDateBegin, $startDateEnd,
+        $city, $state, $region, $country, $postalCode)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_SearchOrgProjectsByVarious(?, ?, ?, ?, ?, ?, ?, ?)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+
+            // pass value to the command
+            $stmt->bindParam(1, $isPriority, PDO::PARAM_STR);
+            $stmt->bindParam(2, $startDateBegin, PDO::PARAM_NULL);
+            $stmt->bindParam(3, $startDateEnd, PDO::PARAM_NULL);
+            $stmt->bindParam(4, $city, PDO::PARAM_STR);
+            $stmt->bindParam(5, $state, PDO::PARAM_STR);
+            $stmt->bindParam(6, $region, PDO::PARAM_STR);
+            $stmt->bindParam(7, $country, PDO::PARAM_STR);
+            $stmt->bindParam(8, $postalCode, PDO::PARAM_STR);
+            
+            // execute the stored procedure
+            $stmt->execute();
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            return $records;
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
     }
     
     
-    function getskills($skillid, $description, $experiencemin, $experiencemax){
-        if (!empty($skillid)){
-            $sql .= " AND SkillID = :skillid";
-        }
-        if (!empty($description)){
-            $sql .= " AND Description = :description";
-        }
-        if (!empty($experiencemin)){
-            $sql .= " AND ExperienceMin = :experiencemin";
-        }
-        if (!empty($experiencemax)){
-            $sql .= " AND ExperienceMax = :experiencemax";
-        }
+    function searchVolunteersByVarious($city, $state, $region, $country, $postalCode,
+        $skillID, $skillExperienceLevel, $isCurrent)
+    {
+        // values for skillID, skillExperienceLevel, isCurrent must be together
+        //      if experience or current is provided but not the skill, we must toss it out
         
-        $stmt->bindParam('SkillID', $skillid);
-        $stmt->bindParam('Description', $description);
-        $stmt->bindParam('ExperienceMin', $experiencemin);
-        $stmt->bindParam('ExperienceMax', $experiencemax);
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
         
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-    }
-    
-    function volbio($volID, $descripiton, $workhistory, $interest){
-        if (!empty($volID)){
-            $sql .= " AND VolunteerID = :volID";
-        }
-        if (!empty($description)){
-            $sql .= " AND Description = :description";
-        }
-        if (!empty($workhistory)){
-            $sql .= " AND WorkHistory = :workhistory";
-        }
-        if (!empty($interest)){
-            $sql .= " AND Interest = :interest";
-        }
-        
-        $stmt = $conn->prepare($sql);
-        
-        $stmt->bindParam('VolunteerID', $volID);
-        $stmt->bindParam('Description', $description);
-        $stmt->bindParam('WorkHistory', $workhistory);
-        $stmt->bindParam('Interest', $interest);
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_SearchVolunteersByVarious(?, ?, ?, ?, ?, ?, ?, ?)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+
 
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -376,53 +397,55 @@
         }
         if (!empty($phonenumber)){
             $sql .= " AND PhoneNumber = :phonenumber";
+          
+            // pass value to the command
+            $stmt->bindParam(1, $city, PDO::PARAM_STR);
+            $stmt->bindParam(2, $state, PDO::PARAM_STR);
+            $stmt->bindParam(3, $region, PDO::PARAM_STR);
+            $stmt->bindParam(4, $country, PDO::PARAM_STR);
+            $stmt->bindParam(5, $postalCode, PDO::PARAM_STR);
+            $stmt->bindParam(6, $skillID, PDO::PARAM_INT);
+            $stmt->bindParam(7, $skillExperienceLevel, PDO::PARAM_INT);
+            $stmt->bindParam(8, $isCurrent, PDO::PARAM_BOOL);
+            
+            // execute the stored procedure
+            $stmt->execute();
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            return $records;
         }
-        if (!empty($contactpref)){
-            $sql .= " AND ContactPref = :contactpref";
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
         }
-        
-        
-        $stmt->bindParam('VolunteerID', $volUD);
-        $stmt->bindParam('FirstName', $firstname);
-        $stmt->bindParam('LastName', $lastname);
-        $stmt->bindParam('City', $city);
-        $stmt->bindParam('State', $state);
-        $stmt->bindParam('Region', $region);
-        $stmt->bindParam('Country', $country);
-        $stmt->bindParam('PostalCode', $postalcode);
-        $stmt->bindParam('Url', $url);
-        $stmt->bindParam('EmailAdress', $emailaddress);
-        $stmt->bindParam('phonenumber', $phonenunmber);
-        $stmt->bindParam('ContactPref', $contactpref);
-        
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
+        return null;
     }
     
-    function volskills($volID, $skillId, $experiencelevel, $iscurrent){
-        if (!empty($volID)){
-            $sql .= " AND VolunteerID = :volID";
-        }
-        if (!empty($skillId)){
-            $sql .= " AND SkillID = :skillId";
-        }
-        if (!empty($experiencelevel)){
-            $sql .= " AND ExperienceLevel = :experiencelevel";
-        }
-        if (!empty($iscurrent)){
-            $sql .= " AND IsCurrent = :iscurrent";
-        }
+    // sp_GetSkills
+    function getSkills()
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
         
-        $stmt = $conn->prepare($sql);
-        
-        $stmt->bindParam('VolunteerID', $volUD);
-        $stmt->bindParam('SkillID', $skillId);
-        $stmt->bindParam('ExperienceLevel', $experiencelevel);
-        $stmt->bindParam('IsCurrent', $iscurrent);
-        
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-    }
-    
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_GetSkills()';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
 
+            // execute the stored procedure
+            $stmt->execute();
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            return $records;
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+   
 ?>

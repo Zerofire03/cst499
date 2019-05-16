@@ -57,6 +57,7 @@ CREATE TABLE `authusers` (
 DROP TABLE IF EXISTS `orgprofile`;
 CREATE TABLE `orgprofile` (
   `OrgID` int(11) NOT NULL,
+  `Name` VARCHAR(100) NOT NULL,
   `Description` text NOT NULL,
   `Mission` text,
   `TaxIdentifier` VARCHAR(50) NULL,
@@ -90,6 +91,7 @@ DROP TABLE IF EXISTS `orgproject`;
 CREATE TABLE `orgproject` (
   `OrgProjectID` int(11) NOT NULL,
   `OrgID` int(11) NOT NULL,
+  `Name` VARCHAR(100) NOT NULL,
   `IsActive` tinyint(4) NOT NULL DEFAULT '1',
   `Priority` varchar(2) NOT NULL DEFAULT 'H',
   `Description` text NOT NULL,
@@ -214,7 +216,8 @@ ALTER TABLE `authusers`
 -- Indexes for table `orgprofile`
 --
 ALTER TABLE `orgprofile`
-  ADD PRIMARY KEY (`OrgID`);
+  ADD PRIMARY KEY (`OrgID`),
+  ADD UNIQUE KEY `Name_UNIQUE` (`Name`);
 
 --
 -- Indexes for table `orgproject`
@@ -378,6 +381,7 @@ DROP PROCEDURE IF EXISTS `sp_GetOrgProfileByOrgID`$$
 CREATE PROCEDURE `sp_GetOrgProfileByOrgID` (IN `_OrgID` INT)  BEGIN
     
     SELECT OrgID,
+		Name,
 		Description,
         Mission,
         TaxIdentifier,
@@ -409,6 +413,7 @@ CREATE PROCEDURE `sp_GetOrgProjectsByOrgID` (IN `_OrgID` INT)  BEGIN
     
     SELECT OrgProjectID,
 		OrgID,
+        Name,
 		IsActive,
         Priority,
         Description,
@@ -433,6 +438,7 @@ CREATE PROCEDURE `sp_GetOrgProjectsByOrgProjectID` (IN `_OrgProjectID` INT)  BEG
     
     SELECT OrgProjectID,
 		OrgID,
+        Name,
 		IsActive,
         Priority,
         Description,
@@ -550,7 +556,7 @@ CREATE PROCEDURE `sp_InsertAuthUser` (`_Role` VARCHAR(2), `_VolunteerID` INT,
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertOrgProfile`$$
-CREATE PROCEDURE `sp_InsertOrgProfile` (`_Description` TEXT, 
+CREATE PROCEDURE `sp_InsertOrgProfile` (`_Name` VARCHAR(100), `_Description` TEXT, 
 					`_Mission` TEXT, `_TaxIdentifier` VARCHAR(45), 
                     `_ContactName` VARCHAR(200), `_ContactEmail` VARCHAR(200), 
                     `_ContactPhone` VARCHAR(20), `_Address1` VARCHAR(200), 
@@ -563,14 +569,14 @@ CREATE PROCEDURE `sp_InsertOrgProfile` (`_Description` TEXT,
     
     INSERT INTO orgprofile
     (
-		Description, Mission, TaxIdentifier, ContactName, ContactEmail,
+		Name, Description, Mission, TaxIdentifier, ContactName, ContactEmail,
         ContactPhone, Address1, Address2, City, State, Region,
         Country, PostalCode, EmailAddress, PhoneNumber, Twitter,
         LinkedIn, CreatedDate, CreatedBy, UpdatedDate, UpdatedBy
 	)
     VALUES
     (
-		_Description, _Mission, _TaxIdentifier, _ContactName, _ContactEmail,
+		_Name, _Description, _Mission, _TaxIdentifier, _ContactName, _ContactEmail,
         _ContactPhone, _Address1, _Address2, _City, _State, _Region,
         _Country, _PostalCode, _EmailAddress, _PhoneNumber, _Twitter,
         _LinkedIn, CURRENT_TIMESTAMP, _CreatedBy, CURRENT_TIMESTAMP, _CreatedBy
@@ -581,7 +587,7 @@ CREATE PROCEDURE `sp_InsertOrgProfile` (`_Description` TEXT,
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertOrgProject`$$
-CREATE PROCEDURE `sp_InsertOrgProject` (`_OrgID` INT, 
+CREATE PROCEDURE `sp_InsertOrgProject` (`_OrgID` INT, `_Name` VARCHAR(100),
 		`_IsActive` TINYINT, `_Priority` VARCHAR(2), 
         `_Description` TEXT, `_StartDate` DATETIME, 
         `_TimelineDescription` TEXT, `_City` VARCHAR(100), 
@@ -591,14 +597,14 @@ CREATE PROCEDURE `sp_InsertOrgProject` (`_OrgID` INT,
     
     INSERT INTO orgproject
     (
-		OrgID, IsActive, Priority, Description,
+		OrgID, Name, IsActive, Priority, Description,
         StartDate, TimelineDescription, City, State, Region,
         Country, PostalCode, CreatedDate, CreatedBy, UpdatedDate, 
         UpdatedBy
 	)
     VALUES
     (
-		_OrgID, _IsActive, _Priority, _Description,
+		_OrgID, _Name, _IsActive, _Priority, _Description,
         _StartDate, _TimelineDescription, _City, _State, _Region,
         _Country, _PostalCode, CURRENT_TIMESTAMP, _CreatedBy, CURRENT_TIMESTAMP, 
         _CreatedBy
@@ -682,38 +688,92 @@ CREATE PROCEDURE `sp_InsertVolSkill` (`_VolunteerID` INT,
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_SearchOrgProjectsByVarious`$$
-CREATE PROCEDURE `sp_SearchOrgProjectsByVarious` (IN `_IsActive` TINYINT, 
+CREATE PROCEDURE `sp_SearchOrgProjectsByVarious` (IN `_IsPriority` VARCHAR(2), 
 		IN `_StartDateBegin` DATETIME, IN `_StartDateEnd` DATETIME, 
         IN `_City` VARCHAR(100), IN `_State` VARCHAR(100), 
         IN `_Region` VARCHAR(100), IN `_Country` VARCHAR(100), 
         IN `_PostalCode` VARCHAR(20))  BEGIN
     
-    SELECT OrgProjectID,
-		OrgID,
-		IsActive,
-        Priority,
+    IF (ISNULL(_StartDateBegin) OR ISEMPTY(_StartDateBegin)) THEN
+		SET _StartDateBegin = STR_TO_DATE('01-01-1900','%d-%m-%Y');
+    END IF;
+    IF (ISNULL(_StartDateEnd) OR ISEMPTY(_StartDateEnd)) THEN
+		SET _StartDateEnd = STR_TO_DATE('31-12-2299','%d-%m-%Y');
+    END IF;
+
+    SELECT op.OrgProjectID,
+		op.OrgID,
+		op.Name,
+        o.Name as OrgName,
+		op.IsActive,
+        op.Priority,
+        op.Description,
+        op.StartDate,
+        op.TimelineDescription,
+        op.City,
+        op.State,
+        op.Region,
+        op.Country,
+        op.PostalCode,
+        op.CreatedDate,
+        op.CreatedBy,
+        op.UpdatedDate,
+        op.UpdatedBy
+	FROM orgproject as op
+		join orgprofile as o
+			on op.OrgID = o.OrgID
+    WHERE LOWER(op.Priority) = LOWER(Coalesce(_IsPriority, op.Priority))
+		AND op.StartDate between _StartDateBegin AND _StartDateEnd
+        AND op.City LIKE CONCAT('%', coalesce(_City, ''), '%')
+        AND op.State LIKE CONCAT('%', coalesce(_State, ''), '%')
+        AND op.Region LIKE CONCAT('%', coalesce(_Region, ''), '%')
+        AND op.Country LIKE CONCAT('%', coalesce(_Country, ''), '%')
+        AND op.PostalCode LIKE CONCAT('%', coalesce(_PostalCode, ''), '%');
+
+    
+END$$
+
+
+DROP PROCEDURE IF EXISTS `sp_SearchOrgsByVarious`$$
+CREATE PROCEDURE `sp_SearchOrgsByVarious` (IN `_Name` VARCHAR(100), 
+        IN `_TaxIdentifier` VARCHAR(50), 
+        IN `_City` VARCHAR(100), IN `_State` VARCHAR(100), 
+        IN `_Region` VARCHAR(100), IN `_Country` VARCHAR(100), 
+        IN `_PostalCode` VARCHAR(20))  BEGIN
+    
+    SELECT OrgID,
+		Name,
         Description,
-        StartDate,
-        TimelineDescription,
+        Mission,
+        TaxIdentifier,
+        ContactName,
+        ContactEmail,
+        ContactPhone,
+        Address1,
+        Address2,
         City,
         State,
         Region,
         Country,
         PostalCode,
+        EmailAddress,
+        PhoneNumber,
+        Twitter,
+        LinkedIn,
         CreatedDate,
         CreatedBy,
         UpdatedDate,
         UpdatedBy
-	FROM orgproject
-    WHERE IsActive = Coalesce(_IsActive, IsActive)
-		AND (StartDate >= Coalesce(_StartDateBegin, StartDate) AND StartDate <= Coalesce(_StartDateEnd, StartDate))
-        AND City = Coalesce(_City, City)
-        AND State = Coalesce(_State, State)
-        AND Region = Coalesce(_Region, Region)
-        AND Country = Coalesce(_Country, Country)
-        AND PostalCode = Coalesce(_PostalCode, PostalCode);
+	FROM orgprofile
+    WHERE Name like CONCAT('%', _Name, '%') 
+		AND TaxIdentifier like CONCAT('%', _TaxIdentifier, '%') 
+        AND City like CONCAT('%', _City, '%') 
+        AND State like CONCAT('%', _State, '%') 
+        AND Region like CONCAT('%', _Region, '%') 
+        AND Country like CONCAT('%', _Country, '%') 
+        AND PostalCode like CONCAT('%', _PostalCode, '%');
 
-    
+
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_SearchVolunteersByVarious`$$
@@ -785,7 +845,8 @@ CREATE PROCEDURE `sp_UpdateAuthUser` (`_UserID` INT,
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_UpdateOrgProfile`$$
-CREATE PROCEDURE `sp_UpdateOrgProfile` (`_OrgID` INT, `_Description` TEXT, 
+CREATE PROCEDURE `sp_UpdateOrgProfile` (`_OrgID` INT, `_Name` VARCHAR(100),
+		`_Description` TEXT, 
 		`_Mission` TEXT, `_TaxIdentifier` VARCHAR(45), 
         `_ContactName` VARCHAR(200), `_ContactEmail` VARCHAR(200), 
         `_ContactPhone` VARCHAR(20), `_Address1` VARCHAR(200), 
@@ -797,7 +858,8 @@ CREATE PROCEDURE `sp_UpdateOrgProfile` (`_OrgID` INT, `_Description` TEXT,
         `_UpdatedBy` VARCHAR(100))  BEGIN
     
     UPDATE orgprofile
-		SET Description = _Description,
+		SET Name = _Name,
+			Description = _Description,
 			Mission = _Mission,
             TaxIdentifier = _TaxIdentifier,
             ContactName = _ContactName,
@@ -822,7 +884,7 @@ END$$
 
 DROP PROCEDURE IF EXISTS `sp_UpdateOrgProject`$$
 CREATE PROCEDURE `sp_UpdateOrgProject` (`_OrgProjectID` INT, 
-		`_OrgID` INT, `_IsActive` TINYINT, 
+		`_OrgID` INT, `_Name` VARCHAR(100), `_IsActive` TINYINT, 
         `_Priority` VARCHAR(2), `_Description` TEXT, 
         `_StartDate` DATETIME, `_TimelineDescription` TEXT, 
         `_City` VARCHAR(100), `_State` VARCHAR(100), 
@@ -830,7 +892,8 @@ CREATE PROCEDURE `sp_UpdateOrgProject` (`_OrgProjectID` INT,
         `_PostalCode` VARCHAR(20), `_UpdatedBy` VARCHAR(100))  BEGIN
     
     UPDATE orgproject
-		SET IsActive = _IsActive,
+		SET Name = _Name,
+			IsActive = _IsActive,
 			Priority = _Priority,
             Description = _Description,
             StartDate = _StartDate,

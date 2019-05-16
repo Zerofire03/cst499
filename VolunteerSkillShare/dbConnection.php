@@ -4,7 +4,7 @@ function getDatabaseConnection($dbname = 'cst499-vss'){
     $username = 'root';
     $password = '';
     
-        /*when connecting from Heroku
+    /*when connecting from Heroku
     if  (strpos($_SERVER['HTTP_HOST'], 'herokuapp') !== false) {
         $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
         $host = $url["host"];

@@ -1,20 +1,4 @@
-<?php
-    //session_start();
-    
-    //include "dbConnection.php";
-    
-    //$conn = getDatabaseConnection("cst499-vss");
-    
-?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Volunteer Skill Share</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <style>@import url("css/styles.css");</style>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates" rel="stylesheet">
-    </head>
+    <?php include '_header.php';?>
     
     <body id="activePage">
         
@@ -23,15 +7,26 @@
         </div>
         
         <!-- Navigation Bar-->
-        <ul class="nav nav-pills">
+        <ul class="nav nav-pills" id="navBar">
           <li role="presentation" class="active"><a href="index.php">Login</a></li>
-          <li role="presentation"><a href="volProfile.php">Volunteer Profile</a></li>
-          <li role="presentation"><a href="orgProfile.php">Organization Profile</a></li>
+          <?php 
+            if(isset($_SESSION['incorrect']))
+            {
+                echo '<li role="presentation"><a href="volProfile.php">Volunteer Profile</a></li>'; 
+                echo '<li role="presentation"><a href="orgProfile.php">Organization Profile</a></li>';
+            }  
+            ?>
           <li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>
         </ul>
         
+        <br>
+        
        <!--Login Process-->
-        <div class="instructions">
+       <button class="accordion" id="userLogin">Returning Users</button>
+        <div class="panel">
+         
+        <p>
+        <div class="<?php echo empty($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
         <h3><font color="black">Please Login</font></h3>
         <div id="loginBox">
         <form method="post" action="loginProcess.php">
@@ -42,13 +37,20 @@
         </form>
         </div>
         </div>
+        </p>   
+        
+        </div>
+        
+        
         
         <!--Create Account Process-->
-        
-        <div class="instructions">
+        <button class="accordion" id="createUser">New Users</button>
+        <div class="panel">
+            
+        <div class="<?php echo empty($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
         <h3><font color="black">Sign Up</font></h3>
         <div id="accountBox">
-        <form method="post" action="VolunteerSkillShare/insertAuthUser.php">
+        <form method="post" action="insertAuthUser.php">
             <input type="text" name="fName" id="fName" placeholder="First Name" size="20"/> <input type="text" name="lName" id="lName" placeholder="Last Name" size="20"/> <br>
             <input type="text" name="email" id="email" placeholder="Email" size="42"/> <br>
             <input type="password" name="password" id="passwordA" placeholder="Password" size="42"/> <br>
@@ -58,19 +60,26 @@
         </div>
         </div>
         
-        <!-- This is the footer -->
-        <footer>
-            <hr id="hr_footer">
-                CST 499 Group Capstone. 2019&copy; Buckey, Gonzalez, Holmes, Loeser<br />
-                <strong>Disclaimer:</strong> The information in this webpage is fictious.<br />
-                It is used for academic purposes only.
-                
-                <figure id="csumb">
-                    <img src="Images/csumb_logo.png" alt="CSUMB Logo">
-                </figure>
+        </div>
+        
+       <!-- Action: Button Click -->
+       <script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
             
-        </footer>
-        <!-- closing footer -->
-    </body>
+            for (i = 0; i < acc.length; i++) {
+              acc[i].addEventListener("click", function() {
+                this.classList.toggle("open");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight){
+                  panel.style.maxHeight = null;
+                } else {
+                  panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+              });
+            }
+        </script>
+        
     
-</html>
+        
+<?php include '_footer.php';
