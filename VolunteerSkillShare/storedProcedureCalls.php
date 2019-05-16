@@ -336,5 +336,73 @@
         }
         return null;
     }
+    
+    
+    function searchVolunteersByVarious($city, $state, $region, $country, $postalCode,
+        $skillID, $skillExperienceLevel, $isCurrent)
+    {
+        // values for skillID, skillExperienceLevel, isCurrent must be together
+        //      if experience or current is provided but not the skill, we must toss it out
+        
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_SearchVolunteersByVarious(?, ?, ?, ?, ?, ?, ?, ?)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
 
+            // pass value to the command
+            $stmt->bindParam(1, $city, PDO::PARAM_STR);
+            $stmt->bindParam(2, $state, PDO::PARAM_STR);
+            $stmt->bindParam(3, $region, PDO::PARAM_STR);
+            $stmt->bindParam(4, $country, PDO::PARAM_STR);
+            $stmt->bindParam(5, $postalCode, PDO::PARAM_STR);
+            $stmt->bindParam(6, $skillID, PDO::PARAM_INT);
+            $stmt->bindParam(7, $skillExperienceLevel, PDO::PARAM_INT);
+            $stmt->bindParam(8, $isCurrent, PDO::PARAM_BOOL);
+            
+            // execute the stored procedure
+            $stmt->execute();
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            return $records;
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    // sp_GetSkills
+    function getSkills()
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_GetSkills()';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+
+            // execute the stored procedure
+            $stmt->execute();
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            return $records;
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
 ?>
