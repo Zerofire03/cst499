@@ -340,6 +340,10 @@
     }
     
     function volprofile($volID, $firstname, $lastname, $city, $state, $region, $country, $postalcode, $url, $emailaddress, $phonenumber, $contactpref){
+        $conn = getDatabaseConnection("cst499-vss");
+        
+        $sql = "SELECT * FROM volprofile WHERE 1=1";
+        
         if (!empty($volID)){
             $sql .= " AND VolunteerID = :volID";
         }
@@ -419,5 +423,6 @@
         $stmt = $conn->prepare($sql);
         $stmt->execute();
     }
+    
 
 ?>

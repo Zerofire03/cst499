@@ -24,10 +24,32 @@
         </ul>
         
        <!-- code -->
+
+
+            <p>Volunteer ID</p>  <input type="text" readonly="readonly" name ="volunteerid">
+
+            <p>First Name</p>  <input type="text" readonly="readonly" name ="firstname">       
        
+            <p>Last Name</p>  <input type="text" readonly="readonly" name ="lastname">
        
+            <p>City</p>  <input type="text" readonly="readonly" name ="city">
        
+             <p>State</p>  <input type="text" readonly="readonly" name ="state">
        
+            <p>Region</p>  <input type="text" readonly="readonly" name ="vregion">
+       
+            <p>Country</p>  <input type="text" readonly="readonly" name ="country">
+       
+            <p>Website</p>  <input type="text" readonly="readonly" name ="website">
+       
+            <p>Email Address</p>  <input type="text" readonly="readonly" name ="email">
+       
+             <p>Phone Number</p>  <input type="text" readonly="readonly" name ="phoned">
+       
+             <p>Contact Preference</p>  <input type="text" readonly="readonly" name ="contactpreference">
+       
+            <button type="button" onclick="window.location.href = 'volProfileEdit.php'">Edit</button>
+
        
        
        
