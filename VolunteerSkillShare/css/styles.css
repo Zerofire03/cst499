@@ -2,13 +2,22 @@
 
 
 .jumbotron{
-    background-color: rgb(109, 109, 105) !important;
-    color: rgb(216, 195, 34);
-    font-family: 'Montserrat Alternates', sans-serif;
+    background-color: rgb(80, 86, 89) !important;
+    color: rgb(97, 182, 189);
+    font-family: 'Baloo Bhai', cursive;
+
 }
 
 #activePage{
     background-color: white;
+     text-align: center;
+     font-family: 'Baloo Bhai', cursive;
+}
+
+
+li a:hover {
+  background-color: #555;
+  color: rgb(153,94,187);
 }
 
 .instructions{
@@ -22,6 +31,13 @@
     color: black !important;
 }
 
+.bg
+{
+  width: 100%;
+  height:255px;
+  z-index: 0;
+}
+
 footer, #hr_footer, #csumb{
     color: black;
     font-size:12px;
@@ -32,6 +48,7 @@ footer, #hr_footer, #csumb{
     width:25%;
 }
 
+/*///////////////////////*/
 .tableInput {
     display: inline-block;
     text-align: center;
@@ -89,6 +106,7 @@ footer, #hr_footer, #csumb{
     width: 200px;
 }
 
+/*Accordion Styling*/
 .accordion {
   background-color: #ccc;
   color: #000;
@@ -96,15 +114,16 @@ footer, #hr_footer, #csumb{
   padding: 18px;
   width: 100%;
   border: none;
-  text-align: left;
+  text-align: center;
   outline: none;
   font-size: 15px;
   font-weight: bold;
   transition: 0.4s;
+  font-size: 25px;
 }
 
-.open, .accordion:hover {
-  background-color: rgb(216, 195, 34);
+.active, .open, .accordion:hover {
+  background-color: rgb(245, 208, 74);
 }
 
 .panel {
@@ -115,6 +134,7 @@ footer, #hr_footer, #csumb{
   transition: max-height 0.2s ease-out;
   text-align: center;
 }
+
 .accordion:after {
   content: '\02795'; /* Unicode character for "plus" sign (+) */
   font-size: 15px;
@@ -126,4 +146,8 @@ footer, #hr_footer, #csumb{
 
 .open:after {
   content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+#userLogin, #createUser{
+    text-align: center;
 }

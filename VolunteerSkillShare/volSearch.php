@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 <?php
     include '_header.php';
     include 'storedProcedureCalls.php';
 
     $volResults = null;
+=======
+    <?php include '_header.php';?>
+>>>>>>> 5a2bf9f34dc627671cc2c130823dfe0a760a9204
     
     // get the skills list
     if (!isset($skillsList))
@@ -160,18 +164,4 @@
         </div>
 
         <!-- This is the footer -->
-        <footer>
-            <hr id="hr_footer">
-                CST 499 Group Capstone. 2019&copy; Buckey, Gonzalez, Holmes, Loeser<br />
-                <strong>Disclaimer:</strong> The information in this webpage is fictious.<br />
-                It is used for academic purposes only.
-                
-                <figure id="csumb">
-                    <img src="Images/csumb_logo.png" alt="CSUMB Logo">
-                </figure>
-            
-        </footer>
-        <!-- closing footer -->
-    </body>
-    
-</html>
+        <?php include '_footer.php';

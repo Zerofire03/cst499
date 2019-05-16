@@ -91,6 +91,7 @@ DROP TABLE IF EXISTS `orgproject`;
 CREATE TABLE `orgproject` (
   `OrgProjectID` int(11) NOT NULL,
   `OrgID` int(11) NOT NULL,
+  `Name` VARCHAR(100) NOT NULL,
   `IsActive` tinyint(4) NOT NULL DEFAULT '1',
   `Priority` varchar(2) NOT NULL DEFAULT 'H',
   `Description` text NOT NULL,
@@ -412,6 +413,7 @@ CREATE PROCEDURE `sp_GetOrgProjectsByOrgID` (IN `_OrgID` INT)  BEGIN
     
     SELECT OrgProjectID,
 		OrgID,
+        Name,
 		IsActive,
         Priority,
         Description,
@@ -436,6 +438,7 @@ CREATE PROCEDURE `sp_GetOrgProjectsByOrgProjectID` (IN `_OrgProjectID` INT)  BEG
     
     SELECT OrgProjectID,
 		OrgID,
+        Name,
 		IsActive,
         Priority,
         Description,
@@ -584,7 +587,7 @@ CREATE PROCEDURE `sp_InsertOrgProfile` (`_Name` VARCHAR(100), `_Description` TEX
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_InsertOrgProject`$$
-CREATE PROCEDURE `sp_InsertOrgProject` (`_OrgID` INT, 
+CREATE PROCEDURE `sp_InsertOrgProject` (`_OrgID` INT, `_Name` VARCHAR(100),
 		`_IsActive` TINYINT, `_Priority` VARCHAR(2), 
         `_Description` TEXT, `_StartDate` DATETIME, 
         `_TimelineDescription` TEXT, `_City` VARCHAR(100), 
@@ -594,14 +597,14 @@ CREATE PROCEDURE `sp_InsertOrgProject` (`_OrgID` INT,
     
     INSERT INTO orgproject
     (
-		OrgID, IsActive, Priority, Description,
+		OrgID, Name, IsActive, Priority, Description,
         StartDate, TimelineDescription, City, State, Region,
         Country, PostalCode, CreatedDate, CreatedBy, UpdatedDate, 
         UpdatedBy
 	)
     VALUES
     (
-		_OrgID, _IsActive, _Priority, _Description,
+		_OrgID, _Name, _IsActive, _Priority, _Description,
         _StartDate, _TimelineDescription, _City, _State, _Region,
         _Country, _PostalCode, CURRENT_TIMESTAMP, _CreatedBy, CURRENT_TIMESTAMP, 
         _CreatedBy
@@ -685,36 +688,47 @@ CREATE PROCEDURE `sp_InsertVolSkill` (`_VolunteerID` INT,
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_SearchOrgProjectsByVarious`$$
-CREATE PROCEDURE `sp_SearchOrgProjectsByVarious` (IN `_IsActive` TINYINT, 
+CREATE PROCEDURE `sp_SearchOrgProjectsByVarious` (IN `_IsPriority` VARCHAR(2), 
 		IN `_StartDateBegin` DATETIME, IN `_StartDateEnd` DATETIME, 
         IN `_City` VARCHAR(100), IN `_State` VARCHAR(100), 
         IN `_Region` VARCHAR(100), IN `_Country` VARCHAR(100), 
         IN `_PostalCode` VARCHAR(20))  BEGIN
     
-    SELECT OrgProjectID,
-		OrgID,
-		IsActive,
-        Priority,
-        Description,
-        StartDate,
-        TimelineDescription,
-        City,
-        State,
-        Region,
-        Country,
-        PostalCode,
-        CreatedDate,
-        CreatedBy,
-        UpdatedDate,
-        UpdatedBy
-	FROM orgproject
-    WHERE IsActive = Coalesce(_IsActive, IsActive)
-		AND (StartDate >= Coalesce(_StartDateBegin, StartDate) AND StartDate <= Coalesce(_StartDateEnd, StartDate))
-        AND City LIKE CONCAT('%', _City, '%')
-        AND State LIKE CONCAT('%', _State, '%')
-        AND Region LIKE CONCAT('%', _Region, '%')
-        AND Country LIKE CONCAT('%', _Country, '%')
-        AND PostalCode LIKE CONCAT('%', _PostalCode, '%');
+    IF (ISNULL(_StartDateBegin) OR ISEMPTY(_StartDateBegin)) THEN
+		SET _StartDateBegin = STR_TO_DATE('01-01-1900','%d-%m-%Y');
+    END IF;
+    IF (ISNULL(_StartDateEnd) OR ISEMPTY(_StartDateEnd)) THEN
+		SET _StartDateEnd = STR_TO_DATE('31-12-2299','%d-%m-%Y');
+    END IF;
+
+    SELECT op.OrgProjectID,
+		op.OrgID,
+		op.Name,
+        o.Name as OrgName,
+		op.IsActive,
+        op.Priority,
+        op.Description,
+        op.StartDate,
+        op.TimelineDescription,
+        op.City,
+        op.State,
+        op.Region,
+        op.Country,
+        op.PostalCode,
+        op.CreatedDate,
+        op.CreatedBy,
+        op.UpdatedDate,
+        op.UpdatedBy
+	FROM orgproject as op
+		join orgprofile as o
+			on op.OrgID = o.OrgID
+    WHERE LOWER(op.Priority) = LOWER(Coalesce(_IsPriority, op.Priority))
+		AND op.StartDate between _StartDateBegin AND _StartDateEnd
+        AND op.City LIKE CONCAT('%', coalesce(_City, ''), '%')
+        AND op.State LIKE CONCAT('%', coalesce(_State, ''), '%')
+        AND op.Region LIKE CONCAT('%', coalesce(_Region, ''), '%')
+        AND op.Country LIKE CONCAT('%', coalesce(_Country, ''), '%')
+        AND op.PostalCode LIKE CONCAT('%', coalesce(_PostalCode, ''), '%');
 
     
 END$$
@@ -870,7 +884,7 @@ END$$
 
 DROP PROCEDURE IF EXISTS `sp_UpdateOrgProject`$$
 CREATE PROCEDURE `sp_UpdateOrgProject` (`_OrgProjectID` INT, 
-		`_OrgID` INT, `_IsActive` TINYINT, 
+		`_OrgID` INT, `_Name` VARCHAR(100), `_IsActive` TINYINT, 
         `_Priority` VARCHAR(2), `_Description` TEXT, 
         `_StartDate` DATETIME, `_TimelineDescription` TEXT, 
         `_City` VARCHAR(100), `_State` VARCHAR(100), 
@@ -878,7 +892,8 @@ CREATE PROCEDURE `sp_UpdateOrgProject` (`_OrgProjectID` INT,
         `_PostalCode` VARCHAR(20), `_UpdatedBy` VARCHAR(100))  BEGIN
     
     UPDATE orgproject
-		SET IsActive = _IsActive,
+		SET Name = _Name,
+			IsActive = _IsActive,
 			Priority = _Priority,
             Description = _Description,
             StartDate = _StartDate,

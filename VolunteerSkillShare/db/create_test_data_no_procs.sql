@@ -229,6 +229,7 @@ INSERT INTO authusers
 
 
 -- create a project listing
+set @_ProjectName = 'Sample Network Installation';
 set @_Description = 'Sample Network Installation
 
 Test Org is looking to install a new network in our 
@@ -249,7 +250,7 @@ plan, working with the site architect.  This
 will ensure connections and power are installed 
 together.
 ';
-set @_StartDate = '2019-08-01';
+set @_StartDate = CAST('2019-08-01' AS DATE);
 set @_TimelineDescription = '
 Funds will be allocated from the build-out budget 
 or by new grant requests once the initial plan 
@@ -264,12 +265,12 @@ set @_PostalCode = '14301';
 set @_CreatedBy = 'rootuser';
 
 INSERT INTO orgproject
-(OrgID, IsActive, Priority, Description,
+(OrgID, Name, IsActive, Priority, Description,
 	StartDate, TimelineDescription, City, State, Region,
 	Country, PostalCode, CreatedDate, CreatedBy, UpdatedDate, 
 	UpdatedBy)
 VALUES
-(@org1, 1, 'H', @_Description,
+(@org1, @_ProjectName, 1, 'H', @_Description,
 	@_StartDate, @_TimelineDescription, @_City, @_State, @_Region,
 	@_Country, @_PostalCode, CURRENT_TIMESTAMP, @_CreatedBy, CURRENT_TIMESTAMP, 
 	@_CreatedBy);
