@@ -1,6 +1,6 @@
 <?php 
     include '_header.php';
-    // include '_enforceLogin.php';
+    include '_enforceLogin.php';
 ?>
     
     <body id="activePage">
