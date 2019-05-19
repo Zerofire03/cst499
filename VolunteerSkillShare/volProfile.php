@@ -24,9 +24,6 @@
        
        
         
-<<<<<<< HEAD
+
         <?php include '_footer.php'; ?>
-=======
-        <!-- This is the footer -->
-        <?php include '_footer.php';
->>>>>>> 5a2bf9f34dc627671cc2c130823dfe0a760a9204
+
