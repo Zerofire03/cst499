@@ -135,6 +135,28 @@ footer, #hr_footer, #csumb{
   text-align: center;
 }
 
+.fixedheader {
+    background-color: rgb(245, 208, 74);
+  color: #000;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  font-weight: bold;
+  transition: 0.4s;
+  font-size: 25px;
+}
+.fixedpanel {
+  padding: 0 18px;
+  background-color: white;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  text-align: center;
+}
+
 .accordion:after {
   content: '\02795'; /* Unicode character for "plus" sign (+) */
   font-size: 15px;
