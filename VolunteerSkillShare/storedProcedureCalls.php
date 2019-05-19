@@ -363,7 +363,7 @@
             $stmt->bindParam(5, $postalCode, PDO::PARAM_STR);
             $stmt->bindParam(6, $skillID, PDO::PARAM_INT);
             $stmt->bindParam(7, $skillExperienceLevel, PDO::PARAM_INT);
-            $stmt->bindParam(8, $isCurrent, PDO::PARAM_BOOL);
+            $stmt->bindParam(8, $isCurrent, PDO::PARAM_INT);
             
             // execute the stored procedure
             $stmt->execute();
