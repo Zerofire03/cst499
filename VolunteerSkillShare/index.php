@@ -10,11 +10,11 @@
         <ul class="nav nav-pills" id="navBar">
           <li role="presentation" class="active"><a href="index.php">Login</a></li>
           <?php 
-            if(isset($_SESSION['incorrect']))
-            {
+            //if(isset($_SESSION['incorrect']))
+           // {
                 echo '<li role="presentation"><a href="volProfile.php">Volunteer Profile</a></li>'; 
                 echo '<li role="presentation"><a href="orgProfile.php">Organization Profile</a></li>';
-            }  
+           // }  
             ?>
           <li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>
         </ul>
@@ -26,7 +26,7 @@
         <div class="panel">
          
         <p>
-        <div class="<?php echo empty($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
+        <div class="<?php //echo empty($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
         <h3><font color="black">Please Login</font></h3>
         <div id="loginBox">
         <form method="post" action="loginProcess.php">
