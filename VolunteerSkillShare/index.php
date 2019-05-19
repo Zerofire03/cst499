@@ -16,7 +16,7 @@
         <div class="panel">
          
         <p>
-        <div class="<?php //echo empty($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
+        <div class="<?php echo isset($_SESSION['username']) ? 'hidden' : 'show';?>"
         <h3><font color="black">Please Login</font></h3>
         <div id="loginBox">
         <form method="post" action="loginProcess.php">
@@ -37,7 +37,7 @@
         <button class="accordion" id="createUser">New Users</button>
         <div class="panel">
             
-        <div class="<?php echo empty($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
+        <div class="<?php echo isset($_SESSION['username']) ? 'hidden' : 'show';?>"
         <h3><font color="black">Sign Up</font></h3>
         <div id="accountBox">
         <form method="post" action="insertAuthUser.php">
