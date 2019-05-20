@@ -72,7 +72,16 @@
     <body id="activePage">
         <div class="jumbotron text-center">
             <h1>VOLUNTEER SKILL SHARE</h1><br/>
-            <h2>Welcome <?=$_SESSION['userName']?>!</h2><br/>
+            <?php
+                if(isset($_SESSION['username']))
+                {
+                     echo '<h2>Welcome ' . $_SESSION['username'] . '!</h2><br/>';
+                }
+                else
+                {
+                    echo "<h2>Welcome!</h2><br/>";
+                }
+            ?>
         </div>
         
         <!-- Navigation Bar-->
