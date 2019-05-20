@@ -7,7 +7,7 @@
         
         <div class="jumbotron text-center">
         <h1>VOLUNTEER SKILL SHARE</h1><br/>
-        <h2>Welcome <?=$_SESSION['userName']?>!</h2><br/>
+        <h2>Welcome <?=$_SESSION['username']?>!</h2><br/>
         </div>
         
         <!-- Navigation Bar-->
@@ -17,6 +17,7 @@
           <li role="presentation"><a href="orgProfileEdit.php">Profile Editor</a></li>
           <li role="presentation"><a href="orgProject.php">Active Project</a></li>
           <li role="presentation"><a href="volSearch.php">Volunteer Search</a></li>
+          <?php echo isset($_SESSION['username']) ? '<li role="presentation"><a href="logout.php">Logout</a></li>' : ''; ?>
         </ul>
         
        <!-- code -->

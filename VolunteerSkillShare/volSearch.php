@@ -54,6 +54,7 @@
           <li role="presentation"><a href="orgProfileEdit.php">Profile Editor</a></li>
           <li role="presentation"><a href="orgProject.php">Active Project</a></li>
           <li role="presentation" class="active"><a href="volSearch.php">Volunteer Search</a></li>
+          <?php echo isset($_SESSION['username']) ? '<li role="presentation"><a href="logout.php">Logout</a></li>' : ''; ?>
         </ul>
         
         <!-- code -->
