@@ -23,7 +23,7 @@
         }
         elseif($_SESSION['role'] == 'O')
         {
-            header("Location:orglProfile.php");
+            header("Location:orgProfile.php");
         }
     }
     else

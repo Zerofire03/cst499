@@ -1,6 +1,7 @@
 <?php
     include '_header.php';
     include 'storedProcedureCalls.php';
+    include '_enforceLogin.php';
 
     $volResults = null;
 
