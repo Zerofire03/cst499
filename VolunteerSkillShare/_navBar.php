@@ -9,7 +9,7 @@
           <?php if(isset($_SESSION['username']) && $_SESSION['role'] == "O"){ echo '<li role="presentation"><a href=orgProfile.php">Organization Profile</a></li>'; } ?>
           <?php if(isset($_SESSION['username']) && $_SESSION['role'] == "O"){ echo '<li role="presentation"><a href="orgProfileEdit.php">Profile Editor</a></li>'; } ?>
           <?php if(isset($_SESSION['username']) && $_SESSION['role'] == "O"){ echo '<li role="presentation"><a href="orgProject.php">Active Project</a></li>'; } ?>
-          <?php if(isset($_SESSION['username']) && $_SESSION['role'] == "O" && strlen(strstr($fileName, 'volSearch'))>0){ echo '<li role="presentation"><a href="volSearch.php">Volunteer Search</a></li>'; } ?>
+          <?php if(isset($_SESSION['username']) && $_SESSION['role'] == "O"){ echo '<li role="presentation"><a href="volSearch.php">Volunteer Search</a></li>'; } ?>
           <li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>
           <?php echo isset($_SESSION['username']) ? '<li role="presentation"><a href="logout.php">Logout</a></li>' : ''; ?> 
         </ul>

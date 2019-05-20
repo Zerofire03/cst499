@@ -29,7 +29,7 @@
     else
     {
         $_SESSION['incorrect'] = true;
-        header("Location:testFail.html");
+        header("Location:index.php");
     }
     
 ?>

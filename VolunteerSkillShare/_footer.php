@@ -1,6 +1,6 @@
 <!-- This is the footer -->
 
-<img class="bg" src="/cst499/VolunteerSkillShare/Images/volHands.png" />
+<img class="bg" src="Images/volHands.png" />
         <footer>
             <hr id="hr_footer">
                 CST 499 Group Capstone. 2019&copy; Buckey, Gonzalez, Holmes, Loeser<br />
