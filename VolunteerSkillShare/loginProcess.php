@@ -28,7 +28,6 @@
     }
     else
     {
-        $_SESSION['incorrect'] = true;
         header("Location:index.php");
     }
     
