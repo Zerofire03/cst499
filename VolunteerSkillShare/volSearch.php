@@ -1,7 +1,6 @@
 <?php
     include '_header.php';
     include 'storedProcedureCalls.php';
-    include '_enforceLogin.php';
 
     $volResults = null;
 
@@ -208,5 +207,5 @@
         </div>
         <br/>
         
-        <!-- This is the footer -->
-        <?php include '_footer.php';
+<!-- This is the footer -->
+<?php include '_footer.php';

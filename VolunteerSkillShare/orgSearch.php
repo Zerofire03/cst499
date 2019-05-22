@@ -334,5 +334,5 @@
     }
 ?>
 
-        <!-- This is the footer -->
-        <?php include '_footer.php';
+<!-- This is the footer -->
+<?php include '_footer.php';
