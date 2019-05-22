@@ -249,6 +249,43 @@
         }
         return null;
     }
+
+    /**
+     * Get GetAuthUserByUserName
+     * @param username
+     */
+    function getAuthUserByUserName($userName)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_GetAuthUserByUserName(:_UserName)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_UserName', $userName, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            $return_value = $stmt->fetch();
+     
+            $stmt->closeCursor();
+            return $return_value;
+            
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
     
     function searchOrgsByVarious($name, $taxIdentifier, $city, $state,
         $region, $country, $postalCode)

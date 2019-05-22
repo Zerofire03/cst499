@@ -41,22 +41,6 @@
     */
 
 ?>
-
-        <div class="jumbotron text-center">
-            <h1>VOLUNTEER SKILL SHARE</h1><br/>
-            <h2>Welcome <?=$_SESSION['userName']?>!</h2><br/>
-        </div>
-        
-        <!-- Navigation Bar-->
-        <ul class="nav nav-pills">
-          <li role="presentation"><a href="index.php">Home</a></li>
-          <li role="presentation"><a href="orgProfile.php">Organization Profile</a></li>
-          <li role="presentation"><a href="orgProfileEdit.php">Profile Editor</a></li>
-          <li role="presentation"><a href="orgProject.php">Active Project</a></li>
-          <li role="presentation" class="active"><a href="volSearch.php">Volunteer Search</a></li>
-          <?php echo isset($_SESSION['username']) ? '<li role="presentation"><a href="logout.php">Logout</a></li>' : ''; ?>
-        </ul>
-        
         <!-- code -->
         <br/>
         <div class="fixedheader">Volunteer Search</div>

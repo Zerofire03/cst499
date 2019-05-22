@@ -4,7 +4,7 @@
         
         <div class="jumbotron text-center">
         <h1>VOLUNTEER SKILL SHARE</h1><br/>
-        <h2>Welcome <?=$_SESSION['userName']?>!</h2><br/>
+        <h2>Welcome <?=$_SESSION['fname']?>!</h2><br/>
         </div>
         
         <!-- Navigation Bar-->

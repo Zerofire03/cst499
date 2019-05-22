@@ -1,14 +1,11 @@
-    <?php include '_header.php';?>
-    
-    <body id="activePage">
-        
-        <div class="jumbotron text-center">
-        <h1>VOLUNTEER SKILL SHARE</h1>
-        </div>
-        
-        <!-- Navigation Bar-->
-        <?php include '_navBar.php'; ?>
-        
+<?php 
+
+session_start();    
+
+include '_header.php';
+
+?>
+
         <br>
         
        <!--Login Process-->
@@ -19,7 +16,7 @@
                 <div class="panel"';
             }
         ?>
-         
+
         <p>
         <div class="<?php echo isset($_SESSION['username']) ? 'hidden' : 'show';?>"
         <h3><font color="black">Please Login</font></h3>
