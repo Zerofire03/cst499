@@ -10,26 +10,34 @@
     
     $authSuccess = getAuthenticatedUser($username, $password);
     
-    
     if($authSuccess == 1)
     {
         $_SESSION['incorrect'] = false;
         $_SESSION['username'] = $username;
+        
+        $userInfo = getAuthUserByUserName($username);
+        
+        $_SESSION['userid'] = $userInfo['UserID'];
+        $_SESSION['role'] = strtoupper($userInfo['Role']);
+        $_SESSION['fname'] = $userInfo['FirstName'];
+        $_SESSION['lname'] = $userInfo['LastName'];
+        
+        /*
         $_SESSION['userid'] = getAuthUserID($username);
         $_SESSION['role'] = getAuthUserRole($username);
+        */
         if($_SESSION['role'] == 'V')
         {
             header("Location:volProfile.php");
         }
         elseif($_SESSION['role'] == 'O')
         {
-            header("Location:orglProfile.php");
+            header("Location:orgProfile.php");
         }
     }
     else
     {
-        $_SESSION['incorrect'] = true;
-        header("Location:testFail.html");
+        header("Location:index.php");
     }
     
 ?>

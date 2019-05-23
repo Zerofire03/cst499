@@ -784,8 +784,8 @@ CREATE PROCEDURE `sp_SearchVolunteersByVarious` (`_City` VARCHAR(100),
         `_IsCurrent` TINYINT)  BEGIN
     
     SELECT vp.VolunteerID,
-		vp.FirstName,
-        vp.LastName,
+		au.FirstName,
+        au.LastName,
         vp.City,
         vp.State,
         vp.Region,
@@ -801,24 +801,35 @@ CREATE PROCEDURE `sp_SearchVolunteersByVarious` (`_City` VARCHAR(100),
         vp.CreatedDate,
         vp.CreatedBy,
         vp.UpdatedDate,
-        vp.UpdatedBy
+        vp.UpdatedBy,
+        vs.SkillID,
+        vs.ExperienceLevel,
+        vs.IsCurrent,
+        s.Name
 	FROM volprofile as vp
 		JOIN volbio as vb
 			on vp.VolunteerID = vb.VolunteerID
 		JOIN authusers as au
 			on au.VolunteerID = vp.VolunteerID
-    WHERE vp.City = Coalesce(_City, vp.City)
-        AND vp.State = Coalesce(_State, vp.State)
-        AND vp.Region = Coalesce(_Region, vp.Region)
-        AND vp.Country = Coalesce(_Country, vp.Country)
-        AND vp.PostalCode = Coalesce(_PostalCode, vp.PostalCode)
-		AND EXISTS (SELECT 1 
+				and au.Role = 'V'
+		LEFT OUTER JOIN volskills as vs
+			on vs.VolunteerID = vp.VolunteerID
+                AND vs.SkillID = _SkillID
+                AND vs.ExperienceLevel >= Coalesce(_ExperienceLevel, vs.ExperienceLevel)
+                AND vs.IsCurrent = Coalesce(_IsCurrent, vs.IsCurrent)
+		LEFT OUTER JOIN skills as s
+			on s.SkillID = vs.SkillID
+    WHERE vp.City like CONCAT('%', ifnull(_City, vp.City), '%') 
+        AND vp.State like CONCAT('%', ifnull(_State, vp.State), '%') 
+        AND vp.Region like CONCAT('%', ifnull(_Region, vp.Region), '%') 
+        AND vp.Country like CONCAT('%', ifnull(_Country, vp.Country), '%') 
+        AND vp.PostalCode like CONCAT('%', ifnull(_PostalCode, vp.PostalCode), '%')
+        AND EXISTS (SELECT 1 
 					FROM volskills as vs
 					WHERE vs.VolunteerID = vp.VolunteerID
-						AND vs.SkillID = Coalesce(_SkillID, vs.SkillID)
-                        AND vs.ExperienceLevel = Coalesce(_ExperienceLevel, vs.ExperienceLevel)
-                        AND vs.IsCurrent = Coalesce(_IsCurrent, vs.IsCurrent));
-
+						AND vs.SkillID = ifnull(_SkillID, vs.SkillID)
+                        AND vs.ExperienceLevel >= ifnull(_ExperienceLevel, vs.ExperienceLevel)
+                        AND vs.IsCurrent = ifnull(_IsCurrent, vs.IsCurrent));
 
 END$$
 

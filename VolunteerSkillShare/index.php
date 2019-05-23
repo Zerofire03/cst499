@@ -1,32 +1,24 @@
-    <?php include '_header.php';?>
-    
-    <body id="activePage">
-        
-        <div class="jumbotron text-center">
-        <h1>VOLUNTEER SKILL SHARE</h1>
-        </div>
-        
-        <!-- Navigation Bar-->
-        <ul class="nav nav-pills" id="navBar">
-          <li role="presentation" class="active"><a href="index.php">Login</a></li>
-          <?php 
-            if(isset($_SESSION['incorrect']))
-            {
-                echo '<li role="presentation"><a href="volProfile.php">Volunteer Profile</a></li>'; 
-                echo '<li role="presentation"><a href="orgProfile.php">Organization Profile</a></li>';
-            }  
-            ?>
-          <li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>
-        </ul>
-        
+<?php 
+
+session_start();    
+
+include '_header.php';
+
+?>
+
         <br>
         
        <!--Login Process-->
-       <button class="accordion" id="userLogin">Returning Users</button>
-        <div class="panel">
-         
+       <?php
+            if(!isset($_SESSION['username']))
+            {
+               echo '<button class="accordion" id="userLogin">Returning Users</button>
+                <div class="panel"';
+            }
+        ?>
+
         <p>
-        <div class="<?php echo empty($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
+        <div class="<?php echo isset($_SESSION['username']) ? 'hidden' : 'show';?>"
         <h3><font color="black">Please Login</font></h3>
         <div id="loginBox">
         <form method="post" action="loginProcess.php">
@@ -44,10 +36,15 @@
         
         
         <!--Create Account Process-->
-        <button class="accordion" id="createUser">New Users</button>
-        <div class="panel">
+        <?php
+            if(!isset($_SESSION['username']))
+            {
+                echo '<button class="accordion" id="createUser">New Users</button>
+                <div class="panel">';
+            }
+        ?>
             
-        <div class="<?php echo empty($_SESSION['incorrect']) ? 'show' : 'hidden';?>"
+        <div class="<?php echo isset($_SESSION['username']) ? 'hidden' : 'show';?>"
         <h3><font color="black">Sign Up</font></h3>
         <div id="accountBox">
         <form method="post" action="insertAuthUser.php">
