@@ -496,6 +496,30 @@ CREATE PROCEDURE `sp_GetSkills` ()  BEGIN
     
 END$$
 
+
+DROP PROCEDURE IF EXISTS `sp_GetVolProfileByVolunteerID`$$
+CREATE PROCEDURE `sp_GetVolProfileByVolunteerID` (`_VolunteerID` INT)  BEGIN
+    
+    SELECT
+		VolunteerID,
+        City,
+        State,
+        Region,
+        Country,
+        PostalCode,
+        Url,
+        EmailAddress,
+        PhoneNumber,
+        ContactPref,
+        CreatedDate,
+        CreatedBy,
+        UpdatedDate,
+        UpdatedBy
+	FROM volprofile
+    WHERE VolunteerID = _VolunteerID;
+
+END$$
+
 DROP PROCEDURE IF EXISTS `sp_GetVolBioByVolunteerID`$$
 CREATE PROCEDURE `sp_GetVolBioByVolunteerID` (`_VolunteerID` INT)  BEGIN
     
@@ -922,12 +946,13 @@ CREATE PROCEDURE `sp_UpdateOrgProject` (`_OrgProjectID` INT,
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_UpdateVolProfile`$$
-CREATE PROCEDURE `sp_UpdateVolProfile` (`_VolunteerID` INT, `_FirstName` VARCHAR(100), `_LastName` VARCHAR(100), `_City` VARCHAR(100), `_State` VARCHAR(100), `_Region` VARCHAR(100), `_Country` VARCHAR(100), `_PostalCode` VARCHAR(20), `_Url` VARCHAR(200), `_EmailAddress` VARCHAR(200), `_PhoneNumber` VARCHAR(20), `_ContactPref` VARCHAR(5), `_UpdatedBy` VARCHAR(100))  BEGIN
+CREATE PROCEDURE `sp_UpdateVolProfile` (`_VolunteerID` INT, `_City` VARCHAR(100),
+			`_State` VARCHAR(100),`_Region` VARCHAR(100), `_Country` VARCHAR(100),
+            `_PostalCode` VARCHAR(20), `_Url` VARCHAR(200), `_EmailAddress` VARCHAR(200),
+            `_PhoneNumber` VARCHAR(20), `_ContactPref` VARCHAR(5), `_UpdatedBy` VARCHAR(100))  BEGIN
     
     UPDATE volprofile
-		set FirstName = _FirstName,
-			LastName = _LastName,
-            City = _City,
+		set City = _City,
             State = _State,
             Region = _Region,
             Country = _Country,
