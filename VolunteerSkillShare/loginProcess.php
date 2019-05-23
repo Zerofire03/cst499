@@ -1,7 +1,6 @@
 <?php
-
     include "storedProcedureCalls.php";
-    
+    echo "Line 3";
     //using session varaibles to store admin name and display on other pages
     session_start();
     

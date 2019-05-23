@@ -1,7 +1,7 @@
 <?php
     include "dbConnection.php";
     $dbName = "cst499-vss";
-    $createdBy = 'phpRootUser';
+    
     
     /**
      * Get AuthenticateUser
@@ -9,6 +9,7 @@
      * @param string $password
      * @return int
      */
+     
     function getAuthenticatedUser($username, $password)
     {
         global $dbName;
@@ -57,6 +58,8 @@
         LastPasswordReset, CreatedDate, 
         CreatedBy, UpdatedDate, UpdatedBy
      */
+     
+     
     function setInsertAuthUser($role, $fName, $lName, $username, $password)
     {
         global $dbName;
@@ -64,8 +67,7 @@
         
         try
         {
-            global $createdBy;
-            
+     
             // calling stored procedure command
             $sql = 'CALL sp_InsertAuthUser(:_Role, :_VolunteerID, :_OrgID, :_FirstName, :_LastName, :_UserName, :_Password, :_LastLogin, :_LastPasswordReset, :_CreatedBy)';
      
@@ -82,7 +84,7 @@
             $stmt->bindParam(':_Password', $password, PDO::PARAM_STR);
             $stmt->bindValue(':_LastLogin', null, PDO::PARAM_INT);
             $stmt->bindValue(':_LastPasswordReset', null, PDO::PARAM_INT);
-            $stmt->bindParam(':_CreatedBy', $createdBy, PDO::PARAM_STR);
+            $stmt->bindParam(':_CreatedBy', $username, PDO::PARAM_STR);
      
             // execute the stored procedure
             $stmt->execute();
@@ -140,6 +142,7 @@
      * @param int $userID
      * @return int
      */
+     
     function deleteAuthUser($userID)
     {
         global $dbName;
@@ -174,6 +177,7 @@
      * Get GetAuthUserIDByUserName
      * @param username
      */
+     
     function getAuthUserID($userName)
     {
         global $dbName;
@@ -211,6 +215,7 @@
      * Get GetAuthUserIDByUserName
      * @param username
      */
+     
     function getAuthUserRole($userName)
     {
         global $dbName;
@@ -279,16 +284,7 @@
         return null;
     }
     
-    /**
-     * Get searchOrgsByVarious
-     * @param name
-     * @param taxIdentifier
-     * @param city
-     * @param state
-     * @param region
-     * @param country
-     * @param postalCode
-     */
+    
     function searchOrgsByVarious($name, $taxIdentifier, $city, $state,
         $region, $country, $postalCode)
     {
@@ -336,6 +332,7 @@
         }
         return null;
     }
+<<<<<<< HEAD
     /**
      * Get searchOrgProjectsByVarious
      * @param isPriority
@@ -347,6 +344,10 @@
      * @param country
      * @param postalCode
      */
+=======
+
+
+>>>>>>> parent of 7119314... finished all of the insert proc methods
     function searchOrgProjectsByVarious($isPriority, $startDateBegin, $startDateEnd,
         $city, $state, $region, $country, $postalCode)
     {
@@ -383,17 +384,7 @@
         return null;
     }
     
-    /**
-     * Get searchVolunteersByVarious
-     * @param city
-     * @param state
-     * @param region
-     * @param country
-     * @param postalCode
-     * @param skillID
-     * @param skillExperienceLevel
-     * @param isCurrent
-     */
+    
     function searchVolunteersByVarious($city, $state, $region, $country, $postalCode,
         $skillID, $skillExperienceLevel, $isCurrent)
     {
@@ -433,9 +424,7 @@
         return null;
     }
     
-    /**
-     * Get getSkills - retrieves the whole list of skill records
-     */
+    // sp_GetSkills
     function getSkills()
     {
         global $dbName;
@@ -461,6 +450,7 @@
         return null;
     }
     
+<<<<<<< HEAD
     /**
      * Get GetOrgProfileByOrgID
      * @param $orgID
@@ -1443,4 +1433,6 @@
 
     // do the updates and deletes
 
+=======
+>>>>>>> parent of 7119314... finished all of the insert proc methods
 ?>
