@@ -196,3 +196,7 @@ footer, #hr_footer, #csumb{
 #userLogin, #createUser{
     text-align: center;
 }
+
+th, td {
+  padding: 15px;
+}

@@ -1,30 +1,140 @@
 <?php 
     include '_header.php';
     //include '_enforceLogin.php';
+    session_start();
 ?>
-
-
-    
-    <body id="activePage">
-        
-        <div class="jumbotron text-center">
-        <h1>VOLUNTEER SKILL SHARE</h1><br/>
-        <h2>Welcome <?=$_SESSION['username']?>!</h2><br/>
-        </div>
-        
-        <!-- Navigation Bar-->
-        <ul class="nav nav-pills">
-          <li role="presentation"><a href="index.php">Home</a></li>
-          <li role="presentation" class="active"><a href="volProfile.php">Volunteer Profile</a></li>
-          <li role="presentation"><a href="volProfileEdit.php">Profile Editor</a></li>
-          <li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>
-        </ul>
         
        <!-- code -->
     
     <?php
         include 'storedProcedureCalls.php';   
        
+       
+    ?>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <form>
+                    First Name <br>
+                    <?php echo '<input type="text" name="fname" value= ' . getAuthUserByUserName($_SESSION['username'])[FirstName] . '>'; ?>
+                    <br>
+                    
+                    URL <br>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Url] . '>'; ?>
+                    <br>
+                    
+                    
+                </form>
+                
+            </div>
+            <div class="col-sm-6">
+                <form>
+                    Last Name <br>
+                    <?php echo '<input type="text" name="fname" value= ' . getAuthUserByUserName($_SESSION['username'])[LastName] . '>'; ?>
+                    <br>
+                    
+                    Email <br>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[EmailAddress] . '>'; ?>
+                    <br>
+                    
+                    
+                </form>
+            </div>
+            <div class="col-sm-2">
+                <form>
+                    Coutry of Residence <br>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Country] . '>'; ?>
+                    <br>
+                </form>
+            </div>
+            <div class="col-sm-2">
+                <form>
+                    State <br>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[State] . '>'; ?>
+                    <br>
+                </form>
+            </div>
+            <div class="col-sm-2">
+                <form>
+                    Region <br>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Region] . '>'; ?>
+                    <br>
+                </form>
+            </div>
+            <div class="col-sm-2">
+                <form>
+                    City <br>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[City] . '>'; ?>
+                    <br>
+                </form>
+            </div>
+            <div class="col-sm-2">
+                <form>
+                    Postal Code <br>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[PostalCode] . '>'; ?>
+                    <br>
+                </form>
+            </div>
+            <div class="col-sm-4">
+                <form>
+                    Bio <br>
+                    <?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Description]; ?>
+                    <br>
+                </form>
+            </div>
+            <div class="col-sm-4">
+                <form>
+                    Work History <br>
+                    <?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[WorkHistory]; ?>
+                    <br>
+                </form>
+            </div>
+            <div class="col-sm-4">
+                <form>
+                    Interests <br>
+                    <?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Interests]; ?>
+                    <br>
+                </form>
+            </div>
+            <div class="col-sm-12">
+                Skills <br>
+                <?php
+                    echo "<table>
+                            <tr>
+                                <th>Skill Name</th>
+                                <th>Experience Level</th>
+                                <th>Current</th>
+                            </tr>";
+                    foreach(GetVolSkillsByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID]) as $skills)
+                    {
+                        echo "<tr>
+                                <td>" . $skills[SkillID] . "</td>
+                                <td>" . $skills[ExperienceLevel] . "</td>
+                                <td>";
+                                if($skills[IsCurrent] == 1)
+                                {
+                                    echo "Yes</td>";
+                                }
+                                else
+                                {
+                                     echo "No</td>";
+                                }
+                    }
+                    echo "</table>";
+                ?>
+                <br>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <?php
+       
+       
+       
+    /*   
     $Username = $_SESSION['username'];
     echo $Username;
     echo '<br><br>';
@@ -114,8 +224,9 @@
            echo '</tr>';
        
        echo '</table>';
+       
+       */
        ?>
-            <button type="button" onclick="window.location.href = 'volProfileEdit.php'">Edit</button>
 
        
         
