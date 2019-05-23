@@ -4,7 +4,7 @@
 
   $fileName = strtolower(basename($_SERVER['PHP_SELF'], '.php'));
 
-  echo '<ul class="nav nav-pills" id="navBar">';
+  echo '<ul class="nav nav-pills nav-stacked" id="navBar">';
   
   $vol = ($_SESSION['role'] == "V" ? TRUE : FALSE);
   $org = ($_SESSION['role'] == "O" ? TRUE : FALSE);
@@ -16,7 +16,7 @@
  {
   // add top level items for volunteer or org
   echo '<li role="presentation" class="active"><a href="index.php">Home</a></li>';
-  
+  echo '<li role="presentation"><a href="login.php">Login</a></li>';
   if($vol)
   {
    echo '<li role="presentation"><a href="volProfile.php">My Profile</a></li>';
@@ -32,10 +32,33 @@
   echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
   
  }
+ 
+  elseif ($fileName == 'login')
+ {
+  // available to all, including anonymous
+  echo '<li role="presentation"><a href="index.php">Home</a></li>';
+  echo '<li role="presentation" class="active"><a href="login.php">Login</a></li>';
+  if($vol)
+  {
+   echo '<li role="presentation"><a href="volProfile.php">My Profile</a></li>';
+   echo '<li role="presentation"><a href="volProfileEdit.php">My Profile Edit</a></li>';
+  }
+  if($org)
+  {
+    echo '<li role="presentation"><a href="orgProfile.php">Org Profile</a></li>';
+    echo '<li role="presentation"><a href="orgProfileEdit.php">Org Profile Edit</a></li>';
+    echo '<li role="presentation"><a href="orgProject.php">Org Projects</a></li>';  
+    echo '<li role="presentation"><a href="volSearch.php">Volunteer Search</a></li>';
+  }
+  echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
+ }
+ 
+ 
  elseif ($fileName == 'orgsearch')
  {
   // available to all, including anonymous
   echo '<li role="presentation"><a href="index.php">Home</a></li>';
+  echo '<li role="presentation"><a href="login.php">Login</a></li>';
   if($vol)
   {
    echo '<li role="presentation"><a href="volProfile.php">My Profile</a></li>';
@@ -59,6 +82,7 @@
   }
   
   echo '<li role="presentation"><a href="index.php">Home</a></li>';
+  echo '<li role="presentation"><a href="login.php">Login</a></li>';
   echo '<li role="presentation"><a href="orgProfile.php">Org Profile</a></li>';
   echo '<li role="presentation"><a href="orgProfileEdit.php">Org Profile Editor</a></li>';
   echo '<li role="presentation"><a href="orgProject.php">Org Projects</a></li>';  
@@ -98,6 +122,7 @@
   }
   
   echo '<li role="presentation"><a href="index.php">Home</a></li>';
+  echo '<li role="presentation"><a href="login.php">Login</a></li>';
   echo '<li role="presentation"><a href="orgProfile.php">Org Profile</a></li>';
   echo '<li role="presentation" class="active"><a href="orgProfileEdit.php">Org Profile Editor</a></li>';
   echo '<li role="presentation"><a href="orgProject.php">Org Projects</a></li>';  
@@ -137,6 +162,7 @@
   }
   
   echo '<li role="presentation"><a href="index.php">Home</a></li>';
+  echo '<li role="presentation"><a href="login.php">Login</a></li>';
   echo '<li role="presentation"><a href="orgProfile.php">Org Profile</a></li>';
   echo '<li role="presentation" class="active"><a href="orgProfileEdit.php">Org Profile Editor</a></li>';
   echo '<li role="presentation" class="active"><a href="orgProject.php">Org Projects</a></li>';  
@@ -168,6 +194,7 @@
       header("Location:index.php");
   }
   echo '<li role="presentation"><a href="index.php">Home</a></li>';
+  echo '<li role="presentation"><a href="login.php">Login</a></li>';
   echo '<li role="presentation"><a href="volProfile.php">My Profile</a></li>';
   echo '<li role="presentation" class="active"><a href="volProfileEdit.php">My Profile Edit</a></li>';
   echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
@@ -175,6 +202,7 @@
  elseif ($fileName == "insertauthuser")
  {
   echo '<li role="presentation" class="active"><a href="index.php">Home</a></li>';
+  echo '<li role="presentation"><a href="login.php">Login</a></li>';
   echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
  }
  
