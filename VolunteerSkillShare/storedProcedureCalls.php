@@ -1,7 +1,8 @@
 <?php
+
     include "dbConnection.php";
     $dbName = "cst499-vss";
-    
+    $createdBy = 'phpRootUser';
     
     /**
      * Get AuthenticateUser
@@ -9,7 +10,6 @@
      * @param string $password
      * @return int
      */
-     
     function getAuthenticatedUser($username, $password)
     {
         global $dbName;
@@ -58,8 +58,6 @@
         LastPasswordReset, CreatedDate, 
         CreatedBy, UpdatedDate, UpdatedBy
      */
-     
-     
     function setInsertAuthUser($role, $fName, $lName, $username, $password)
     {
         global $dbName;
@@ -67,7 +65,8 @@
         
         try
         {
-     
+            global $createdBy;
+            
             // calling stored procedure command
             $sql = 'CALL sp_InsertAuthUser(:_Role, :_VolunteerID, :_OrgID, :_FirstName, :_LastName, :_UserName, :_Password, :_LastLogin, :_LastPasswordReset, :_CreatedBy)';
      
@@ -84,7 +83,7 @@
             $stmt->bindParam(':_Password', $password, PDO::PARAM_STR);
             $stmt->bindValue(':_LastLogin', null, PDO::PARAM_INT);
             $stmt->bindValue(':_LastPasswordReset', null, PDO::PARAM_INT);
-            $stmt->bindParam(':_CreatedBy', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':_CreatedBy', $createdBy, PDO::PARAM_STR);
      
             // execute the stored procedure
             $stmt->execute();
@@ -142,7 +141,6 @@
      * @param int $userID
      * @return int
      */
-     
     function deleteAuthUser($userID)
     {
         global $dbName;
@@ -177,7 +175,6 @@
      * Get GetAuthUserIDByUserName
      * @param username
      */
-     
     function getAuthUserID($userName)
     {
         global $dbName;
@@ -215,7 +212,6 @@
      * Get GetAuthUserIDByUserName
      * @param username
      */
-     
     function getAuthUserRole($userName)
     {
         global $dbName;
@@ -248,6 +244,7 @@
         }
         return null;
     }
+
     /**
      * Get GetAuthUserByUserName
      * @param username
@@ -284,7 +281,16 @@
         return null;
     }
     
-    
+    /**
+     * Get searchOrgsByVarious
+     * @param name
+     * @param taxIdentifier
+     * @param city
+     * @param state
+     * @param region
+     * @param country
+     * @param postalCode
+     */
     function searchOrgsByVarious($name, $taxIdentifier, $city, $state,
         $region, $country, $postalCode)
     {
@@ -312,6 +318,7 @@
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
+
             $stmt->bindParam(1, $name, PDO::PARAM_STR);
             $stmt->bindParam(2, $taxIdentifier, PDO::PARAM_STR);
             $stmt->bindParam(3, $city, PDO::PARAM_STR);
@@ -332,7 +339,7 @@
         }
         return null;
     }
-<<<<<<< HEAD
+
     /**
      * Get searchOrgProjectsByVarious
      * @param isPriority
@@ -344,10 +351,6 @@
      * @param country
      * @param postalCode
      */
-=======
-
-
->>>>>>> parent of 7119314... finished all of the insert proc methods
     function searchOrgProjectsByVarious($isPriority, $startDateBegin, $startDateEnd,
         $city, $state, $region, $country, $postalCode)
     {
@@ -361,6 +364,7 @@
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
+
             // pass value to the command
             $stmt->bindParam(1, $isPriority, PDO::PARAM_STR);
             $stmt->bindParam(2, $startDateBegin, PDO::PARAM_NULL);
@@ -384,7 +388,17 @@
         return null;
     }
     
-    
+    /**
+     * Get searchVolunteersByVarious
+     * @param city
+     * @param state
+     * @param region
+     * @param country
+     * @param postalCode
+     * @param skillID
+     * @param skillExperienceLevel
+     * @param isCurrent
+     */
     function searchVolunteersByVarious($city, $state, $region, $country, $postalCode,
         $skillID, $skillExperienceLevel, $isCurrent)
     {
@@ -401,6 +415,7 @@
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
+
             // pass value to the command
             $stmt->bindParam(1, $city, PDO::PARAM_STR);
             $stmt->bindParam(2, $state, PDO::PARAM_STR);
@@ -424,7 +439,9 @@
         return null;
     }
     
-    // sp_GetSkills
+    /**
+     * Get getSkills - retrieves the whole list of skill records
+     */
     function getSkills()
     {
         global $dbName;
@@ -437,6 +454,7 @@
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
+
             // execute the stored procedure
             $stmt->execute();
             $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -450,7 +468,6 @@
         return null;
     }
     
-<<<<<<< HEAD
     /**
      * Get GetOrgProfileByOrgID
      * @param $orgID
@@ -781,6 +798,7 @@
         return null;
     }
   
+
     /**
      * InsertOrgProjectSkill
      * @param orgProjectID
@@ -965,17 +983,6 @@
         return null;
     }
     
-
-    
-    function getVolunteerID($userName){
-        global $dbName;
-        $conn = getDatabaseConnection($dbName);
-        
-        try{
-     
-            // calling stored procedure command
-            $sql = 'CALL sp_GetAuthUserByUserName(:_UserName)';
-
     /**
      * UpdateAuthUser
      * @param userID
@@ -1273,30 +1280,16 @@
      
             // calling stored procedure command
             $sql = 'CALL sp_GetVolBioByVolunteerID(:_VolunteerID)';
-
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
      
             // pass value to the command
-
-            $stmt->bindValue(':_UserName', $userName, PDO::PARAM_INT);
-
             $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
-
      
             // execute the stored procedure
             $stmt->execute();
             $return_value = $stmt->fetch();
-
-            $volunteerid = $return_value['VolunteerID'];
-     
-            $stmt->closeCursor();
-            return $volunteerid;
-            
-        }
-        catch (PDOException $e){
-
      
             $stmt->closeCursor();
             return $return_value;
@@ -1304,22 +1297,11 @@
         }
         catch (PDOException $e)
         {
-
             die("Error occurred:" . $e->getMessage());
         }
         return null;
     }
     
-
-    function getOrgID($userName){
-        global $dbName;
-        $conn = getDatabaseConnection($dbName);
-        
-        try{
-     
-            // calling stored procedure command
-            $sql = 'CALL sp_GetAuthUserByUserName(:_UserName)';
-
     /**
      * Get GetVolSkillsByVolunteerID
      * @param $volunteerID
@@ -1334,29 +1316,16 @@
      
             // calling stored procedure command
             $sql = 'CALL sp_GetVolSkillsByVolunteerID(:_VolunteerID)';
-
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
      
             // pass value to the command
-
-            $stmt->bindValue(':_UserName', $userName, PDO::PARAM_INT);
-
             $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
-
      
             // execute the stored procedure
             $stmt->execute();
             $return_value = $stmt->fetch();
-
-            $orgid = $return_value['OrgID'];
-            $stmt->closeCursor();
-            return $orgid;
-            
-        }
-        catch (PDOException $e){
-
      
             $stmt->closeCursor();
             return $return_value;
@@ -1364,35 +1333,11 @@
         }
         catch (PDOException $e)
         {
-
             die("Error occurred:" . $e->getMessage());
         }
         return null;
     }
     
-
-    
-     function getVolBiobyVolunteerID($volunteerid){
-        global $dbName;
-        $conn = getDatabaseConnection($dbName);
-        
-        try{
-            // calling stored procedure command
-            $sql = 'CALL sp_GetVolBioByVolunteerID(:_volunteerid)';
-     
-            // prepare for execution of the stored procedure
-            $stmt = $conn->prepare($sql);
-            // pass value to the command
-            $stmt->bindParam(':_volunteerid', $VolunteerID, PDO::PARAM_STR);
-            
-            // execute the stored procedure
-            $stmt->execute();
-            $volbio = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-            return $volbio;
-        }    
-        catch (PDOException $e){
-
     /**
      * Get GetVolProfileByVolunteerID
      * @param $volunteerID
@@ -1424,15 +1369,8 @@
         }
         catch (PDOException $e)
         {
-
             die("Error occurred:" . $e->getMessage());
         }
         return null;
     }
-
-
-    // do the updates and deletes
-
-=======
->>>>>>> parent of 7119314... finished all of the insert proc methods
 ?>
