@@ -1,5 +1,4 @@
 <?php
-
     include "dbConnection.php";
     $dbName = "cst499-vss";
     $createdBy = 'phpRootUser';
@@ -244,7 +243,6 @@
         }
         return null;
     }
-
     /**
      * Get GetAuthUserByUserName
      * @param username
@@ -318,7 +316,6 @@
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
-
             $stmt->bindParam(1, $name, PDO::PARAM_STR);
             $stmt->bindParam(2, $taxIdentifier, PDO::PARAM_STR);
             $stmt->bindParam(3, $city, PDO::PARAM_STR);
@@ -339,7 +336,6 @@
         }
         return null;
     }
-
     /**
      * Get searchOrgProjectsByVarious
      * @param isPriority
@@ -364,7 +360,6 @@
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
-
             // pass value to the command
             $stmt->bindParam(1, $isPriority, PDO::PARAM_STR);
             $stmt->bindParam(2, $startDateBegin, PDO::PARAM_NULL);
@@ -415,7 +410,6 @@
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
-
             // pass value to the command
             $stmt->bindParam(1, $city, PDO::PARAM_STR);
             $stmt->bindParam(2, $state, PDO::PARAM_STR);
@@ -454,7 +448,6 @@
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
-
             // execute the stored procedure
             $stmt->execute();
             $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -798,7 +791,6 @@
         return null;
     }
   
-
     /**
      * InsertOrgProjectSkill
      * @param orgProjectID
@@ -983,6 +975,17 @@
         return null;
     }
     
+
+    
+    function getVolunteerID($userName){
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try{
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_GetAuthUserByUserName(:_UserName)';
+
     /**
      * UpdateAuthUser
      * @param userID
@@ -1280,16 +1283,30 @@
      
             // calling stored procedure command
             $sql = 'CALL sp_GetVolBioByVolunteerID(:_VolunteerID)';
+
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
      
             // pass value to the command
+
+            $stmt->bindValue(':_UserName', $userName, PDO::PARAM_INT);
+
             $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
+
      
             // execute the stored procedure
             $stmt->execute();
             $return_value = $stmt->fetch();
+
+            $volunteerid = $return_value['VolunteerID'];
+     
+            $stmt->closeCursor();
+            return $volunteerid;
+            
+        }
+        catch (PDOException $e){
+
      
             $stmt->closeCursor();
             return $return_value;
@@ -1297,11 +1314,22 @@
         }
         catch (PDOException $e)
         {
+
             die("Error occurred:" . $e->getMessage());
         }
         return null;
     }
     
+
+    function getOrgID($userName){
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try{
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_GetAuthUserByUserName(:_UserName)';
+
     /**
      * Get GetVolSkillsByVolunteerID
      * @param $volunteerID
@@ -1316,16 +1344,29 @@
      
             // calling stored procedure command
             $sql = 'CALL sp_GetVolSkillsByVolunteerID(:_VolunteerID)';
+
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
      
             // pass value to the command
+
+            $stmt->bindValue(':_UserName', $userName, PDO::PARAM_INT);
+
             $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
+
      
             // execute the stored procedure
             $stmt->execute();
             $return_value = $stmt->fetch();
+
+            $orgid = $return_value['OrgID'];
+            $stmt->closeCursor();
+            return $orgid;
+            
+        }
+        catch (PDOException $e){
+
      
             $stmt->closeCursor();
             return $return_value;
@@ -1333,11 +1374,35 @@
         }
         catch (PDOException $e)
         {
+
             die("Error occurred:" . $e->getMessage());
         }
         return null;
     }
     
+
+    
+     function getVolBiobyVolunteerID($volunteerid){
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try{
+            // calling stored procedure command
+            $sql = 'CALL sp_GetVolBioByVolunteerID(:_volunteerid)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+            // pass value to the command
+            $stmt->bindParam(':_volunteerid', $VolunteerID, PDO::PARAM_STR);
+            
+            // execute the stored procedure
+            $stmt->execute();
+            $volbio = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            return $volbio;
+        }    
+        catch (PDOException $e){
+
     /**
      * Get GetVolProfileByVolunteerID
      * @param $volunteerID
@@ -1369,8 +1434,13 @@
         }
         catch (PDOException $e)
         {
+
             die("Error occurred:" . $e->getMessage());
         }
         return null;
     }
+
+
+    // do the updates and deletes
+
 ?>
