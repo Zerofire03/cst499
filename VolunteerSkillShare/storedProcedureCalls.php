@@ -983,5 +983,394 @@
         return null;
     }
     
-    // do the updates and deletes
+    /**
+     * UpdateAuthUser
+     * @param userID
+     * @param role
+     * @param firstName
+     * @param lastName
+     * @param userName
+     * @param password
+     * @param lastLogin
+     * @param lastPasswordReset
+     **/
+    function UpdateAuthUser ($userID, $role, $firstName, $lastName, $userName,
+            $password, $lastLogin, $lastPasswordReset)
+    {
+        global $dbName, $createdBy;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_UpdateAuthUser(:_UserID, :_Role, :_FirstName, :_LastName,
+                        :_UserName, :_Password, :_LastLogin, :_LastPasswordReset,
+                        :_UpdatedBy)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_UserID', $userID, PDO::PARAM_INT);
+            $stmt->bindValue(':_Role', $role, PDO::PARAM_STR);
+            $stmt->bindValue(':_FirstName', $firstName, PDO::PARAM_STR);
+            $stmt->bindValue(':_LastName', $lastName, PDO::PARAM_STR);
+            $stmt->bindValue(':_UserName', $userName, PDO::PARAM_STR);
+            $stmt->bindValue(':_Password', $password, PDO::PARAM_STR);
+            $stmt->bindValue(':_LastLogin', $lastLogin, PDO::PARAM_STR);
+            $stmt->bindValue(':_LastPasswordReset', $lastPasswordReset, PDO::PARAM_STR);
+            $stmt->bindValue(':_UpdatedBy', $createdBy, PDO::PARAM_STR);
+     
+            // execute the stored procedure
+            $stmt->execute();
+     
+            $stmt->closeCursor();
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * UpdateOrgProfile
+     * @param orgID
+     * @param name
+     * @param description
+     * @param mission
+     * @param taxIdentifier
+     * @param contactName
+     * @param contactEmail
+     * @param contactPhone
+     * @param address1
+     * @param address2
+     * @param city
+     * @param state
+     * @param region
+     * @param country
+     * @param postalCode
+     * @param emailAddress
+     * @param phoneNumber
+     * @param twitter
+     * @param linkedIn
+     **/
+    function UpdateOrgProfile ($orgID, $name, $description, $mission, $taxIdentifier,
+            $contactName, $contactEmail, $contactPhone, $address1, $address2,
+            $city, $state, $region, $country, $postalCode, $emailAddress,
+            $phoneNumber, $twitter, $linkedIn)
+    {
+        global $dbName, $createdBy;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_UpdateOrgProfile(:_OrgID, :_Name, :_Description, :_Mission,
+                        :_TaxIdentifier, :_ContactName, :_ContactEmail, :_ContactPhone,
+                        :_Address1, :_Address2, :_City, :_State, :_Region, :_Country,
+                        :_PostalCode, :_EmailAddress, :_PhoneNumber, :_Twitter,
+                        :_LinkedIn, :_UpdatedBy)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_OrgID', $orgID, PDO::PARAM_INT);
+            $stmt->bindValue(':_Name', $name, PDO::PARAM_STR);
+            $stmt->bindValue(':_Description', $description, PDO::PARAM_STR);
+            $stmt->bindValue(':_Mission', $mission, PDO::PARAM_STR);
+            $stmt->bindValue(':_TaxIdentifier', $taxIdentifier, PDO::PARAM_STR);
+            $stmt->bindValue(':_ContactName', $contactName, PDO::PARAM_STR);
+            $stmt->bindValue(':_ContactEmail', $contactEmail, PDO::PARAM_STR);
+            $stmt->bindValue(':_ContactPhone', $contactPhone, PDO::PARAM_STR);
+            $stmt->bindValue(':_Address1', $address1, PDO::PARAM_STR);
+            $stmt->bindValue(':_Address2', $address2, PDO::PARAM_STR);
+            $stmt->bindValue(':_City', $city, PDO::PARAM_STR);
+            $stmt->bindValue(':_State', $state, PDO::PARAM_STR);
+            $stmt->bindValue(':_Region', $region, PDO::PARAM_STR);
+            $stmt->bindValue(':_Country', $country, PDO::PARAM_STR);
+            $stmt->bindValue(':_PostalCode', $postalCode, PDO::PARAM_STR);
+            $stmt->bindValue(':_EmailAddress', $emailAddress, PDO::PARAM_STR);
+            $stmt->bindValue(':_PhoneNumber', $phoneNumber, PDO::PARAM_STR);
+            $stmt->bindValue(':_Twitter', $twitter, PDO::PARAM_STR);
+            $stmt->bindValue(':_LinkedIn', $linkedIn, PDO::PARAM_STR);
+            $stmt->bindValue(':_UpdatedBy', $createdBy, PDO::PARAM_STR);
+     
+            // execute the stored procedure
+            $stmt->execute();
+     
+            $stmt->closeCursor();
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * UpdateOrgProject
+     * @param orgProjectID
+     * @param orgID
+     * @param name
+     * @param isActive
+     * @param priority
+     * @param description
+     * @param startDate
+     * @param timelineDescription
+     * @param city
+     * @param state
+     * @param region
+     * @param country
+     * @param postalCode
+     **/
+    function UpdateOrgProject ($orgProjectID, $orgID, $name, $isActive, $priority,
+                $description, $startDate, $timelineDescription, $city, $state,
+                $region, $country, $postalCode)
+    {
+        global $dbName, $createdBy;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_UpdateOrgProject(:_OrgProjectID, :_OrgID, :_Name, :_IsActive,
+                        :_Priority, :_Description, :_StartDate, :_TimelineDescription,
+                        :_City, :_State, :_Region, :_Country, :_PostalCode, :_UpdatedBy)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_OrgProjectID', $orgProjectID, PDO::PARAM_INT);
+            $stmt->bindValue(':_OrgID', $orgID, PDO::PARAM_INT);
+            $stmt->bindValue(':_Name', $name, PDO::PARAM_STR);
+            $stmt->bindValue(':_IsActive', $isActive, PDO::PARAM_INT);
+            $stmt->bindValue(':_Priority', $priority, PDO::PARAM_STR);
+            $stmt->bindValue(':_Description', $description, PDO::PARAM_STR);
+            $stmt->bindValue(':_StartDate', $startDate, PDO::PARAM_STR);
+            $stmt->bindValue(':_TimelineDescription', $timelineDescription, PDO::PARAM_STR);
+            $stmt->bindValue(':_City', $city, PDO::PARAM_STR);
+            $stmt->bindValue(':_State', $state, PDO::PARAM_STR);
+            $stmt->bindValue(':_Region', $region, PDO::PARAM_STR);
+            $stmt->bindValue(':_Country', $country, PDO::PARAM_STR);
+            $stmt->bindValue(':_PostalCode', $postalCode, PDO::PARAM_STR);
+            $stmt->bindValue(':_UpdatedBy', $createdBy, PDO::PARAM_STR);
+     
+            // execute the stored procedure
+            $stmt->execute();
+     
+            $stmt->closeCursor();
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * UpdateVolBio
+     * @param volunteerID
+     * @param description
+     * @param workHistory
+     * @param interests
+     **/
+    function UpdateVolBio ($volunteerID, $description, $workHistory, $interests)
+    {
+        global $dbName, $createdBy;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_UpdateVolBio(:_VolunteerID, :_Description, :_WorkHistory,
+                        :_Interests, :_UpdatedBy)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
+            $stmt->bindValue(':_Description', $description, PDO::PARAM_STR);
+            $stmt->bindValue(':_WorkHistory', $workHistory, PDO::PARAM_STR);
+            $stmt->bindValue(':_Interests', $interests, PDO::PARAM_STR);
+            $stmt->bindValue(':_UpdatedBy', $createdBy, PDO::PARAM_STR);
+     
+            // execute the stored procedure
+            $stmt->execute();
+     
+            $stmt->closeCursor();
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    
+    /**
+     * UpdateVolProfile
+     * @param volunteerID
+     * @param city
+     * @param state
+     * @param region
+     * @param country
+     * @param postalCode
+     * @param url
+     * @param emailAddress
+     * @param phoneNumber
+     * @param contactPref
+     **/
+    function UpdateVolProfile ($volunteerID, $city, $state, $region, $country, 
+            $postalCode, $url, $emailAddress, $phoneNumber, $contactPref)
+    {
+        global $dbName, $createdBy;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_UpdateVolProfile(:_VolunteerID, :_City, :_State,
+                        :_Region, :_Country, :_PostalCode, :_Url,
+                        :_EmailAddress, :_PhoneNumber, :_ContactPref, :_UpdatedBy)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
+            $stmt->bindValue(':_City', $firstName, PDO::PARAM_STR);
+            $stmt->bindValue(':_State', $firstName, PDO::PARAM_STR);
+            $stmt->bindValue(':_Region', $firstName, PDO::PARAM_STR);
+            $stmt->bindValue(':_Country', $firstName, PDO::PARAM_STR);
+            $stmt->bindValue(':_PostalCode', $firstName, PDO::PARAM_STR);
+            $stmt->bindValue(':_Url', $firstName, PDO::PARAM_STR);
+            $stmt->bindValue(':_EmailAddress', $firstName, PDO::PARAM_STR);
+            $stmt->bindValue(':_PhoneNumber', $workHistory, PDO::PARAM_STR);
+            $stmt->bindValue(':_ContactPref', $interests, PDO::PARAM_STR);
+            $stmt->bindValue(':_UpdatedBy', $createdBy, PDO::PARAM_STR);
+
+            // execute the stored procedure
+            $stmt->execute();
+     
+            $stmt->closeCursor();
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    // Get methods for Volunteers
+    /**
+     * Get GetVolBioByVolunteerID
+     * @param $volunteerID
+     */
+    function GetVolBioByVolunteerID($volunteerID)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_GetVolBioByVolunteerID(:_VolunteerID)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            $return_value = $stmt->fetch();
+     
+            $stmt->closeCursor();
+            return $return_value;
+            
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * Get GetVolSkillsByVolunteerID
+     * @param $volunteerID
+     */
+    function GetVolSkillsByVolunteerID($volunteerID)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_GetVolSkillsByVolunteerID(:_VolunteerID)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            $return_value = $stmt->fetch();
+     
+            $stmt->closeCursor();
+            return $return_value;
+            
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * Get GetVolProfileByVolunteerID
+     * @param $volunteerID
+     */
+    function GetVolProfileByVolunteerID($volunteerID)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_GetVolProfileByVolunteerID(:_VolunteerID)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            $return_value = $stmt->fetch();
+     
+            $stmt->closeCursor();
+            return $return_value;
+            
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
 ?>
