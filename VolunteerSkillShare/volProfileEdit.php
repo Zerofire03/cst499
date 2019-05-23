@@ -2,11 +2,11 @@
         
        <!-- code -->
        <form>
-       <p>Volunteer ID</p>  <input type="text" readonly="readonly" name ="volunteerid">
+       <p>Volunteer ID</p>  <input type="text"  name ="volunteerid">
 
-       <p>First Name</p>  <input type="text" readonly="readonly" name ="firstname">       
+       <p>First Name</p>  <input type="text"  name ="firstname">       
        
-       <p>Last Name</p>  <input type="text" readonly="readonly" name ="lastname">
+       <p>Last Name</p>  <input type="text"  name ="lastname">
        
        <p>City</p>  <input type="text" name ="city">
        

@@ -5,41 +5,41 @@
         
         
              <form>
-       <p>Organization ID</p>  <input type="text" readonly="readonly" name ="orgid" value="<?=orgid?>">
+       <p>Organization ID</p>  <input type="text" name ="orgid">
 
-       <p>Name</p>  <input type="text" readonly="readonly" name ="name" value="<?=name?>">       
+       <p>Name</p>  <input type="text" name ="name">       
        
-       <p>Description</p>  <input type="text" readonly="readonly" name ="description" value="<?=description?>">
+       <p>Description</p>  <input type="text" name ="description">
        
-       <p>Mission</p>  <input type="text" name ="mission" value="<?=mission?>">
+       <p>Mission</p>  <input type="text" name ="mission">
        
-       <p>Tax Identifier</p>  <input type="text" name ="taxid" value="<?=taxid?>">
+       <p>Tax Identifier</p>  <input type="text" name ="taxid">
        
-       <p>Contact Name</p>  <input type="text" name ="contactname" value="<?=contactname?>">
+       <p>Contact Name</p>  <input type="text" name ="contactname">
        
-       <p>Contact Phone Number</p>  <input type="text" name ="contactphone" value="<?=contactphone?>">
+       <p>Contact Phone Number</p>  <input type="text" name ="contactphone">
        
-       <p>Address1</p>  <input type="text" name ="address1" value="<?=address1?>">
+       <p>Address1</p>  <input type="text" name ="address1">
        
-       <p>Address2</p>  <input type="text" name ="address2" value="<?=address2?>">
+       <p>Address2</p>  <input type="text" name ="address2">
        
-       <p>City</p>  <input type="text" name ="city" value="<?=city?>">
+       <p>City</p>  <input type="text" name ="city">
        
-       <p>State</p>  <input type="text" name ="state" value="<?=state?>">
+       <p>State</p>  <input type="text" name ="state">
        
-       <p>Region</p>  <input type="text" name ="region" value="<?=region?>">
+       <p>Region</p>  <input type="text" name ="region">
        
-       <p>Country</p>  <input type="text" name ="country" value="<?=country?>">
+       <p>Country</p>  <input type="text" name ="country">
        
-       <p>Postal Code</p>  <input type="text" name ="postal" value="<?=postal?>">
+       <p>Postal Code</p>  <input type="text" name ="postal">
        
-       <p>Email Address</p>  <input type="text" name ="email" value="<?=email?>">
+       <p>Email Address</p>  <input type="text" name ="email">
        
-       <p>Phone Number</p>  <input type="text" name ="phone" value="<?=phone?>">
+       <p>Phone Number</p>  <input type="text" name ="phone">
        
-       <p>Twitter</p>  <input type="text" name ="twitter" value="<?=twitter?>">
+       <p>Twitter</p>  <input type="text" name ="twitter">
        
-       <p>LinkedIn</p>  <input type="text" name ="linkedin" value="<?=linkedin?>">
+       <p>LinkedIn</p>  <input type="text" name ="linkedin">
        
        <input type="submit" value="Submit">
        </form>
