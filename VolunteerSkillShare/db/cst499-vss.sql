@@ -540,13 +540,17 @@ END$$
 DROP PROCEDURE IF EXISTS `sp_GetVolSkillsByVolunteerID`$$
 CREATE PROCEDURE `sp_GetVolSkillsByVolunteerID` (`_VolunteerID` INT)  BEGIN
     
-    Select VolunteerID, 
-		SkillID, 
-        ExperienceLevel, 
-        IsCurrent, 
-        CreatedDate, 
-        CreatedBy
-    FROM volskills 
+    Select vs.VolunteerID, 
+		    vs.SkillID, 
+        vs.ExperienceLevel, 
+        vs.IsCurrent, 
+        vs.CreatedDate, 
+        vs.CreatedBy,
+        s.Name as SkillName,
+        s.Description as SkillDescription
+    FROM volskills as vs
+      JOIN skills as s
+        on vs.SkillID = s.SkillID
     WHERE VolunteerID = _VolunteerID;
     
 END$$
