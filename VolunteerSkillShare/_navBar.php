@@ -16,7 +16,7 @@
  {
   // add top level items for volunteer or org
   echo '<li role="presentation" class="active"><a href="index.php">Home</a></li>';
-  echo '<li role="presentation"><a href="login.php">Login</a></li>';
+  echo isset($_SESSION['username']) ? '<li class="hidden" role="presentation"><a href="login.php">Login</a></li>' : '<li class="show" role="presentation"><a href="login.php">Login</a></li>';
   if($vol)
   {
    echo '<li role="presentation"><a href="volProfile.php">My Profile</a></li>';
@@ -82,7 +82,6 @@
   }
   
   echo '<li role="presentation"><a href="index.php">Home</a></li>';
-  echo '<li role="presentation"><a href="login.php">Login</a></li>';
   echo '<li role="presentation"><a href="orgProfile.php">Org Profile</a></li>';
   echo '<li role="presentation"><a href="orgProfileEdit.php">Org Profile Editor</a></li>';
   echo '<li role="presentation"><a href="orgProject.php">Org Projects</a></li>';  
@@ -122,7 +121,6 @@
   }
   
   echo '<li role="presentation"><a href="index.php">Home</a></li>';
-  echo '<li role="presentation"><a href="login.php">Login</a></li>';
   echo '<li role="presentation"><a href="orgProfile.php">Org Profile</a></li>';
   echo '<li role="presentation" class="active"><a href="orgProfileEdit.php">Org Profile Editor</a></li>';
   echo '<li role="presentation"><a href="orgProject.php">Org Projects</a></li>';  
@@ -162,7 +160,6 @@
   }
   
   echo '<li role="presentation"><a href="index.php">Home</a></li>';
-  echo '<li role="presentation"><a href="login.php">Login</a></li>';
   echo '<li role="presentation"><a href="orgProfile.php">Org Profile</a></li>';
   echo '<li role="presentation" class="active"><a href="orgProfileEdit.php">Org Profile Editor</a></li>';
   echo '<li role="presentation" class="active"><a href="orgProject.php">Org Projects</a></li>';  
@@ -211,7 +208,6 @@
       header("Location:index.php");
   }
   echo '<li role="presentation"><a href="index.php">Home</a></li>';
-  echo '<li role="presentation"><a href="login.php">Login</a></li>';
   echo '<li role="presentation"><a href="volProfile.php">My Profile</a></li>';
   echo '<li role="presentation" class="active"><a href="volProfileEdit.php">My Profile Edit</a></li>';
   echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
