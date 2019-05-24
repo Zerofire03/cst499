@@ -1,23 +1,45 @@
 @charset "UTF-8";
 
-
-.jumbotron{
-    background-color: rgb(80, 86, 89) !important;
-    color: rgb(97, 182, 189);
-    font-family: 'Baloo Bhai', cursive;
-    margin-bottom: 5px;
-}
-
 #activePage{
     background-color: white;
      text-align: center;
-     font-family: 'Baloo Bhai', cursive;
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+
 }
 
+.mainLogo {
+   /*The image used */
+  background-image: url("/cst499/VolunteerSkillShare/Images/hadnshake_Teamwork.png");
 
+  height: 480px;
+
+   /*Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 800px;
+
+   /*Needed to position the navbar */
+  position: relative;
+}
+
+/* Position the navbar container inside the image */
+#navBar {
+    position: absolute;
+    margin: 20px;
+    width: auto;
+    font-size: 25px;
+}
+
+h1, h2{
+    font-size: 40px;
+}
+
+.introText{
+    font-size: 20px;
+}
 li a:hover {
   background-color: #555;
-  color: rgb(153,94,187);
+  color: green;
 }
 
 .instructions{
@@ -48,10 +70,11 @@ footer, #hr_footer, #csumb{
     width:25%;
 }
 
-/*///////////////////////*/
+/*/Results Tables*/
 .tableInput {
     display: inline-block;
     text-align: center;
+    font-size: 20px;
 }
 
 .resultsDiv {
@@ -172,4 +195,8 @@ footer, #hr_footer, #csumb{
 
 #userLogin, #createUser{
     text-align: center;
+}
+
+th, td {
+  padding: 15px;
 }
