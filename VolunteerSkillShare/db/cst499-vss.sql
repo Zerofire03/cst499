@@ -501,22 +501,28 @@ DROP PROCEDURE IF EXISTS `sp_GetVolProfileByVolunteerID`$$
 CREATE PROCEDURE `sp_GetVolProfileByVolunteerID` (`_VolunteerID` INT)  BEGIN
     
     SELECT
-		VolunteerID,
-        City,
-        State,
-        Region,
-        Country,
-        PostalCode,
-        Url,
-        EmailAddress,
-        PhoneNumber,
-        ContactPref,
-        CreatedDate,
-        CreatedBy,
-        UpdatedDate,
-        UpdatedBy
-	FROM volprofile
-    WHERE VolunteerID = _VolunteerID;
+		vp.VolunteerID,
+        vp.City,
+        vp.State,
+        vp.Region,
+        vp.Country,
+        vp.PostalCode,
+        vp.Url,
+        vp.EmailAddress,
+        vp.PhoneNumber,
+        vp.ContactPref,
+        vp.CreatedDate,
+        vp.CreatedBy,
+        vp.UpdatedDate,
+        vp.UpdatedBy,
+		au.FirstName,
+		au.LastName,
+		au.Role,
+		au.UserName
+	FROM volprofile as vp
+		join authusers as au
+			on vp.VolunteerID = au.VolunteerID
+    WHERE vp.VolunteerID = _VolunteerID;
 
 END$$
 
