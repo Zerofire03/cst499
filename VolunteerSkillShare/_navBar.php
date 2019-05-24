@@ -186,6 +186,23 @@
   }
   echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
  }
+ elseif ($fileName == "volprofileid")
+ {
+
+  echo '<li role="presentation"><a href="index.php">Home</a></li>';
+  if($vol){
+   echo '<li role="presentation" class="active"><a href="volProfile.php">My Profile</a></li>';
+   echo '<li role="presentation"><a href="volProfileEdit.php">My Profile Edit</a></li>';
+  }
+  elseif($org)
+  {
+    echo '<li role="presentation"><a href="orgProfile.php">Org Profile</a></li>';
+    echo '<li role="presentation"><a href="orgProfileEdit.php">Org Profile Editor</a></li>';
+    echo '<li role="presentation"><a href="orgProject.php">Org Projects</a></li>';  
+    echo '<li role="presentation" class="active"><a href="volSearch.php">Volunteer Search</a></li>';
+  }
+  echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
+ }
  elseif ($fileName == "volprofileedit")
  {
   // user must be a volunteer
