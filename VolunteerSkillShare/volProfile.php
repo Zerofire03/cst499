@@ -17,11 +17,11 @@
             <div class="col-sm-6">
                 <form>
                     First Name <br>
-                    <?php echo '<input type="text" name="fname" value= ' . getAuthUserByUserName($_SESSION['username'])[FirstName] . '>'; ?>
+                    <?php echo '<input type="text" name="fname" value= ' . getAuthUserByUserName($_SESSION['username'])[FirstName] . ' readonly>'; ?>
                     <br>
                     
                     URL <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Url] . '>'; ?>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Url] . ' readonly>'; ?>
                     <br>
                     
                     
@@ -31,11 +31,11 @@
             <div class="col-sm-6">
                 <form>
                     Last Name <br>
-                    <?php echo '<input type="text" name="fname" value= ' . getAuthUserByUserName($_SESSION['username'])[LastName] . '>'; ?>
+                    <?php echo '<input type="text" name="fname" value= ' . getAuthUserByUserName($_SESSION['username'])[LastName] . ' readonly>'; ?>
                     <br>
                     
                     Email <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[EmailAddress] . '>'; ?>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[EmailAddress] . ' readonly>'; ?>
                     <br>
                     
                     
@@ -44,35 +44,35 @@
             <div class="col-sm-2">
                 <form>
                     Coutry of Residence <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Country] . '>'; ?>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Country] . ' readonly>'; ?>
                     <br>
                 </form>
             </div>
             <div class="col-sm-2">
                 <form>
                     State <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[State] . '>'; ?>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[State] . ' readonly>'; ?>
                     <br>
                 </form>
             </div>
             <div class="col-sm-2">
                 <form>
                     Region <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Region] . '>'; ?>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Region] . ' readonly>'; ?>
                     <br>
                 </form>
             </div>
             <div class="col-sm-2">
                 <form>
                     City <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[City] . '>'; ?>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[City] . ' readonly>'; ?>
                     <br>
                 </form>
             </div>
             <div class="col-sm-2">
                 <form>
                     Postal Code <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[PostalCode] . '>'; ?>
+                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[PostalCode] . ' readonly>'; ?>
                     <br>
                 </form>
             </div>
@@ -123,7 +123,6 @@
                     }
                     echo "</table>";
                 ?>
-                <br>
             </div>
         </div>
     </div>
