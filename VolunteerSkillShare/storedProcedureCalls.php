@@ -1242,15 +1242,15 @@
      
             // pass value to the command
             $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
-            $stmt->bindValue(':_City', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_State', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_Region', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_Country', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_PostalCode', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_Url', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_EmailAddress', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_PhoneNumber', $workHistory, PDO::PARAM_STR);
-            $stmt->bindValue(':_ContactPref', $interests, PDO::PARAM_STR);
+            $stmt->bindValue(':_City', $city, PDO::PARAM_STR);
+            $stmt->bindValue(':_State', $state, PDO::PARAM_STR);
+            $stmt->bindValue(':_Region', $region, PDO::PARAM_STR);
+            $stmt->bindValue(':_Country', $country, PDO::PARAM_STR);
+            $stmt->bindValue(':_PostalCode', $postalCode, PDO::PARAM_STR);
+            $stmt->bindValue(':_Url', $url, PDO::PARAM_STR);
+            $stmt->bindValue(':_EmailAddress', $emailAddress, PDO::PARAM_STR);
+            $stmt->bindValue(':_PhoneNumber', $phoneNumber, PDO::PARAM_STR);
+            $stmt->bindValue(':_ContactPref', $contactPref, PDO::PARAM_STR);
             $stmt->bindValue(':_UpdatedBy', $createdBy, PDO::PARAM_STR);
 
             // execute the stored procedure
