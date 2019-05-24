@@ -9,8 +9,7 @@
     
     session_start();
     include 'storedProcedureCalls.php';   
-       
-       
+
 ?>
     
 <div class="container">
@@ -100,38 +99,31 @@
             <form>
                 Interests <br>
                 <?php echo '<textarea readonly form="volProfileEdit" rows="10">' . GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Interests] . '</textarea>'; ?>
+
                 <br>
-            </form>
-        </div>
-        <div class="col-sm-12">
-            Skills <br>
-            <?php
-                echo "<table>
-                        <tr>
-                            <th>Skill Name</th>
-                            <th>Experience Level</th>
-                            <th>Current</th>
-                        </tr>";
-                $skills = GetVolSkillsByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID]);
-                foreach($skills as $skill)
-                {
-                    echo "<tr>
-                            <td>" . $skill[SkillName] . "</td>
-                            <td>" . $skill[ExperienceLevel] . "</td>
-                            <td>";
-                            if($skill[IsCurrent] == 1)
-                            {
-                                echo "Yes</td>";
-                            }
-                            else
-                            {
-                                 echo "No</td>";
-                            }
-                }
-                echo "</table>";
-            ?>
-        </div>
-    </div>
-</div>
+                <?php
+                    echo "<table class='skillstable'>
+                            <tr>
+                                <th>Skill Name</th>
+                                <th>Experience Level</th>
+                                <th>Current</th>
+                            </tr>";
+                    foreach(GetVolSkillsByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID]) as $skills)
+                    {
+                        echo "<tr>
+                                <td>" . $skills[SkillID] . "</td>
+                                <td>" . $skills[ExperienceLevel] . "</td>
+                                <td>";
+                                if($skills[IsCurrent] == 1)
+                                {
+                                    echo "Yes</td>";
+                                }
+                                else
+                                {
+                                     echo "No</td>";
+                                }
+                    }
+                    echo "</table>";
+                ?>
 
 <?php include '_footer.php'; ?>
