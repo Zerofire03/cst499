@@ -1325,7 +1325,7 @@
      
             // execute the stored procedure
             $stmt->execute();
-            $return_value = $stmt->fetch();
+            $return_value = $stmt->fetchAll();
      
             $stmt->closeCursor();
             return $return_value;

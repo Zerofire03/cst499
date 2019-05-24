@@ -1,15 +1,17 @@
 <?php 
     include '_header.php';
-    //include '_enforceLogin.php';
-    session_start();
-?>
-        
-       <!-- code -->
+    include '_enforceLogin.php';
     
-    <?php
-        include 'storedProcedureCalls.php';   
+    if(isset($_GET["volid"]))
+    {
+        header('Location:volProfileID.php?volid=' . $_GET["volid"]);
+    }
+    
+    session_start();
+    include 'storedProcedureCalls.php';   
        
        
+
     ?>
     <table class= "biotable">
         <tr>
@@ -94,12 +96,5 @@
                     }
                     echo "</table>";
                 ?>
-                <br>
-            </div>
-        </div>
-    </div>
-    
-        <?php include '_footer.php'; ?>
 
-        <!-- This is the footer -->
-</body>
+<?php include '_footer.php'; ?>
