@@ -11,96 +11,67 @@
        
        
     ?>
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <form>
-                    First Name <br>
-                    <?php echo '<input type="text" name="fname" value= ' . getAuthUserByUserName($_SESSION['username'])[FirstName] . '>'; ?>
-                    <br>
-                    
-                    URL <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Url] . '>'; ?>
-                    <br>
-                    
-                    
-                </form>
-                
-            </div>
-            <div class="col-sm-6">
-                <form>
-                    Last Name <br>
-                    <?php echo '<input type="text" name="fname" value= ' . getAuthUserByUserName($_SESSION['username'])[LastName] . '>'; ?>
-                    <br>
-                    
-                    Email <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[EmailAddress] . '>'; ?>
-                    <br>
-                    
-                    
-                </form>
-            </div>
-            <div class="col-sm-2">
-                <form>
-                    Coutry of Residence <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Country] . '>'; ?>
-                    <br>
-                </form>
-            </div>
-            <div class="col-sm-2">
-                <form>
-                    State <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[State] . '>'; ?>
-                    <br>
-                </form>
-            </div>
-            <div class="col-sm-2">
-                <form>
-                    Region <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Region] . '>'; ?>
-                    <br>
-                </form>
-            </div>
-            <div class="col-sm-2">
-                <form>
-                    City <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[City] . '>'; ?>
-                    <br>
-                </form>
-            </div>
-            <div class="col-sm-2">
-                <form>
-                    Postal Code <br>
-                    <?php echo '<input type="text" name="fname" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[PostalCode] . '>'; ?>
-                    <br>
-                </form>
-            </div>
-            <div class="col-sm-4">
-                <form>
-                    Bio <br>
-                    <?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Description]; ?>
-                    <br>
-                </form>
-            </div>
-            <div class="col-sm-4">
-                <form>
-                    Work History <br>
-                    <?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[WorkHistory]; ?>
-                    <br>
-                </form>
-            </div>
-            <div class="col-sm-4">
-                <form>
-                    Interests <br>
-                    <?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Interests]; ?>
-                    <br>
-                </form>
-            </div>
-            <div class="col-sm-12">
-                Skills <br>
+    <table class= "biotable">
+        <tr>
+        <th> First Name</th>
+        <th><?php echo getAuthUserByUserName($_SESSION['username'])[FirstName]; ?> </th>
+        </tr>
+        <tr>
+        <th> Last Name</th>
+        <th><?php echo getAuthUserByUserName($_SESSION['username'])[LastName]; ?> </th>
+        </tr>
+        <tr>
+        <th> Email Address</th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[EmailAddress]; ?></th>
+        </tr>
+        <tr>
+        <th> URL</th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Url]; ?></th>
+        </tr>
+        <tr>
+        <th> City </th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[City]; ?></th>
+        </tr>
+        <tr>
+        <th> Region</th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Region]; ?></th>
+        </tr>
+        <tr>
+        <th> State</th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[State]; ?></th>
+        </tr>
+        <tr>
+        <th> Country</th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Country]; ?></th>
+        </tr>
+        <tr>
+        <th> Postal Code</th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[PostalCode]; ?></th>
+        </tr>
+        </table>
+        
+        <p class="description">Description</p>
+        <br>
+        <textarea rows = "25" cols="100" readonly="readonly"><?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Description]; ?>  </textarea> </th>
+        
+        <br>
+        
+        <p class="description"> Work History</p>
+        <br>
+        <th><textarea rows = "25" cols="100" readonly="readonly"><?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[WorkHistory]; ?></textarea> </th>
+
+        <br>
+
+        <p class="description"> Interests </p>
+        <br>
+        <th><textarea rows = "25" cols="100" readonly="readonly"><?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Interests]; ?></textarea> </th>
+        
+        <br>
+
+                <p class="description">Skills</p>
+                <br>
                 <?php
-                    echo "<table>
+                    echo "<table class='skillstable'>
                             <tr>
                                 <th>Skill Name</th>
                                 <th>Experience Level</th>
@@ -128,109 +99,6 @@
         </div>
     </div>
     
-    
-    
-    <?php
-       
-       
-       
-    /*   
-    $Username = $_SESSION['username'];
-    echo $Username;
-    echo '<br><br>';
-    $VolunteerID = getVolunteerID($Username);
-    echo $VolunteerID;
-    echo '<br><br>';
-    $VolunteerBio = array(getVolBiobyVolunteerID($VolunteerID));
-    print_r($VolunteerBio);
-    echo '<br><br>';
-    echo $VolunteerBio[2];
-   
-    
-       echo '<table>';
-           echo '<tr>';
-           echo '<th>User Name</th>';
-           echo '<th>'.$Username.'</th>';
-           echo '</tr>';
-           
-           echo '<tr>';
-               echo '<th>Volunteer ID</th>';
-               echo '<th>'.$VolunteerBio["VolunteerID"].'</th>';
-           echo '</tr>';
-          
-           echo '<tr>';
-               echo '<th>First Name</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-           
-           echo '<tr>';
-               echo '<th>Last Name</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-          
-           echo '<tr>';
-               echo '<th>City</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-          
-           echo '<tr>';
-               echo '<th>State</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-          
-           echo '<tr>';
-               echo '<th>Region</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-          
-           echo '<tr>';
-               echo '<th>Country</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-         
-           echo '<tr>';
-               echo '<th>Website</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-          
-           echo '<tr>';
-               echo '<th>Email Address</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-          
-           echo '<tr>';
-               echo '<th>Phone Number</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-          
-           echo '<tr>';
-               echo '<th>Contact Preference</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-           
-                      echo '<tr>';
-               echo '<th>Description</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-          
-           echo '<tr>';
-               echo '<th>Work History</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-          
-           echo '<tr>';
-               echo '<th>Interests</th>';
-               echo '<th>   </th>';
-           echo '</tr>';
-       
-       echo '</table>';
-       
-       */
-       ?>
-
-       
-        
-
         <?php include '_footer.php'; ?>
 
         <!-- This is the footer -->

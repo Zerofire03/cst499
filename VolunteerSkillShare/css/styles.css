@@ -200,3 +200,14 @@ footer, #hr_footer, #csumb{
 th, td {
   padding: 15px;
 }
+
+.biotable, .skillstable{
+    margin-left:auto; 
+    margin-right:auto; 
+    font-size:2em; 
+    table-layout: auto;
+}
+
+.description{
+    font-size: 2em;
+}
