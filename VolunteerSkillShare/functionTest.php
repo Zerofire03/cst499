@@ -1,5 +1,5 @@
 <?php
     session_start();
     include 'storedProcedureCalls.php'; 
-    UpdateVolProfile(2, 'Riverside', 'CA', 'SoCal', 'USA', '92507', 'foo.com', 'foo@foo.com', '1234567890', 'P');
+    UpdateVolBio(2, 'This is a test bio description for volunteer 2', 'This is a temporary work history for volunteer 2', 'Insert this damn interests list');
 ?>

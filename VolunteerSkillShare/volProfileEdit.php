@@ -62,17 +62,17 @@
                      </div>
                      <div class="col-sm-4">
                             Bio <br>
-                            <?php echo '<textarea form="volProfileEdit" rows="10">' . GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Description] . '</textarea>'; ?>
+                            <?php echo '<textarea form="volProfileEdit" name="description" rows="10">' . GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Description] . '</textarea>'; ?>
                             <br>
                      </div>
                      <div class="col-sm-4">
                             Work History <br>
-                            <?php echo '<textarea form="volProfileEdit" rows="10">' . GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[WorkHistory] . '</textarea>'; ?>
+                            <?php echo '<textarea form="volProfileEdit" name="workHistory" rows="10">' . GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[WorkHistory] . '</textarea>'; ?>
                             <br>
                      </div>
                      <div class="col-sm-4">
                             Interests <br>
-                            <?php echo '<textarea form="volProfileEdit" rows="10">' . GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Interests] . '</textarea>'; ?>
+                            <?php echo '<textarea form="volProfileEdit" name="interests" rows="10">' . GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Interests] . '</textarea>'; ?>
                             <br>
                      </div>
                      <div class="col-sm-12">
