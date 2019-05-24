@@ -891,7 +891,7 @@ CREATE PROCEDURE `sp_UpdateAuthUser` (`_UserID` INT,
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_UpdateAuthUserNames`$$
-CREATE PROCEDURE `sp_UpdateAuthUser` (`_UserID` INT, 
+CREATE PROCEDURE `sp_UpdateAuthUserNames` (`_UserID` INT, 
 		`_FirstName` VARCHAR(100), `_LastName` VARCHAR(100), 
         `_UpdatedBy` VARCHAR(100))  BEGIN
     
