@@ -106,13 +106,14 @@
                                 <th>Experience Level</th>
                                 <th>Current</th>
                             </tr>";
-                    foreach(GetVolSkillsByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID]) as $skills)
+                    $skills = GetVolSkillsByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID]);
+                    foreach($skills as $skill)
                     {
                         echo "<tr>
-                                <td>" . $skills[SkillID] . "</td>
-                                <td>" . $skills[ExperienceLevel] . "</td>
+                                <td>" . $skill[SkillName] . "</td>
+                                <td>" . $skill[ExperienceLevel] . "</td>
                                 <td>";
-                                if($skills[IsCurrent] == 1)
+                                if($skill[IsCurrent] == 1)
                                 {
                                     echo "Yes</td>";
                                 }
