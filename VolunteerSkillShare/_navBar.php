@@ -164,8 +164,8 @@ elseif ($fileName == "orgprojectedit")
     echo '<li role="presentation"><a href="index.php">Home</a></li>';
     echo '<li role="presentation"><a href="orgProfile.php">Org Profile</a></li>';
     echo '<li role="presentation"><a href="orgProfileEdit.php">Org Profile Edit</a></li>';
-    echo '<li role="presentation" class="active"><a href="orgProfileEdit.php">Org Project Edit</a></li>';
     echo '<li role="presentation"><a href="orgProject.php">Org Projects</a></li>';  
+    echo '<li role="presentation" class="active"><a href="orgProjectEdit.php">Org Project Edit</a></li>';
     echo '<li role="presentation"><a href="volSearch.php">Volunteer Search</a></li>';
     echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
 }
