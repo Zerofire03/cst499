@@ -522,6 +522,7 @@ CREATE PROCEDURE `sp_GetVolProfileByVolunteerID` (`_VolunteerID` INT)  BEGIN
 	FROM volprofile as vp
 		join authusers as au
 			on vp.VolunteerID = au.VolunteerID
+				AND UPPER(au.Role) = 'V'
     WHERE vp.VolunteerID = _VolunteerID;
 
 END$$
@@ -886,6 +887,20 @@ CREATE PROCEDURE `sp_UpdateAuthUser` (`_UserID` INT,
         UpdatedBy = _UpdatedBy
 	WHERE UserID = _UserID;
     
+    
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_UpdateAuthUserNames`$$
+CREATE PROCEDURE `sp_UpdateAuthUserNames` (`_UserID` INT, 
+		`_FirstName` VARCHAR(100), `_LastName` VARCHAR(100), 
+        `_UpdatedBy` VARCHAR(100))  BEGIN
+    
+    Update authusers
+    SET FirstName = _FirstName,
+        LastName = _LastName,
+		UpdatedDate = CURRENT_TIMESTAMP,
+        UpdatedBy = _UpdatedBy
+	WHERE UserID = _UserID;
     
 END$$
 
