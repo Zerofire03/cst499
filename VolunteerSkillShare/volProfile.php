@@ -75,6 +75,7 @@
         <th><textarea rows = "25" cols="100" readonly="readonly"><?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Interests]; ?></textarea> </th>
         
         <br>
+        </table>
 
                 <p class="description">Skills</p>
                 <br>

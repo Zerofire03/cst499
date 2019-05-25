@@ -4,7 +4,77 @@
        session_start();
        include 'storedProcedureCalls.php'; 
 ?>
+
+    <table class= "biotable">
+        <tr>
+        <td> First Name</th>
+        <td><?php  echo '<input type="text" value= ' . getAuthUserByUserName($_SESSION['username'])[FirstName] . ' >'; ?> </th>
+        </tr>
+        <tr>
+        <td> Last Name</th>
+        <td><?php  echo '<input type="text" value= ' . getAuthUserByUserName($_SESSION['username'])[LastName] . ' >'; ?> </th>
+        </tr>
+        <tr>
+        <td> Email Address</th>
+        <td><?php  echo '<input type="text" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[EmailAddress] . ' >'; ?></th>
+        </tr>
+        <tr>
+            <td>Phone Number</th>
+            <td><?php  echo '<input type="text" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[PhoneNumber] . ' >'; ?></th>
+        </tr>
+        <tr>
+            <td>Contact Preference</th>
+            <input type="radio" name="contactPref" value="E" <?php echo (GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[ContactPref]=="E") ? ' checked' : '' ;?> > Email 
+            <input type="radio" name="contactPref" value="P" <?php echo (GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[ContactPref]=="P") ? " checked" : '' ;?> > Phone
+        </tr>
+        <tr>
+        <td> URL</th>
+        <td><?php  echo '<input type="text" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Url] . ' >'; ?></th>
+        </tr>
+        <tr>
+        <td> City </th>
+        <td><?php  echo '<input type="text" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[City] . ' >'; ?></th>
+        </tr>
+        <tr>
+        <td> Region</th>
+        <td><?php  echo '<input type="text" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Region] . ' >'; ?></th>
+        </tr>
+        <tr>
+        <td> State</th>
+        <td><?php  echo '<input type="text" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[State] . ' >'; ?></th>
+        </tr>
+        <tr>
+        <td> Country</th>
+        <td><?php  echo '<input type="text" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Country] . ' >'; ?></th>
+        </tr>
+        <tr>
+        <td> Postal Code</th>
+        <td><?php  echo '<input type="text" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[PostalCode] . ' >'; ?></th>
+        </tr>
+        </table>
         
+        <p class="description">Description</p>
+        <br>
+        <textarea rows = "25" cols="100"><?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Description]; ?>  </textarea> </th>
+        
+        <br>
+        
+        <p class="description"> Work History</p>
+        <br>
+        <td><textarea rows = "25" cols="100"><?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[WorkHistory]; ?></textarea> </th>
+
+        <br>
+
+        <p class="description"> Interests </p>
+        <br>
+        <td><textarea rows = "25" cols="100"><?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Interests]; ?></textarea> </th>
+        
+        <br>
+        </table>
+        <br>
+        <button class="btn btn-primary" type="submit" value="update">Update Profile</button>
+        
+<!--        
 <div class="container">
        <div class="row">
               <form id="volProfileEdit" method="post" action="updateProfileProcess.php">
@@ -80,13 +150,14 @@
                      </div>
               </form>
               <div class="col-sm-12">
+-->
                      Skills <br>
                      <?php
                             echo "<table>
                                    <tr>
-                                          <th>Skill Name</th>
-                                          <th>Experience Level</th>
-                                          <th>Current</th>
+                                          <td>Skill Name</th>
+                                          <td>Experience Level</th>
+                                          <td>Current</th>
                                    </tr>";
                             $skills = GetVolSkillsByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID]);
                             foreach($skills as $skill)
