@@ -34,12 +34,15 @@ h1, h2{
     font-size: 40px;
 }
 
-.introText{
-    font-size: 20px;
-}
 li a:hover {
   background-color: #555;
   color: green;
+}
+
+/*Carousel*/
+.item{
+    width: 50%; 
+    margin: auto; 
 }
 
 .instructions{
@@ -70,6 +73,26 @@ footer, #hr_footer, #csumb{
     width:25%;
 }
 
+/* Text body of index.php*/
+.media-body{
+    background: rgb(242,243,245);
+}
+.text-body{
+    font-size:20px;
+    text-align: center;
+    padding-right: 200px;
+    padding-left: 200px;
+}
+
+.media-heading{
+    text-align: center;
+    font-size: 35px;
+}
+h5{
+    text-align: center;
+    font-size: 15px;
+}
+
 /*/Results Tables*/
 .tableInput {
     display: inline-block;
@@ -92,6 +115,12 @@ footer, #hr_footer, #csumb{
     font-weight: bold;
     padding: 10px;
     text-align: Left;
+    border: 1px solid #ccc;
+}
+.resultsThRight {
+    font-weight: bold;
+    padding: 10px;
+    text-align: Right;
     border: 1px solid #ccc;
 }
 
@@ -200,3 +229,19 @@ footer, #hr_footer, #csumb{
 th, td {
   padding: 15px;
 }
+
+.biotable, .skillstable{
+    margin-left:auto; 
+    margin-right:auto; 
+    font-size:20px; 
+    table-layout: auto;
+}
+
+.description{
+    font-size: 20px;
+}
+
+
+
+
+
