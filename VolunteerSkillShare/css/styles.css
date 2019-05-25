@@ -94,6 +94,12 @@ footer, #hr_footer, #csumb{
     text-align: Left;
     border: 1px solid #ccc;
 }
+.resultsThRight {
+    font-weight: bold;
+    padding: 10px;
+    text-align: Right;
+    border: 1px solid #ccc;
+}
 
 .resultsTdLeft {
     padding: 10px;
