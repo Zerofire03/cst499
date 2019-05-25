@@ -3,6 +3,10 @@
     
     //using session varaibles to store admin name and display on other pages
     session_start();
+    if(!isset($_POST['fName']) || !isset($_POST['lName']) || !isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['account']))
+    {
+        header("Location:login.php");
+    }
     
     $fname = $_POST['fName'];
     $lname = $_POST['lName'];
@@ -15,13 +19,33 @@
     
     if(empty($insertAccount))
     {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+    
+        $authSuccess = getAuthenticatedUser($username, $password);
         $_SESSION['incorrect'] = false;
-        header("Location:testPass.html");
+        $_SESSION['username'] = $username;
+        
+        $userInfo = getAuthUserByUserName($username);
+        
+        $_SESSION['userid'] = $userInfo['UserID'];
+        $_SESSION['role'] = strtoupper($accountType);
+        $_SESSION['fname'] = $fname;
+        $_SESSION['lname'] = $lname;
+        
+        if($_SESSION['role'] == 'V')
+        {
+            header("Location:newVolProfileEdit.php");
+        }
+        elseif($_SESSION['role'] == 'O')
+        {
+            header("Location:newOrgProfileEdit.php");
+        }
     }
     else
     {
         $_SESSION['incorrect'] = true;
-        header("Location:testFail.html");
+        header("Location:login.php");
     }
     
 ?>

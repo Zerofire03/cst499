@@ -11,11 +11,12 @@
     if($authSuccess == 1)
     {
         $_SESSION['incorrect'] = false;
-        $_SESSION['username'] = $username;
+        //$_SESSION['username'] = $username;
         
         $userInfo = getAuthUserByUserName($username);
         
         $_SESSION['userid'] = $userInfo['UserID'];
+        $_SESSION['username'] = $userInfo['UserName'];
         $_SESSION['role'] = strtoupper($userInfo['Role']);
         $_SESSION['fname'] = $userInfo['FirstName'];
         $_SESSION['lname'] = $userInfo['LastName'];

@@ -9,7 +9,7 @@
 
 .mainLogo {
    /*The image used */
-  background-image: url("/cst499/VolunteerSkillShare/Images/hadnshake_Teamwork.png");
+  background-image: url("../Images/hadnshake_Teamwork.png");
 
   height: 480px;
 
@@ -239,9 +239,13 @@ th, td {
 
 .description{
     font-size: 20px;
+<<<<<<< HEAD
 }
 
 
 
 
 
+=======
+}
+>>>>>>> b4d6f04847c5d68a969352113bcad1f607718c90

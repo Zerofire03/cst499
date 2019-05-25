@@ -151,8 +151,8 @@
      
             // calling stored procedure command
             //CALL sp_DeleteAuthUser(0)
-            $sql = 'CALL sp_GetUserIDByUserName(:_UserID, @UserIDOut)';
-     
+            $sql = 'CALL sp_DeleteAuthUser(:_UserID)';
+
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
      
@@ -172,8 +172,80 @@
     }
     
     /**
+     * Delete AuthUser for an Org
+     * @param int $userID
+     * @param int $orgID
+     * @return int
+     */
+    function deleteOrgAuthUser($userID, $orgID)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_DeleteOrgAuthUser(:_UserID, :_OrgID)';
+            
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_UserID', $userID, PDO::PARAM_INT);
+            $stmt->bindValue(':_OrgID', $orgID, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+
+            $stmt->closeCursor();
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * Delete OrgProject record
+     * @param int $orgID
+     * @param int $orgProjectID
+     * @return int
+     */
+    function deleteOrgProject($orgID, $orgProjectID)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_DeleteOrgProject(:_OrgID, :_OrgProjectID)';
+            
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_OrgID', $orgID, PDO::PARAM_INT);
+            $stmt->bindValue(':_OrgProjectID', $orgProjectID, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+
+            $stmt->closeCursor();
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
      * Get GetAuthUserIDByUserName
-     * @param username
+     * @param userName
      */
     function getAuthUserID($userName)
     {
@@ -210,7 +282,7 @@
     
     /**
      * Get GetAuthUserIDByUserName
-     * @param username
+     * @param userName
      */
     function getAuthUserRole($userName)
     {
@@ -247,7 +319,7 @@
 
     /**
      * Get GetAuthUserByUserName
-     * @param username
+     * @param userName
      */
     function getAuthUserByUserName($userName)
     {
@@ -272,6 +344,40 @@
      
             $stmt->closeCursor();
             return $return_value;
+            
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * Get GetOrgAuthUsersByOrgID
+     * @param orgID
+     */
+    function GetOrgAuthUsersByOrgID($orgID)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_GetOrgAuthUsersByOrgID(:_OrgID)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+
+            // pass value to the command
+            $stmt->bindValue(':_OrgID', $orgID, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $records;
             
         }
         catch (PDOException $e)
@@ -524,13 +630,12 @@
      
             // pass value to the command
             $stmt->bindValue(':_OrgID', $orgID, PDO::PARAM_INT);
-     
+
             // execute the stored procedure
             $stmt->execute();
-            $return_value = $stmt->fetch();
-     
-            $stmt->closeCursor();
-            return $return_value;
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            return $records;
             
         }
         catch (PDOException $e)
@@ -560,13 +665,12 @@
      
             // pass value to the command
             $stmt->bindValue(':_OrgProjectID', $orgProjectID, PDO::PARAM_INT);
-     
+
             // execute the stored procedure
             $stmt->execute();
-            $return_value = $stmt->fetch();
-     
-            $stmt->closeCursor();
-            return $return_value;
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $records;
             
         }
         catch (PDOException $e)
@@ -601,10 +705,9 @@
      
             // execute the stored procedure
             $stmt->execute();
-            $return_value = $stmt->fetch();
-     
-            $stmt->closeCursor();
-            return $return_value;
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            return $records;
             
         }
         catch (PDOException $e)
@@ -642,10 +745,9 @@
      
             // execute the stored procedure
             $stmt->execute();
-            $return_value = $stmt->fetch();
-     
-            $stmt->closeCursor();
-            return $return_value;
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            return $records;
             
         }
         catch (PDOException $e)
@@ -1358,7 +1460,7 @@
      
             // pass value to the command
             $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
-     
+
             // execute the stored procedure
             $stmt->execute();
             $return_value = $stmt->fetch();

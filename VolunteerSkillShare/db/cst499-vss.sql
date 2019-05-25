@@ -351,6 +351,13 @@ CREATE PROCEDURE `sp_DeleteAuthUser` (`_UserID` INT)  BEGIN
         
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_DeleteOrgAuthUser`$$
+CREATE PROCEDURE `sp_DeleteOrgAuthUser` (`_UserID` INT, `_OrgID` INT)  BEGIN
+    
+    Delete From authusers Where UserID = _UserID AND OrgID = _OrgID;
+
+END$$
+
 DROP PROCEDURE IF EXISTS `sp_DeleteOrgProjectSkills`$$
 CREATE PROCEDURE `sp_DeleteOrgProjectSkills` (`_OrgProjectID` INT)  BEGIN
     
@@ -365,6 +372,14 @@ CREATE PROCEDURE `sp_DeleteVolSkills` (`_VolunteerID` INT)  BEGIN
 	
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_DeleteOrgProject`$$
+CREATE PROCEDURE `sp_DeleteOrgProject` (`_OrgID` INT, `_OrgProjectID` INT)  BEGIN
+    
+    Delete From orgproject WHERE OrgID = _OrgID AND OrgProjectID = _OrgProjectID;
+	
+END$$
+
+
 DROP PROCEDURE IF EXISTS `sp_GetAuthUserByUserName`$$
 CREATE PROCEDURE `sp_GetAuthUserByUserName` (`_UserName` VARCHAR(100))  BEGIN
     
@@ -376,6 +391,17 @@ CREATE PROCEDURE `sp_GetAuthUserByUserName` (`_UserName` VARCHAR(100))  BEGIN
 	
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_GetOrgAuthUsersByOrgID`$$
+CREATE PROCEDURE `sp_GetOrgAuthUsersByOrgID` (`_OrgID` INTEGER)  BEGIN
+    
+    Select UserID, Role, VolunteerID, OrgID, FirstName, LastName,
+		UserName, LastLogin, LastPasswordReset, CreatedDate, CreatedBy,
+        UpdatedDate, UpdatedBy
+	From authusers
+    Where OrgID = _OrgID
+		AND Role = 'O';
+	
+END$$
 
 DROP PROCEDURE IF EXISTS `sp_GetOrgProfileByOrgID`$$
 CREATE PROCEDURE `sp_GetOrgProfileByOrgID` (IN `_OrgID` INT)  BEGIN
@@ -501,22 +527,29 @@ DROP PROCEDURE IF EXISTS `sp_GetVolProfileByVolunteerID`$$
 CREATE PROCEDURE `sp_GetVolProfileByVolunteerID` (`_VolunteerID` INT)  BEGIN
     
     SELECT
-		VolunteerID,
-        City,
-        State,
-        Region,
-        Country,
-        PostalCode,
-        Url,
-        EmailAddress,
-        PhoneNumber,
-        ContactPref,
-        CreatedDate,
-        CreatedBy,
-        UpdatedDate,
-        UpdatedBy
-	FROM volprofile
-    WHERE VolunteerID = _VolunteerID;
+		vp.VolunteerID,
+        vp.City,
+        vp.State,
+        vp.Region,
+        vp.Country,
+        vp.PostalCode,
+        vp.Url,
+        vp.EmailAddress,
+        vp.PhoneNumber,
+        vp.ContactPref,
+        vp.CreatedDate,
+        vp.CreatedBy,
+        vp.UpdatedDate,
+        vp.UpdatedBy,
+		au.FirstName,
+		au.LastName,
+		au.Role,
+		au.UserName
+	FROM volprofile as vp
+		join authusers as au
+			on vp.VolunteerID = au.VolunteerID
+				AND UPPER(au.Role) = 'V'
+    WHERE vp.VolunteerID = _VolunteerID;
 
 END$$
 
@@ -880,6 +913,20 @@ CREATE PROCEDURE `sp_UpdateAuthUser` (`_UserID` INT,
         UpdatedBy = _UpdatedBy
 	WHERE UserID = _UserID;
     
+    
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_UpdateAuthUserNames`$$
+CREATE PROCEDURE `sp_UpdateAuthUserNames` (`_UserID` INT, 
+		`_FirstName` VARCHAR(100), `_LastName` VARCHAR(100), 
+        `_UpdatedBy` VARCHAR(100))  BEGIN
+    
+    Update authusers
+    SET FirstName = _FirstName,
+        LastName = _LastName,
+		UpdatedDate = CURRENT_TIMESTAMP,
+        UpdatedBy = _UpdatedBy
+	WHERE UserID = _UserID;
     
 END$$
 

@@ -1,13 +1,17 @@
 <?php
 // move the role tests into the nav items for more detail testing
 //include '_enforceLogin.php';
+
 $fileName = strtolower(basename($_SERVER['PHP_SELF'], '.php'));
+
 echo '<ul class="nav nav-pills nav-stacked" id="navBar">';
   
 $vol = ($_SESSION['role'] == "V" ? TRUE : FALSE);
 $org = ($_SESSION['role'] == "O" ? TRUE : FALSE);
+
 // test the page names
 //echo "TESTTESTTEST - " . $fileName;
+
 if ($fileName == 'index')
 {
     // add top level items for volunteer or org
@@ -49,6 +53,7 @@ elseif ($fileName == 'login')
     }
     echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
 }
+
 elseif ($fileName == 'orgsearch')
 {
     // available to all, including anonymous
@@ -68,6 +73,7 @@ elseif ($fileName == 'orgsearch')
     }
     echo '<li role="presentation" class="active"><a href="orgSearch.php">Active Project Search</a></li>';
 }
+
 elseif ($fileName == "volsearch")
 {
     // user should be a organization
@@ -114,6 +120,7 @@ elseif ($fileName == "orgprofileedit")
     {
         header("Location:index.php");
     }
+
     echo '<li role="presentation"><a href="index.php">Home</a></li>';
     echo '<li role="presentation"><a href="orgProfile.php">Org Profile</a></li>';
     echo '<li role="presentation" class="active"><a href="orgProfileEdit.php">Org Profile Editor</a></li>';
@@ -145,6 +152,7 @@ elseif ($fileName == "orgproject")
     }
     // org project search put into role tests
 }
+
 elseif ($fileName == "orgprojectedit")
 {
     // this should be viewed by orgs
@@ -177,6 +185,7 @@ elseif ($fileName == "volprofile")
     }
     echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
 }
+
 elseif ($fileName == "volprofileid")
 {
     echo '<li role="presentation"><a href="index.php">Home</a></li>';
@@ -211,7 +220,10 @@ elseif ($fileName == "insertauthuser")
     echo '<li role="presentation"><a href="login.php">Login</a></li>';
     echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
 }
+
 // remove logout to all pages after login
 if($vol || $org){ echo '<li role="presentation"><a href="logout.php">Logout</a></li>'; }
+
 echo '</ul>';
+
 ?>
