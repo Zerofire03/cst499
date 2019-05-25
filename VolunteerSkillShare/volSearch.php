@@ -185,7 +185,7 @@
             
             // display rows
             echo "<tr>";
-            echo "<td class='resultsTdLeft'><a href='orgProfile.php?orgid=$orgid'>$firstname $lastname</a></td>";
+            echo "<td class='resultsTdLeft'><a href='volProfile.php?volid=$volid'>$firstname $lastname</a></td>";
             echo "<td class='resultsTdLeft'>$email</td>";
             echo "<td class='resultsTdLeft'>$url</td>";
             echo "<td class='resultsTdLeft'>$pref</td>";
