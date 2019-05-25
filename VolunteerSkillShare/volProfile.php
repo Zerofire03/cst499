@@ -1,104 +1,82 @@
 <?php 
     include '_header.php';
-    include '_enforceLogin.php';
-    
-    if(isset($_GET["volid"]))
-    {
-        header('Location:volProfileID.php?volid=' . $_GET["volid"]);
-    }
-    
+    //include '_enforceLogin.php';
     session_start();
-    include 'storedProcedureCalls.php';   
-
 ?>
+        
+       <!-- code -->
     
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <form>
-                First Name <br>
-                <?php echo '<input type="text" name="fname" value= ' . getAuthUserByUserName($_SESSION['username'])[FirstName] . ' readonly>'; ?>
-                <br>
-                
-                URL <br>
-                <?php echo '<input type="text" name="url" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Url] . ' readonly>'; ?>
-                <br>
-                
-                Phone Number <br>
-                <?php echo '<input type="text" name="phone" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[PhoneNumber] . ' readonly>'; ?>
-                <br>
-            </form>
-            
-        </div>
-        <div class="col-sm-6">
-            <form>
-                Last Name <br>
-                <?php echo '<input type="text" name="lname" value= ' . getAuthUserByUserName($_SESSION['username'])[LastName] . ' readonly>'; ?>
-                <br>
-                
-                Email <br>
-                <?php echo '<input type="text" name="email" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[EmailAddress] . ' readonly>'; ?>
-                <br>
-                
-                Contact Preference <br>
-                <?php echo (GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[ContactPref]=="E") ? 'Email' : 'Phone' ;?> 
-                <br>
-            </form>
-        </div>
-        <div class="col-sm-2">
-            <form>
-                Coutry of Residence <br>
-                <?php echo '<input type="text" name="country" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Country] . ' readonly>'; ?>
-                <br>
-            </form>
-        </div>
-        <div class="col-sm-2">
-            <form>
-                State <br>
-                <?php echo '<input type="text" name="state" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[State] . ' readonly>'; ?>
-                <br>
-            </form>
-        </div>
-        <div class="col-sm-2">
-            <form>
-                Region <br>
-                <?php echo '<input type="text" name="region" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Region] . ' readonly>'; ?>
-                <br>
-            </form>
-        </div>
-        <div class="col-sm-2">
-            <form>
-                City <br>
-                <?php echo '<input type="text" name="city" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[City] . ' readonly>'; ?>
-                <br>
-            </form>
-        </div>
-        <div class="col-sm-2">
-            <form>
-                Postal Code <br>
-                <?php echo '<input type="text" name="postalcode" value= ' . GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[PostalCode] . ' readonly>'; ?>
-                <br>
-            </form>
-        </div>
-        <div class="col-sm-4">
-            <form>
-                Bio <br>
-                <?php echo '<textarea readonly form="volProfileEdit" rows="10">' . GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Description] . '</textarea>'; ?>
-                <br>
-            </form>
-        </div>
-        <div class="col-sm-4">
-            <form>
-                Work History <br>
-                <?php echo '<textarea readonly form="volProfileEdit" rows="10">' . GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[WorkHistory] . '</textarea>'; ?>
-                <br>
-            </form>
-        </div>
-        <div class="col-sm-4">
-            <form>
-                Interests <br>
-                <?php echo '<textarea readonly form="volProfileEdit" rows="10">' . GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Interests] . '</textarea>'; ?>
+    <?php
+        include 'storedProcedureCalls.php';   
+       
+       
+    ?>
+    <table class= "biotable">
+        <tr>
+        <th> First Name</th>
+        <th><?php echo getAuthUserByUserName($_SESSION['username'])[FirstName]; ?> </th>
+        </tr>
+        <tr>
+        <th> Last Name</th>
+        <th><?php echo getAuthUserByUserName($_SESSION['username'])[LastName]; ?> </th>
+        </tr>
+        <tr>
+        <th> Email Address</th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[EmailAddress]; ?></th>
+        </tr>
+        <tr>
+            <th>Phone Number</th>
+            <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[PhoneNumber]; ?></th>
+        </tr>
+        <tr>
+            <th>Contact Preference</th>
+            <th><?php echo (GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[ContactPref]=="E") ? 'Email' : 'Phone' ;?></th>
+        </tr>
+        <tr>
+        <th> URL</th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Url]; ?></th>
+        </tr>
+        <tr>
+        <th> City </th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[City]; ?></th>
+        </tr>
+        <tr>
+        <th> Region</th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Region]; ?></th>
+        </tr>
+        <tr>
+        <th> State</th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[State]; ?></th>
+        </tr>
+        <tr>
+        <th> Country</th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Country]; ?></th>
+        </tr>
+        <tr>
+        <th> Postal Code</th>
+        <th><?php echo GetVolProfileByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[PostalCode]; ?></th>
+        </tr>
+        </table>
+        
+        <p class="description">Description</p>
+        <br>
+        <textarea rows = "25" cols="100" readonly="readonly"><?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Description]; ?>  </textarea> </th>
+        
+        <br>
+        
+        <p class="description"> Work History</p>
+        <br>
+        <th><textarea rows = "25" cols="100" readonly="readonly"><?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[WorkHistory]; ?></textarea> </th>
 
+        <br>
+
+        <p class="description"> Interests </p>
+        <br>
+        <th><textarea rows = "25" cols="100" readonly="readonly"><?php echo GetVolBioByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID])[Interests]; ?></textarea> </th>
+        
+        <br>
+
+                <p class="description">Skills</p>
                 <br>
                 <?php
                     echo "<table class='skillstable'>
@@ -124,5 +102,12 @@
                     }
                     echo "</table>";
                 ?>
+                <br>
+            </div>
+        </div>
+    </div>
+    
+        <?php include '_footer.php'; ?>
 
-<?php include '_footer.php'; ?>
+        <!-- This is the footer -->
+</body>

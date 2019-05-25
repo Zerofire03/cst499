@@ -204,10 +204,10 @@ th, td {
 .biotable, .skillstable{
     margin-left:auto; 
     margin-right:auto; 
-    font-size:2em; 
+    font-size:20px; 
     table-layout: auto;
 }
 
 .description{
-    font-size: 2em;
+    font-size: 20px;
 }
