@@ -351,6 +351,13 @@ CREATE PROCEDURE `sp_DeleteAuthUser` (`_UserID` INT)  BEGIN
         
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_DeleteOrgAuthUser`$$
+CREATE PROCEDURE `sp_DeleteOrgAuthUser` (`_UserID` INT, `_OrgID` INT)  BEGIN
+    
+    Delete From authusers Where UserID = _UserID AND OrgID = _OrgID;
+
+END$$
+
 DROP PROCEDURE IF EXISTS `sp_DeleteOrgProjectSkills`$$
 CREATE PROCEDURE `sp_DeleteOrgProjectSkills` (`_OrgProjectID` INT)  BEGIN
     
@@ -365,6 +372,14 @@ CREATE PROCEDURE `sp_DeleteVolSkills` (`_VolunteerID` INT)  BEGIN
 	
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_DeleteOrgProject`$$
+CREATE PROCEDURE `sp_DeleteOrgProject` (`_OrgID` INT, `_OrgProjectID` INT)  BEGIN
+    
+    Delete From orgproject WHERE OrgID = _OrgID AND OrgProjectID = _OrgProjectID;
+	
+END$$
+
+
 DROP PROCEDURE IF EXISTS `sp_GetAuthUserByUserName`$$
 CREATE PROCEDURE `sp_GetAuthUserByUserName` (`_UserName` VARCHAR(100))  BEGIN
     
@@ -376,6 +391,17 @@ CREATE PROCEDURE `sp_GetAuthUserByUserName` (`_UserName` VARCHAR(100))  BEGIN
 	
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_GetOrgAuthUsersByOrgID`$$
+CREATE PROCEDURE `sp_GetOrgAuthUsersByOrgID` (`_OrgID` INTEGER)  BEGIN
+    
+    Select UserID, Role, VolunteerID, OrgID, FirstName, LastName,
+		UserName, LastLogin, LastPasswordReset, CreatedDate, CreatedBy,
+        UpdatedDate, UpdatedBy
+	From authusers
+    Where OrgID = _OrgID
+		AND Role = 'O';
+	
+END$$
 
 DROP PROCEDURE IF EXISTS `sp_GetOrgProfileByOrgID`$$
 CREATE PROCEDURE `sp_GetOrgProfileByOrgID` (IN `_OrgID` INT)  BEGIN
