@@ -10,27 +10,27 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <img src="/cst499/VolunteerSkillShare/Images/carousel/child.jpg" alt="Los Angeles">
+      <img src="Images/carousel/child.jpg" alt="Los Angeles">
     </div>
 
     <div class="item">
-      <img src="/cst499/VolunteerSkillShare/Images/carousel/volChildren.jpg" alt="Chicago">
+      <img src="Images/carousel/volChildren.jpg" alt="Chicago">
     </div>
 
     <div class="item">
-      <img src="/cst499/VolunteerSkillShare/Images/carousel/volDog.jpg" alt="New York">
+      <img src="Images/carousel/volDog.jpg" alt="New York">
     </div>
     
     <div class="item">
-      <img src="/cst499/VolunteerSkillShare/Images/carousel/human-dog-high-five-sciencedaily.jpg" alt="New York">
+      <img src="Images/carousel/human-dog-high-five-sciencedaily.jpg" alt="New York">
     </div>
     
     <div class="item">
-      <img src="/cst499/VolunteerSkillShare/Images/carousel/volElderly.jpg" alt="New York">
+      <img src="Images/carousel/volElderly.jpg" alt="New York">
     </div>
     
     <div class="item">
-      <img src="/cst499/VolunteerSkillShare/Images/carousel/volunteers.jpg" alt="New York">
+      <img src="Images/carousel/volunteers.jpg" alt="New York">
     </div>
     
   </div>
