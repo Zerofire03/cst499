@@ -89,7 +89,7 @@
                     foreach(GetVolSkillsByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID]) as $skills)
                     {
                         echo "<tr>
-                                <td>" . $skills[SkillID] . "</td>
+                                <td>" . $skills[SkillName] . "</td>
                                 <td>" . $skills[ExperienceLevel] . "</td>
                                 <td>";
                                 if($skills[IsCurrent] == 1)
