@@ -94,6 +94,38 @@
         
         <br>
         </table>
+<<<<<<< HEAD
+=======
+
+                <p class="description">Skills</p>
+                <br>
+                <?php
+                    echo "<table class='skillstable'>
+                            <tr>
+                                <th>Skill Name</th>
+                                <th>Experience Level</th>
+                                <th>Current</th>
+                            </tr>";
+                    foreach(GetVolSkillsByVolunteerID(getAuthUserByUserName($_SESSION['username'])[VolunteerID]) as $skills)
+                    {
+                        echo "<tr>
+                                <td>" . $skills[SkillName] . "</td>
+                                <td>" . $skills[ExperienceLevel] . "</td>
+                                <td>";
+                                if($skills[IsCurrent] == 1)
+                                {
+                                    echo "Yes</td>";
+                                }
+                                else
+                                {
+                                     echo "No</td>";
+                                }
+                    }
+                    echo "</table>";
+                ?>
+                <br>
+            </div>
+>>>>>>> ca369dc3586b076e4ba8b54125e0d4672776ecf3
         </div>
         
     <button class="accordion" id="profilePanel" onclick="showhide('volskills')">Volunteer Skills</button>
