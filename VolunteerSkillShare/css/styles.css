@@ -239,13 +239,8 @@ th, td {
 
 .description{
     font-size: 20px;
-<<<<<<< HEAD
 }
 
-
-
-
-
-=======
+.volbio, .volinfo, .volskills{
+    display:block;
 }
->>>>>>> b4d6f04847c5d68a969352113bcad1f607718c90
