@@ -10,14 +10,14 @@
 .mainLogo {
    /*The image used */
   background-image: url("../Images/hadnshake_Teamwork.png");
-
   height: 480px;
 
    /*Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 800px;
-
+  /*background-size: 800px;*/
+    background-size: contain;
+    
    /*Needed to position the navbar */
   position: relative;
 }
@@ -45,6 +45,9 @@ li a:hover {
     margin: auto; 
 }
 
+.carousel{
+    background-color: rgb(244,166,81);
+}
 .instructions{
     display: block;
     margin-left: auto;
@@ -78,7 +81,7 @@ footer, #hr_footer, #csumb{
     background: rgb(242,243,245);
 }
 .text-body{
-    font-size:20px;
+    font-size:30px;
     text-align: center;
     padding-right: 200px;
     padding-left: 200px;
@@ -86,7 +89,7 @@ footer, #hr_footer, #csumb{
 
 .media-heading{
     text-align: center;
-    font-size: 35px;
+    font-size: 45px;
 }
 h5{
     text-align: center;
