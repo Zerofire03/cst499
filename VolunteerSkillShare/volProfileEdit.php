@@ -10,89 +10,88 @@
        $volBio = GetVolBioByVolunteerID($authUser[VolunteerID]);
        $volSkills = GetVolSkillsByVolunteerID($authUser[VolunteerID]);
 ?>
-       <form method="post" action="updateProfileProcess.php">
-    <table class= "biotable">
-        <tr>
-        <td> First Name</th>
-        <td><?php  echo '<input type="text" value= ' . $authUser[FirstName] . ' >'; ?> </th>
-        </tr>
-        <tr>
-        <td> Last Name</th>
-        <td><?php  echo '<input type="text" value= ' . $authUser[LastName] . ' >'; ?> </th>
-        </tr>
-        <tr>
-        <td> Email Address</th>
-        <td><?php  echo '<input type="text" value= ' . $volProfile[EmailAddress] . ' >'; ?></th>
-        </tr>
-        <tr>
-            <td>Phone Number</th>
-            <td><?php  echo '<input type="text" value= ' . $volProfile[PhoneNumber] . ' >'; ?></th>
-        </tr>
-        <tr>
-            <td>Contact Preference</th>
-            <input type="radio" name="contactPref" value="E" <?php echo ($volProfile[ContactPref]=="E") ? ' checked' : '' ;?> > Email 
-            <input type="radio" name="contactPref" value="P" <?php echo ($volProfile[ContactPref]=="P") ? " checked" : '' ;?> > Phone
-        </tr>
-        <tr>
-        <td> URL</th>
-        <td><?php  echo '<input type="text" value= ' . $volProfile[Url] . ' >'; ?></th>
-        </tr>
-        <tr>
-        <td> City </th>
-        <td><?php  echo '<input type="text" value= ' . $volProfile[City] . ' >'; ?></th>
-        </tr>
-        <tr>
-        <td> Region</th>
-        <td><?php  echo '<input type="text" value= ' . $volProfile[Region] . ' >'; ?></th>
-        </tr>
-        <tr>
-        <td> State</th>
-        <td><?php  echo '<input type="text" value= ' . $volProfile[State] . ' >'; ?></th>
-        </tr>
-        <tr>
-        <td> Country</th>
-        <td><?php  echo '<input type="text" value= ' . $volProfile[Country] . ' >'; ?></th>
-        </tr>
-        <tr>
-        <td> Postal Code</th>
-        <td><?php  echo '<input type="text" value= ' . $volProfile[PostalCode] . ' >'; ?></th>
-        </tr>
-        </table>
+<form id="volProfileEdit" method="post" action="updateProfileProcess.php">
+       <table class= "biotable">
+              <tr>
+                     <td> First Name</td>
+                     <td><?php  echo '<input type="text" value= ' . $authUser[FirstName] . ' >'; ?> </td>
+              </tr>
+              <tr>
+                     <td> Last Name</td>
+                     <td><?php  echo '<input type="text" value= ' . $authUser[LastName] . ' >'; ?> </td>
+              </tr>
+              <tr>
+                     <td> Email Address</th>
+                     <td><?php  echo '<input type="text" value= ' . $volProfile[EmailAddress] . ' >'; ?></td>
+              </tr>
+              <tr>
+                     <td>Phone Number</th>
+                     <td><?php  echo '<input type="text" value= ' . $volProfile[PhoneNumber] . ' >'; ?></td>
+              </tr>
+              <tr>
+                     <td>Contact Preference</th>
+                     <input type="radio" name="contactPref" value="E" <?php echo ($volProfile[ContactPref]=="E") ? ' checked' : '' ;?> > Email 
+                     <input type="radio" name="contactPref" value="P" <?php echo ($volProfile[ContactPref]=="P") ? " checked" : '' ;?> > Phone
+              </tr>
+              <tr>
+                     <td> URL</td>
+                     <td><?php  echo '<input type="text" value= ' . $volProfile[Url] . ' >'; ?></td>
+              </tr>
+              <tr>
+                     <td> City </td>
+                     <td><?php  echo '<input type="text" value= ' . $volProfile[City] . ' >'; ?></td>
+              </tr>
+              <tr>
+                     <td> Region</th>
+                     <td><?php  echo '<input type="text" value= ' . $volProfile[Region] . ' >'; ?></td>
+              </tr>
+              <tr>
+                     <td> State</th>
+                     <td><?php  echo '<input type="text" value= ' . $volProfile[State] . ' >'; ?></td>
+              </tr>
+              <tr>
+                     <td> Country</th>
+                     <td><?php  echo '<input type="text" value= ' . $volProfile[Country] . ' >'; ?></td>
+              </tr>
+              <tr>
+                     <td> Postal Code</td>
+                     <td><?php  echo '<input type="text" value= ' . $volProfile[PostalCode] . ' >'; ?></td>
+              </tr>
+       </table>
         
-        <p class="description">Description</p>
-        <br>
-        <textarea rows = "25" cols="100"><?php echo $volBio[Description]; ?>  </textarea> </th>
+       <p class="description">Description</p>
+       <br>
+       <textarea rows = "25" cols="100"><?php echo $volBio[Description]; ?>  </textarea>
         
-        <br>
+       <br>
         
-        <p class="description"> Work History</p>
-        <br>
-        <td><textarea rows = "25" cols="100"><?php echo $volBio[WorkHistory]; ?></textarea> </th>
+       <p class="description"> Work History</p>
+       <br>
+       <textarea rows = "25" cols="100"><?php echo $volBio[WorkHistory]; ?></textarea>
 
-        <br>
+       <br>
 
-        <p class="description"> Interests </p>
-        <br>
-        <td><textarea rows = "25" cols="100"><?php echo $volBio[Interests]; ?></textarea> </th>
+       <p class="description"> Interests </p>
+       <br>
+       <textarea rows = "25" cols="100"><?php echo $volBio[Interests]; ?></textarea>
         
-        <br>
-        </table>
+       <br>
         
 
-                    <br> Skills <br>
-                     <?php
-                            echo "<table>
-                                   <tr>
-                                          <td>Skill Name</th>
-                                          <td>Experience Level</th>
-                                          <td>Current</th>
-                                   </tr>";
-                            foreach($volSkills as $skill)
-                            {
-                                   echo "<tr>
-                                          <td>" . $skill[SkillName] . "</td>
-                                          <td>" . $skill[ExperienceLevel] . "</td>
-                                          <td>";
+       <br> Skills <br>
+       <?php
+              echo "<table>
+                     <tr>
+                            <td>Skill Name</th>
+                            <td>Experience Level</th>
+                            <td>Current</th>
+                     </tr>";
+              foreach($volSkills as $skill)
+              {
+                     echo "<tr>
+                                   <td>" . $skill[SkillName] . "</td>
+                                   <td>" . $skill[ExperienceLevel] . "</td>
+                                   <td>";
                                    if($skill[IsCurrent] == 1)
                                    {
                                           echo "Yes</td>";
@@ -101,29 +100,29 @@
                                    {
                                           echo "No</td>";
                                    }
-                            }
-                            echo "</table>";
-                     ?>
+              }
+              echo "</table>";
+       ?>
                      
-                     Add Skills<br>
-                     <?php
-                            echo "<table>
-                                   <tr>
-                                          <th>Add Skill</th>
-                                          <th>Skill Name</th>
-                                          <th>Experience Level</th>
-                                          <th>Current</th>
-                                   </tr>";
-                            $count = 1;
-                            $skills = getSkills();
-                            $skillNames = array_column($volSkills, 'SkillName');
+       Add Skills<br>
+       <?php
+              echo "<table>
+                            <tr>
+                                   <th>Add Skill</th>
+                                   <th>Skill Name</th>
+                                   <th>Experience Level</th>
+                                   <th>Current</th>
+                            </tr>";
+              $count = 1;
+              $skills = getSkills();
+              $skillNames = array_column($volSkills, 'SkillName');
                             
                             
-                            foreach($skills as $skill)
-                            {
-                                   if(!(array_search($skill[Name], $skillNames)))
-                                   {
-                                   echo '<tr>
+              foreach($skills as $skill)
+              {
+                     if(!(array_search($skill[Name], $skillNames)))
+                     {
+                            echo '<tr>
                                           <td><input type="checkbox" name="skill"' . $count . ' value="' . $skill . '"</td>
                                           <td>' . $skill[Name] . '</td>
                                           <td>
@@ -146,17 +145,13 @@
                                                         <option value="0">No</option>
                                                  </select>
                                           </td>';
-                                   }
-                                   $count++;
-                            }
-                            echo "</table>";
-                     ?>
+                     }
+                     $count++;
+              }
+              echo "</table>";
+       ?>
+       </form>
               <br>
               <button class="btn btn-primary" type="submit" value="update">Update Profile</button>
-              </form>
-              </div>
-       </div>
-</div>
-        
 <!-- This is the footer -->
 <?php include '_footer.php';
