@@ -10,7 +10,7 @@
        $volBio = GetVolBioByVolunteerID($authUser[VolunteerID]);
        $volSkills = GetVolSkillsByVolunteerID($authUser[VolunteerID]);
 ?>
-
+       <form method="post" action="updateProfileProcess.php">
     <table class= "biotable">
         <tr>
         <td> First Name</th>
@@ -77,10 +77,9 @@
         
         <br>
         </table>
-        <br>
-        <button class="btn btn-primary" type="submit" value="update">Update Profile</button>
+        
 
-                     Skills <br>
+                    <br> Skills <br>
                      <?php
                             echo "<table>
                                    <tr>
@@ -105,6 +104,56 @@
                             }
                             echo "</table>";
                      ?>
+                     
+                     Add Skills<br>
+                     <?php
+                            echo "<table>
+                                   <tr>
+                                          <th>Add Skill</th>
+                                          <th>Skill Name</th>
+                                          <th>Experience Level</th>
+                                          <th>Current</th>
+                                   </tr>";
+                            $count = 1;
+                            $skills = getSkills();
+                            $skillNames = array_column($volSkills, 'SkillName');
+                            
+                            
+                            foreach($skills as $skill)
+                            {
+                                   if(!(array_search($skill[Name], $skillNames)))
+                                   {
+                                   echo '<tr>
+                                          <td><input type="checkbox" name="skill"' . $count . ' value="' . $skill . '"</td>
+                                          <td>' . $skill[Name] . '</td>
+                                          <td>
+                                                 <select>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                 </select>
+                                          </td>
+                                          <td>
+                                                 <select>
+                                                        <option value="1">Yes</option>
+                                                        <option value="0">No</option>
+                                                 </select>
+                                          </td>';
+                                   }
+                                   $count++;
+                            }
+                            echo "</table>";
+                     ?>
+              <br>
+              <button class="btn btn-primary" type="submit" value="update">Update Profile</button>
+              </form>
               </div>
        </div>
 </div>
