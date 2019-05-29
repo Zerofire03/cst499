@@ -387,6 +387,18 @@ CREATE PROCEDURE `sp_GetAuthUserByVolID` (`_ID` INT(11))  BEGIN
 	
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_GetOrgAuthUsersByOrgID`$$
+CREATE PROCEDURE `sp_GetOrgAuthUsersByOrgID` (`_OrgID` INTEGER)  BEGIN
+    
+    Select UserID, Role, VolunteerID, OrgID, FirstName, LastName,
+		UserName, LastLogin, LastPasswordReset, CreatedDate, CreatedBy,
+        UpdatedDate, UpdatedBy
+	From authusers
+    Where OrgID = _OrgID
+		AND Role = 'O';
+	
+END$$
+
 
 DROP PROCEDURE IF EXISTS `sp_GetOrgProfileByOrgID`$$
 CREATE PROCEDURE `sp_GetOrgProfileByOrgID` (IN `_OrgID` INT)  BEGIN
