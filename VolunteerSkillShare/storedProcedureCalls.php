@@ -281,6 +281,42 @@
     }
     
     /**
+     * Get GetAuthUserVolID
+     * @param volID
+     */
+    function getAuthUserByVolID($volID)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_GetAuthUserByVolID(:_ID)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_ID', $volID, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            $return_value = $stmt->fetch();
+     
+            $stmt->closeCursor();
+            return $return_value;
+            
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
      * Get GetAuthUserIDByUserName
      * @param userName
      */
