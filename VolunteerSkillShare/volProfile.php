@@ -16,22 +16,20 @@
     session_start();
     
     $authUser;
-    $volProfile;
-    $volBio;
-    $volSkills;
     
     //Obtain volunteer data
     if(isset($_GET["volid"]))
     {
-        
+        $authUser = getAuthUserByVolID($_GET["volid"]);
     }
     else
     {
         $authUser = getAuthUserByUserName($_SESSION['username']);
-        $volProfile = GetVolProfileByVolunteerID($authUser[VolunteerID]);
-        $volBio = GetVolBioByVolunteerID($authUser[VolunteerID]);
-        $volSkills = GetVolSkillsByVolunteerID($authUser[VolunteerID]);
     }
+    $volProfile = GetVolProfileByVolunteerID($authUser[VolunteerID]);
+    $volBio = GetVolBioByVolunteerID($authUser[VolunteerID]);
+    $volSkills = GetVolSkillsByVolunteerID($authUser[VolunteerID]);
+    
 ?>
     <button class="accordion" id="profilePanel" onclick="showhide('volbio')">Contact Information</button>
     <div class="volbio">
