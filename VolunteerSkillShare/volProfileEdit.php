@@ -14,19 +14,19 @@
        <table class= "biotable">
               <tr>
                      <td> First Name</td>
-                     <td><?php  echo '<input type="text" value= ' . $authUser[FirstName] . ' >'; ?> </td>
+                     <td><?php  echo '<input type="text" name="fname" value= ' . $authUser[FirstName] . ' >'; ?> </td>
               </tr>
               <tr>
                      <td> Last Name</td>
-                     <td><?php  echo '<input type="text" value= ' . $authUser[LastName] . ' >'; ?> </td>
+                     <td><?php  echo '<input type="text" name="lname" value= ' . $authUser[LastName] . ' >'; ?> </td>
               </tr>
               <tr>
                      <td> Email Address</th>
-                     <td><?php  echo '<input type="text" value= ' . $volProfile[EmailAddress] . ' >'; ?></td>
+                     <td><?php  echo '<input type="text" name="email" value= ' . $volProfile[EmailAddress] . ' >'; ?></td>
               </tr>
               <tr>
                      <td>Phone Number</th>
-                     <td><?php  echo '<input type="text" value= ' . $volProfile[PhoneNumber] . ' >'; ?></td>
+                     <td><?php  echo '<input type="text" name="phone" value= ' . $volProfile[PhoneNumber] . ' >'; ?></td>
               </tr>
               <tr>
                      <td>Contact Preference</th>
@@ -35,45 +35,45 @@
               </tr>
               <tr>
                      <td> URL</td>
-                     <td><?php  echo '<input type="text" value= ' . $volProfile[Url] . ' >'; ?></td>
+                     <td><?php  echo '<input type="text" name="url" value= ' . $volProfile[Url] . ' >'; ?></td>
               </tr>
               <tr>
                      <td> City </td>
-                     <td><?php  echo '<input type="text" value= ' . $volProfile[City] . ' >'; ?></td>
+                     <td><?php  echo '<input type="text" name="city" value= ' . $volProfile[City] . ' >'; ?></td>
               </tr>
               <tr>
                      <td> Region</th>
-                     <td><?php  echo '<input type="text" value= ' . $volProfile[Region] . ' >'; ?></td>
+                     <td><?php  echo '<input type="text" name="region" value= ' . $volProfile[Region] . ' >'; ?></td>
               </tr>
               <tr>
                      <td> State</th>
-                     <td><?php  echo '<input type="text" value= ' . $volProfile[State] . ' >'; ?></td>
+                     <td><?php  echo '<input type="text" name="state" value=' . $volProfile[State] . ' >'; ?></td>
               </tr>
               <tr>
                      <td> Country</th>
-                     <td><?php  echo '<input type="text" value= ' . $volProfile[Country] . ' >'; ?></td>
+                     <td><?php  echo '<input type="text" name="country" value=' . $volProfile[Country] . ' >'; ?></td>
               </tr>
               <tr>
                      <td> Postal Code</td>
-                     <td><?php  echo '<input type="text" value= ' . $volProfile[PostalCode] . ' >'; ?></td>
+                     <td><?php  echo '<input type="text" name="postalcode" value=' . $volProfile[PostalCode] . ' >'; ?></td>
               </tr>
        </table>
         
        <p class="description">Description</p>
        <br>
-       <textarea rows = "25" cols="100"><?php echo $volBio[Description]; ?>  </textarea>
+       <textarea form="volProfileEdit" name="description" rows = "25" cols="100"><?php echo $volBio[Description]; ?>  </textarea>
         
        <br>
         
        <p class="description"> Work History</p>
        <br>
-       <textarea rows = "25" cols="100"><?php echo $volBio[WorkHistory]; ?></textarea>
+       <textarea form="volProfileEdit" name="workHistory" rows = "25" cols="100"><?php echo $volBio[WorkHistory]; ?></textarea>
 
        <br>
 
        <p class="description"> Interests </p>
        <br>
-       <textarea rows = "25" cols="100"><?php echo $volBio[Interests]; ?></textarea>
+       <textarea form="volProfileEdit" name=interests" rows = "25" cols="100"><?php echo $volBio[Interests]; ?></textarea>
         
        <br>
         
@@ -123,7 +123,7 @@
                      if(!(array_search($skill[Name], $skillNames)))
                      {
                             echo '<tr>
-                                          <td><input type="checkbox" name="skill"' . $count . ' value="' . $skill . '"</td>
+                                          <td><input type="checkbox" name="skill_list[]" value="' . $skill[Name] . '"</td>
                                           <td>' . $skill[Name] . '</td>
                                           <td>
                                                  <select>
@@ -150,8 +150,9 @@
               }
               echo "</table>";
        ?>
-       </form>
-              <br>
-              <button class="btn btn-primary" type="submit" value="update">Update Profile</button>
+       <button class="btn btn-primary" type="submit" value="update">Update Profile</button>
+</form>
+<br>
+
 <!-- This is the footer -->
 <?php include '_footer.php';
