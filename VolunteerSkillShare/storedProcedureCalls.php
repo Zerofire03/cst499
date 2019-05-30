@@ -1109,10 +1109,8 @@
      
             // execute the stored procedure - retrieve the resulting ID
             $stmt->execute();
-            $return_value = $stmt->fetch();
      
             $stmt->closeCursor();
-            return $return_value;
         }
         catch (PDOException $e)
         {
