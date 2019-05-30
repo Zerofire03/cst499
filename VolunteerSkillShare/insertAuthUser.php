@@ -16,15 +16,15 @@
     
     $insertAccount = setInsertAuthUser($accountType, $fname, $lname, $email, $password);
     
+    //Called to 'login' user
+    $userInfo = getAuthUserByUserName($username);
+    
     
     if(empty($insertAccount))
     {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-    
-        $authSuccess = getAuthenticatedUser($username, $password);
         $_SESSION['incorrect'] = false;
-        $_SESSION['username'] = $username;
+        $_SESSION['username'] = $email;
+        
         
         $userInfo = getAuthUserByUserName($username);
         
@@ -35,11 +35,11 @@
         
         if($_SESSION['role'] == 'V')
         {
-            header("Location:newVolProfileEdit.php");
+            header("Location:newVolProfile.php");
         }
         elseif($_SESSION['role'] == 'O')
         {
-            header("Location:newOrgProfileEdit.php");
+            header("Location:newOrgProfile.php");
         }
     }
     else
