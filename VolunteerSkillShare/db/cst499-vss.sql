@@ -898,10 +898,10 @@ CREATE PROCEDURE `sp_UpdateAuthUser` (`_UserID` INT,
         `_LastPasswordReset` TIMESTAMP, `_UpdatedBy` VARCHAR(100))  BEGIN
     
     Update authusers
-    SET Role = _Role,
-		FirstName = _FirstName,
-        LastName = _LastName,
-		UserName = _UserName,
+    SET Role = COALESCE(_Role, Role),
+		FirstName = COALESCE(_FirstName, FirstName),
+        LastName = COALESCE(_LastName, LastName),
+		UserName = COALESCE(_UserName, UserName),
         Password = Coalesce(PASSWORD(_Password), Password),
         LastLogin = Coalesce(_LastLogin, LastLogin),
         LastPasswordReset = Coalesce(_LastPasswordReset, LastPasswordReset),
