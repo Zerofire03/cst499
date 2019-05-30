@@ -1,12 +1,17 @@
 @charset "UTF-8";
 
 #activePage{
-    background-color: white;
-     text-align: center;
+    text-align: center;
+    color: black;
     font-family: 'Fira Sans Extra Condensed', sans-serif;
+    background-image: url("../Images/pageBackground.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
 }
 
+/*Header Image*/
 .mainLogo {
    /*The image used */
   background-image: url("../Images/hadnshake_Teamwork.png");
@@ -17,31 +22,41 @@
   background-repeat: no-repeat;
   /*background-size: 800px;*/
     background-size: contain;
-    
-   /*Needed to position the navbar */
-  position: relative;
 }
 
-/* Position the navbar container inside the image */
+
+/*Volunteer Skill Share*/
+h1{
+    font-size: 40px;
+}
+/*Welcom User*/
+h2{
+    font-size: 20px; 
+ }
+ 
+ 
+/* Nav Bar */
 #navBar {
     position: absolute;
     margin: 20px;
     width: auto;
     font-size: 25px;
+    box-shadow: 0em 0em 2em 0em rgb(200,181,38);
 }
-
-h1, h2{
-    font-size: 40px;
+.nav li a{
+    color: black;
 }
-
 li a:hover {
   background-color: #555;
   color: green;
 }
 
+
+
 /*Carousel*/
 .item{
-    width: 50%; 
+    width: 50%;
+    height: 300px;
     margin: auto; 
 }
 
@@ -66,6 +81,7 @@ li a:hover {
   z-index: 0;
 }
 
+/*Footer*/
 footer, #hr_footer, #csumb{
     color: black;
     font-size:12px;
@@ -97,6 +113,9 @@ h5{
 }
 
 /*/Results Tables*/
+.resultsTbl{
+    background: rgb(255,255,255,0.55);
+}
 .tableInput {
     display: inline-block;
     text-align: center;
@@ -163,8 +182,8 @@ h5{
 
 /*Accordion Styling*/
 .accordion {
-  background-color: #ccc;
-  color: #000;
+  background-color: rgb(50,100,137);
+  color: white;
   cursor: pointer;
   padding: 18px;
   width: 100%;
@@ -178,12 +197,12 @@ h5{
 }
 
 .active, .open, .accordion:hover {
-  background-color: rgb(245, 208, 74);
+  background-color: rgb(69,173,215);
 }
 
 .panel {
   padding: 0 18px;
-  background-color: white;
+  background-color: rgb(191,189,190, 0.5);
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;

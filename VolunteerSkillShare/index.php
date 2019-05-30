@@ -10,10 +10,14 @@ include '_header.php';
         <br>
         <br>
         <br>
+        <br>
+        <br>
+        <br>
         
-        <h4 class="media-heading">“You make a living by what you get. You make a life by what you give.”</h4>
-         <h5>~Winston Churchill</h5>
-                 
+        <div id="Home Page Quote">
+         <h4 class="media-heading">“You make a living by what you get. You make a life by what you give.”</h4>
+          <h5>~Winston Churchill</h5>
+         </div>        
        <?php include 'carousel.php'; ?>
        
        <br>

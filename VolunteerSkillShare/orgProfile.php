@@ -38,6 +38,13 @@
     $orgproject = GetOrgProjectsByOrgID($orgid);
 
 ?>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <!-- code -->
     <button class="accordion" id="profilePanel">Org Profile</button>
