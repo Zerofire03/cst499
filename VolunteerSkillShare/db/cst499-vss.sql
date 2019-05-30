@@ -892,13 +892,15 @@ END$$
 
 DROP PROCEDURE IF EXISTS `sp_UpdateAuthUser`$$
 CREATE PROCEDURE `sp_UpdateAuthUser` (`_UserID` INT, 
-		`_Role` VARCHAR(2), `_FirstName` VARCHAR(100), 
+		`_Role` VARCHAR(2), `_VolunteerID` INT, `_OrgID` INT, `_FirstName` VARCHAR(100), 
         `_LastName` VARCHAR(100), `_UserName` VARCHAR(100), 
         `_Password` VARCHAR(255), `_LastLogin` TIMESTAMP, 
         `_LastPasswordReset` TIMESTAMP, `_UpdatedBy` VARCHAR(100))  BEGIN
     
     Update authusers
     SET Role = COALESCE(_Role, Role),
+		VolunteerID = COALESCE(_VolunteerID, VolunteerID),
+		OrgID = COALESCE(_OrgID, OrgID),
 		FirstName = COALESCE(_FirstName, FirstName),
         LastName = COALESCE(_LastName, LastName),
 		UserName = COALESCE(_UserName, UserName),
