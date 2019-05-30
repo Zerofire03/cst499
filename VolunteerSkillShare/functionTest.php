@@ -9,14 +9,14 @@
     $volSkills = GetVolSkillsByVolunteerID($authUser[VolunteerID]);
     
     $skills = getSkills();
-    $skillNames = array_column($skills, 'Name');
-    
-    print_r($skillNames);
-    
-    //array_search($skill[Name], $skillNames);
-    
-    if(array_search("Tax Preparation", $skillNames))
+    $skillNames = array_column($volSkills, 'SkillName');
+                            
+    foreach($skills as $skill)
     {
-        echo "<br>In Array";
+        if(!(array_search($skill[Name], $skillNames)))
+        {
+            print_r($skill);
+            echo "<br>";
+        }
     }
 ?>

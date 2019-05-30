@@ -4,24 +4,25 @@
     session_start();
     
     $authUser = getAuthUserByUserName($_SESSION['username']);
-    $volProfile = GetVolProfileByVolunteerID($authUser[VolunteerID]);
-    $volBio = GetVolBioByVolunteerID($authUser[VolunteerID]);
-    $volSkills = GetVolSkillsByVolunteerID($authUser[VolunteerID]);
     
-  
     
     UpdateVolProfile($authUser[VolunteerID], $_POST['city'], $_POST['state'], $_POST['region'], $_POST['country'], $_POST['postalcode'], $_POST['url'], $_POST['email'], $_POST['phone'], $_POST['contactPref']);
     UpdateVolBio($authUser[VolunteerID], $_POST['description'], $_POST['workHistory'], $_POST['interests']);
+    UpdateAuthUser($authUser[UserID], NULL, $_POST['fname'], $_POST['lname'], NULL, NULL, NULL, NULL);
     
-    //print_r($_POST['skill_list']);
-    
-    /*
-    foreach($_POST['skill_list'] as $selected)
+    if(isset($_POST['skill_list']))
     {
-        print_r($selected);
-        echo "<br>";
+        $array = $_POST['skill_list'];
+        
+        
+        foreach($_POST['skill_list'] as $skillID)
+        {
+            $experienceLevel = "experience" . $skillID;
+            $isCurrent = "current" . $skillID;
+            InsertVolSkill($authUser[VolunteerID], $skillID, $_POST[$experienceLevel], $_POST[$isCurrent]);
+        }
     }
-    */
+    
     
     
     header("Location:volProfileEdit.php");

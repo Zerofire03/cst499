@@ -73,7 +73,7 @@
 
        <p class="description"> Interests </p>
        <br>
-       <textarea form="volProfileEdit" name=interests" rows = "25" cols="100"><?php echo $volBio[Interests]; ?></textarea>
+       <textarea form="volProfileEdit" name="interests" rows = "25" cols="100"><?php echo $volBio[Interests]; ?></textarea>
         
        <br>
         
@@ -123,10 +123,10 @@
                      if(!(array_search($skill[Name], $skillNames)))
                      {
                             echo '<tr>
-                                          <td><input type="checkbox" name="skill_list[]" value="' . $skill[Name] . '"</td>
+                                          <td><input type="checkbox" name="skill_list[]" value="' . $skill[SkillID] . '"</td>
                                           <td>' . $skill[Name] . '</td>
                                           <td>
-                                                 <select>
+                                                 <select name="experience' . $skill[SkillID] . '">
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
                                                         <option value="3">3</option>
@@ -140,7 +140,7 @@
                                                  </select>
                                           </td>
                                           <td>
-                                                 <select>
+                                                 <select name="current' . $skill[SkillID] . '">
                                                         <option value="1">Yes</option>
                                                         <option value="0">No</option>
                                                  </select>
