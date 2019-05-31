@@ -50,7 +50,7 @@
     <button class="accordion" id="profilePanel">Org Profile</button>
     <div class="panel">
         <br/>
-        <h2>Here is what we have on file for you and your organization.</h2>
+        <h3>Here is what we have on file for you and your organization.</h3>
             <div class="row">
               <div class="column">
                   <table class="resultsTbl">
@@ -154,7 +154,7 @@
               </div> <!--End Column-->
             </div> <!--End row-->
         <br/><br/>
-        <h2>If you would like to edit any part of your profile you may do so here:</h2>
+        <h3>If you would like to edit any part of your profile you may do so here:</h3>
         <br>
         <a class="editLink" href="orgProfileEdit.php">Edit Profile</a>
         <br/><br/>
@@ -164,8 +164,8 @@
     <button class="accordion" id="usersPanel">Org Users</button>
     <div class="panel">
         <br/>
-        <h2>Here is a list of local users on your account. <br/>
-        If you would like to add, edit, or remove a users please follow the links under the Actions column.</h2>
+        <h3>Here is a list of local users on your account. <br/>
+        If you would like to add, edit, or remove a users please follow the links under the Actions column.</h3>
         <table class="resultsTbl">
             <tr>
                 <th class="resultsTh"><h4>UserName</h4></th>
@@ -209,8 +209,8 @@
     <button class="accordion" id="projectsPanel">Org Projects</button>
     <div class="panel">
         <br/>
-        <h2>Here is a list of active projects that your organization has listed for volunteers to find. <br/>
-        If you would like to add, edit, or remove a project please follow the links under the Actions column.</h2>
+        <h3>Here is a list of active projects that your organization has listed for volunteers to find. <br/>
+        If you would like to add, edit, or remove a project please follow the links under the Actions column.</h3>
         <table class="resultsTbl">
             <tr>
                 <th class="resultsTh"><h4>Name</h4></th>
