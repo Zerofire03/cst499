@@ -24,7 +24,7 @@ include '_header.php';
         ?>
 
         <p>
-        <div class="<?php echo isset($_SESSION['username']) ? 'hidden' : 'show';?>"
+        <div class="<?php echo isset($_SESSION['username']) ? 'hidden' : 'show';?>" id="loginTable"
         <h3><font color="black">Please Login</font></h3>
         <div id="loginBox">
         <form method="post" action="loginProcess.php">

@@ -50,109 +50,122 @@
     <button class="accordion" id="profilePanel">Org Profile</button>
     <div class="panel">
         <br/>
-        <table class="resultsTbl">
-            <tr>
-                <th class="resultsTh" colspan="2"><h3>Profile</h3></th>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Name:</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['Name']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Description:</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['Description']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Mission:</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['Mission']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Tax ID:</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['TaxIdentifier']); ?></td>
-            </tr>
-            <tr>
-                <!-- spacer -->
-                <th class="resultsTh" colspan="2">&nbsp;</th>
-            </tr>
-            <tr>
-                <th class="resultsTh" colspan="2"><h3>Contact Info</h3></th>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Contact Name:</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['Mission']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Contact Email</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['ContactEmail']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Contact Phone</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['ContactPhone']); ?></td>
-            </tr>
-            <tr>
-                <!-- spacer -->
-                <th class="resultsTh" colspan="2">&nbsp;</th>
-            </tr>
-            <tr>
-                <th class="resultsTh" colspan="2"><h3>General Info</h3></th>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Address 1</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['Address1']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Address 2</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['Address2']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>City</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['City']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>State</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['State']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Region / Neighborhood</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['Region']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Country</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['Country']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Postal Code</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['PostalCode']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Email Address</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['EmailAddress']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Phone Number</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['PhoneNumber']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Twitter</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['Twitter']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>LinkedIn</h4></th>
-                <td class="resultsTdLeft"><?php echo($orgdata['LinkedIn']); ?></td>
-            </tr>
-            <tr>
-                <th class="resultsThRight"><h4>Updated Date</h4></th>
-                <td class="resultsTdLeft"><?php echo(date('m-d-Y',strtotime($orgdata['UpdatedDate']))); ?></td>
-            </tr>
-        </table>
+        <h2>Here is what we have on file for you and your organization.</h2>
+            <div class="row">
+              <div class="column">
+                  <table class="resultsTbl">
+                    <tr>
+                        <th class="resultsTh" colspan="2"><h3>Profile</h3></th>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Name:</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['Name']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Description:</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['Description']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Mission:</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['Mission']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Tax ID:</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['TaxIdentifier']); ?></td>
+                    </tr>
+                    <tr>
+                        <!-- spacer -->
+                        <th class="resultsTh" colspan="2">&nbsp;</th>
+                    </tr>
+                    
+                      <tr>
+                    <th class="resultsTh" colspan="2"><h3>Contact Info</h3></th>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Contact Name:</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['Mission']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Contact Email</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['ContactEmail']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Contact Phone</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['ContactPhone']); ?></td>
+                    </tr>
+                    <tr>
+                </table> <!-- End Table-->
+              </div> <!--End Column-->
+            <!--///////////////////////////////////////////////////-->
+              <div class="column">
+                  <table class="resultsTbl">
+                    <tr>
+                        <th class="resultsTh" colspan="2"><h3>General Info</h3></th>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Address 1</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['Address1']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Address 2</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['Address2']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>City</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['City']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>State</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['State']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Region / Neighborhood</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['Region']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Country</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['Country']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Postal Code</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['PostalCode']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Email Address</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['EmailAddress']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Phone Number</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['PhoneNumber']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Twitter</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['Twitter']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>LinkedIn</h4></th>
+                        <td class="resultsTdLeft"><?php echo($orgdata['LinkedIn']); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="resultsThRight"><h4>Updated Date</h4></th>
+                        <td class="resultsTdLeft"><?php echo(date('m-d-Y',strtotime($orgdata['UpdatedDate']))); ?></td>
+                    </tr>
+                </table> <!-- End Table-->
+              </div> <!--End Column-->
+            </div> <!--End row-->
         <br/><br/>
-        <a href="orgProfileEdit.php">Edit Profile</a>
+        <h2>If you would like to edit any part of your profile you may do so here:</h2>
+        <br>
+        <a class="editLink" href="orgProfileEdit.php">Edit Profile</a>
+        <br/><br/>
     </div>
     <br/>
 
     <button class="accordion" id="usersPanel">Org Users</button>
     <div class="panel">
         <br/>
+        <h2>Here is a list of local users on your account. <br/>
+        If you would like to add, edit, or remove a users please follow the links under the Actions column.</h2>
         <table class="resultsTbl">
             <tr>
                 <th class="resultsTh"><h4>UserName</h4></th>
@@ -163,32 +176,32 @@
                 <th class="resultsTh"><h4>Actions</h4></th>
             </tr>
 
-<?php
-    // show the user records
-    foreach($orgusers as $item)
-    {
-        echo "<tr>";
-        echo "<td class='resultsTdLeft'>" . $item['UserName'] . "</td>";
-        echo "<td class='resultsTdLeft'>" . $item['FirstName'] . "</td>";
-        echo "<td class='resultsTdLeft'>" . $item['LastName'] . "</td>";
-        echo "<td class='resultsTdLeft'>" . date('m-d-Y',strtotime($item['LastLogin'])) . "</td>";
-        echo "<td class='resultsTdLeft'>" . date('m-d-Y',strtotime($item['UpdatedDate'])) . "</td>";
-        
-        // user can't delete themself
-        if ($item['UserID'] != $_SESSION['userid'])
-        {
-            echo "<td class='resultsTdLeft'><a href='orgProfile.php?orgid=" . $orgid . 
-                "&deleteuserid=" . $item['UserID'] . 
-                "' onclick='return confirm(\"Delete User - <" . $item['UserName'] . ">?\")'>delete</a></td>";
-        }
-        else
-        {
-            echo "<td class='resultsTdLeft'></td>";
-        }
-        
-        echo "</tr>";
-    }
-?>
+        <?php
+            // show the user records
+            foreach($orgusers as $item)
+            {
+                echo "<tr>";
+                echo "<td class='resultsTdLeft'>" . $item['UserName'] . "</td>";
+                echo "<td class='resultsTdLeft'>" . $item['FirstName'] . "</td>";
+                echo "<td class='resultsTdLeft'>" . $item['LastName'] . "</td>";
+                echo "<td class='resultsTdLeft'>" . date('m-d-Y',strtotime($item['LastLogin'])) . "</td>";
+                echo "<td class='resultsTdLeft'>" . date('m-d-Y',strtotime($item['UpdatedDate'])) . "</td>";
+                
+                // user can't delete themself
+                if ($item['UserID'] != $_SESSION['userid'])
+                {
+                    echo "<td class='resultsTdLeft'><a href='orgProfile.php?orgid=" . $orgid . 
+                        "&deleteuserid=" . $item['UserID'] . 
+                        "' onclick='return confirm(\"Delete User - <" . $item['UserName'] . ">?\")'>delete</a></td>";
+                }
+                else
+                {
+                    echo "<td class='resultsTdLeft'></td>";
+                }
+                
+                echo "</tr>";
+            }
+        ?>
         </table>
     </div>
     <br/>
@@ -196,6 +209,8 @@
     <button class="accordion" id="projectsPanel">Org Projects</button>
     <div class="panel">
         <br/>
+        <h2>Here is a list of active projects that your organization has listed for volunteers to find. <br/>
+        If you would like to add, edit, or remove a project please follow the links under the Actions column.</h2>
         <table class="resultsTbl">
             <tr>
                 <th class="resultsTh"><h4>Name</h4></th>
