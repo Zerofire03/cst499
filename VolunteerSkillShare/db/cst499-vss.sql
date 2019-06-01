@@ -365,6 +365,22 @@ CREATE PROCEDURE `sp_DeleteVolSkills` (`_VolunteerID` INT)  BEGIN
 	
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_DeleteOrgAuthUser`$$
+CREATE PROCEDURE `sp_DeleteOrgAuthUser` (`_UserID` INT, `_OrgID` INT)  BEGIN
+    
+    Delete From authusers Where UserID = _UserID AND OrgID = _OrgID;
+
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_DeleteOrgProject`$$
+CREATE PROCEDURE `sp_DeleteOrgProject` (`_OrgID` INT, `_OrgProjectID` INT)  BEGIN
+    
+    Delete From orgproject WHERE OrgID = _OrgID AND OrgProjectID = _OrgProjectID;
+	
+END$$
+
+
+
 DROP PROCEDURE IF EXISTS `sp_GetAuthUserByUserName`$$
 CREATE PROCEDURE `sp_GetAuthUserByUserName` (`_UserName` VARCHAR(100))  BEGIN
     
