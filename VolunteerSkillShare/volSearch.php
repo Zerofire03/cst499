@@ -46,30 +46,30 @@
         <div class="fixedpanel">
             <br/>
             <form id="volsearch" name="volsearch" method="post">
-            <table class="tableInput">
+            <table class="resultsTbl">
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">City: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="city" id="city"/></td>
+                    <th class="resultsThRight"><label for="city">City: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="city" id="city"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">State: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="state" id="state"/></td>
+                    <th class="resultsThRight"><label for="state">State: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="state" id="state"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Region / Neighborhood: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="region" id="region"/></td>
+                    <th class="resultsThRight"><label for="region">Region / Neighborhood: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="region" id="region"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Country: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="country" id="country"/></td>
+                    <th class="resultsThRight"><label for="country">Country: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="country" id="country"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Postal Code: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="postalcode" id="postalcode"/></td>
+                    <th class="resultsThRight"><label for="postalcode">Postal Code: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="postalcode" id="postalcode"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Skill: </label></td>
-                    <td class="tdLeftAlign">
+                    <th class="resultsThRight"><label for="skills">Skill: </label></th>
+                    <td class="resultsTdLeft">
                         <select class="search" name='skills' id='skills'>
                             <option value = "">Select One</option>
                         <?php
@@ -87,8 +87,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Min Experience:<br/>(1-low < 10-high) </label></td>
-                    <td class="tdLeftAlign">
+                    <th class="resultsThRight"><label for="experienceLevel">Min Experience:<br/>(1-low < 10-high) </label></th>
+                    <td class="resultsTdLeft">
                         <select class="search" name="experienceLevel" id="experienceLevel">
                             <option value="">Select Level</option>
                             <option value="1">1</option>
@@ -105,12 +105,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Current Skill: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="checkbox" name="skillCurrent" id="skillCurrent"></td>
+                    <th class="resultsThRight"><label for="skillCurrent">Current Skill: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="checkbox" name="skillCurrent" id="skillCurrent"></td>
                 </tr>
             </table>
             <br/><br/>
-            <input type="submit" name="searchVols" id="searchVols" class="btn btn-primary" value="Search Volunteers">
+            <input type="submit" name="searchVols" id="searchVols" class="btn btn-primary editLink" value="Search Volunteers">
             </form>
 
             <div id="searchVolResults" name="searchVolResults" class="resultsDiv">

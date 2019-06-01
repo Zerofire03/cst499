@@ -19,8 +19,8 @@
         
         <div class="mainLogo">
             <h2>Welcome <?=$_SESSION['fname']?> To</h2>
-            <h1>VOLUNTEER SKILL SHARE</h1>
-            
-             <!--Navigation Bar-->
-            <?php include '_navBar.php'; ?>
+            <h1>VOLUNTEER SKILL SHARE</h1>   
         </div>
+        
+        <!--Navigation Bar-->
+        <?php include '_navBar.php'; ?>

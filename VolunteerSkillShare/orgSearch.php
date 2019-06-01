@@ -77,32 +77,32 @@
             <form id="orgsearch" name="orgsearch" method="post">
             <table class="tableInput">
                <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Name: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="name" id="name"/></td>
+                    <th class="resultsThRight"><label class="inputHeading">Name: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="name" id="name"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Tax Identifier: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="taxidentifier" id="taxidentifier"/></td>
+                    <th class="resultsThRight"><label class="inputHeading">Tax Identifier: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="taxidentifier" id="taxidentifier"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">City: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="city" id="city"/></td>
+                    <th class="resultsThRight"><label class="inputHeading">City: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="city" id="city"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">State: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="state" id="state"/></td>
+                    <th class="resultsThRight"><label class="inputHeading">State: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="state" id="state"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Region / Neighborhood: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="region" id="region"/></td>
+                    <th class="resultsThRight"><label class="inputHeading">Region / Neighborhood: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="region" id="region"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Country: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="country" id="country"/></td>
+                    <th class="resultsThRight"><label class="inputHeading">Country: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="country" id="country"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Postal Code: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="postalcode" id="postalcode"/></td>
+                    <th class="resultsThRight"><label class="inputHeading">Postal Code: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="postalcode" id="postalcode"/></td>
                 </tr>
             </table>
             <br/><br/>

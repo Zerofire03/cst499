@@ -330,6 +330,42 @@
     }
     
     /**
+     * Get GetAuthUserVolID
+     * @param volID
+     */
+    function getAuthUserByVolID($volID)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_GetAuthUserByVolID(:_ID)';
+     
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_ID', $volID, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            $return_value = $stmt->fetch();
+     
+            $stmt->closeCursor();
+            return $return_value;
+            
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
      * Get GetAuthUserIDByUserName
      * @param userName
      */
@@ -1024,10 +1060,8 @@
      
             // execute the stored procedure - retrieve the resulting ID
             $stmt->execute();
-            $return_value = $stmt->fetch();
      
             $stmt->closeCursor();
-            return $return_value;
         }
         catch (PDOException $e)
         {
@@ -1122,10 +1156,8 @@
      
             // execute the stored procedure - retrieve the resulting ID
             $stmt->execute();
-            $return_value = $stmt->fetch();
      
             $stmt->closeCursor();
-            return $return_value;
         }
         catch (PDOException $e)
         {
@@ -1145,7 +1177,7 @@
      * @param lastLogin
      * @param lastPasswordReset
      **/
-    function UpdateAuthUser ($userID, $role, $firstName, $lastName, $userName,
+    function UpdateAuthUser ($userID, $role, $volunteerID, $orgID, $firstName, $lastName, $userName,
             $password, $lastLogin, $lastPasswordReset)
     {
         global $dbName, $createdBy;
@@ -1154,9 +1186,9 @@
         try
         {
             // calling stored procedure command
-            $sql = 'CALL sp_UpdateAuthUser(:_UserID, :_Role, :_FirstName, :_LastName,
-                        :_UserName, :_Password, :_LastLogin, :_LastPasswordReset,
-                        :_UpdatedBy)';
+            $sql = 'CALL sp_UpdateAuthUser(:_UserID, :_Role, :_VolunteerID, :_OrgID,
+                        :_FirstName, :_LastName, :_UserName, :_Password, :_LastLogin,
+                        :_LastPasswordReset, :_UpdatedBy)';
      
             // prepare for execution of the stored procedure
             $stmt = $conn->prepare($sql);
@@ -1164,6 +1196,8 @@
             // pass value to the command
             $stmt->bindValue(':_UserID', $userID, PDO::PARAM_INT);
             $stmt->bindValue(':_Role', $role, PDO::PARAM_STR);
+            $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
+            $stmt->bindValue(':_OrgID', $orgID, PDO::PARAM_INT);
             $stmt->bindValue(':_FirstName', $firstName, PDO::PARAM_STR);
             $stmt->bindValue(':_LastName', $lastName, PDO::PARAM_STR);
             $stmt->bindValue(':_UserName', $userName, PDO::PARAM_STR);
@@ -1393,15 +1427,15 @@
      
             // pass value to the command
             $stmt->bindValue(':_VolunteerID', $volunteerID, PDO::PARAM_INT);
-            $stmt->bindValue(':_City', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_State', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_Region', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_Country', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_PostalCode', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_Url', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_EmailAddress', $firstName, PDO::PARAM_STR);
-            $stmt->bindValue(':_PhoneNumber', $workHistory, PDO::PARAM_STR);
-            $stmt->bindValue(':_ContactPref', $interests, PDO::PARAM_STR);
+            $stmt->bindValue(':_City', $city, PDO::PARAM_STR);
+            $stmt->bindValue(':_State', $state, PDO::PARAM_STR);
+            $stmt->bindValue(':_Region', $region, PDO::PARAM_STR);
+            $stmt->bindValue(':_Country', $country, PDO::PARAM_STR);
+            $stmt->bindValue(':_PostalCode', $postalCode, PDO::PARAM_STR);
+            $stmt->bindValue(':_Url', $url, PDO::PARAM_STR);
+            $stmt->bindValue(':_EmailAddress', $emailAddress, PDO::PARAM_STR);
+            $stmt->bindValue(':_PhoneNumber', $phoneNumber, PDO::PARAM_STR);
+            $stmt->bindValue(':_ContactPref', $contactPref, PDO::PARAM_STR);
             $stmt->bindValue(':_UpdatedBy', $createdBy, PDO::PARAM_STR);
 
             // execute the stored procedure

@@ -1,12 +1,18 @@
 @charset "UTF-8";
 
 #activePage{
-    background-color: white;
-     text-align: center;
+    text-align: center;
+    color: black;
     font-family: 'Fira Sans Extra Condensed', sans-serif;
+    background-image: url("../Images/pageBackground.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-width: 100%;
 
 }
 
+/*Header Image*/
 .mainLogo {
    /*The image used */
   background-image: url("../Images/hadnshake_Teamwork.png");
@@ -17,31 +23,41 @@
   background-repeat: no-repeat;
   /*background-size: 800px;*/
     background-size: contain;
-    
-   /*Needed to position the navbar */
-  position: relative;
 }
 
-/* Position the navbar container inside the image */
+
+/*Volunteer Skill Share*/
+h1{
+    font-size: 40px;
+}
+/*Welcom User*/
+h2{
+    font-size: 20px; 
+ }
+ 
+ 
+/* Nav Bar */
 #navBar {
-    position: absolute;
+    /*position: absolute;*/
     margin: 20px;
     width: auto;
     font-size: 25px;
+    box-shadow: 0em 0em 2em 0em rgb(200,181,38);
 }
-
-h1, h2{
-    font-size: 40px;
+.nav li a{
+    color: black;
 }
-
 li a:hover {
   background-color: #555;
   color: green;
 }
 
+
+
 /*Carousel*/
 .item{
-    width: 50%; 
+    width: 50%;
+    height: 300px;
     margin: auto; 
 }
 
@@ -66,6 +82,7 @@ li a:hover {
   z-index: 0;
 }
 
+/*Footer*/
 footer, #hr_footer, #csumb{
     color: black;
     font-size:12px;
@@ -97,10 +114,13 @@ h5{
 }
 
 /*/Results Tables*/
+.resultsTbl{
+    background: rgb(255,255,255,0.55);
+}
 .tableInput {
     display: inline-block;
     text-align: center;
-    font-size: 20px;
+    /*font-size: 20px;*/
 }
 
 .resultsDiv {
@@ -112,30 +132,30 @@ h5{
 .resultsTbl {
     display: inline-block;
     text-align: center;
+    width: auto;
+    border: 2px solid white;
 }
 
 .resultsTh {
     font-weight: bold;
     padding: 10px;
     text-align: Left;
-    border: 1px solid #ccc;
+    border: 2px solid white;
 }
 .resultsThRight {
     font-weight: bold;
     padding: 10px;
     text-align: Right;
-    border: 1px solid #ccc;
+    border: 2px solid white;
+    
 }
 
 .resultsTdLeft {
     padding: 10px;
     text-align: left;
-    border: 1px solid #ccc;
-}
-
-.resultsTdRight {
-    padding: 10px;
-    text-align: right;
+    border: 2px solid white;
+    width: auto;
+    
 }
 
 .inputHeading {
@@ -161,10 +181,18 @@ h5{
     width: 200px;
 }
 
+.editLink{
+    font-size: 20px;
+    box-shadow: 0em 0em 2em 0em rgb(200,181,38);
+}
+
+h3{
+    font-size: 17px;
+}
 /*Accordion Styling*/
 .accordion {
-  background-color: #ccc;
-  color: #000;
+  background-color: rgb(50,100,137);
+  color: white;
   cursor: pointer;
   padding: 18px;
   width: 100%;
@@ -178,12 +206,12 @@ h5{
 }
 
 .active, .open, .accordion:hover {
-  background-color: rgb(245, 208, 74);
+  background-color: rgb(69,173,215);
 }
 
 .panel {
   padding: 0 18px;
-  background-color: white;
+  background-color: rgb(191,189,190, 0.5);
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
@@ -191,8 +219,8 @@ h5{
 }
 
 .fixedheader {
-    background-color: rgb(245, 208, 74);
-  color: #000;
+  background-color: rgb(69,173,215);
+  color: white;
   cursor: pointer;
   padding: 18px;
   width: 100%;
@@ -206,7 +234,6 @@ h5{
 }
 .fixedpanel {
   padding: 0 18px;
-  background-color: white;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   text-align: center;
@@ -249,14 +276,7 @@ th, td {
 }
 
 .hiddenform {
-  color: inherit;
-  cursor: pointer;
-  border: none;
-  text-align: center;
-  outline: none;
-  font-size: 15px;
-  font-weight: bold;
-  transition: 0.4s;
+    cursor: pointer;
 }
 
 .error {
@@ -266,4 +286,36 @@ th, td {
 .success {
     color: #000;
     font-weight: bold;
+}
+
+/*Two Column Layout*/
+.column {
+  float: left;
+  width: 50%;
+}
+
+.columnLeft {
+  text-align:right;
+  padding-right:20px;
+}
+.columnRight {
+  text-align:left;
+  padding-left: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide,
+make the two columns stack on top of each other instead of next to
+each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+
 }

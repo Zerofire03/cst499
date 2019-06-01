@@ -4,7 +4,7 @@
 
 $fileName = strtolower(basename($_SERVER['PHP_SELF'], '.php'));
 
-echo '<ul class="nav nav-pills nav-stacked" id="navBar">';
+echo '<ul class="nav nav-pills" id="navBar">';
   
 $vol = ($_SESSION['role'] == "V" ? TRUE : FALSE);
 $org = ($_SESSION['role'] == "O" ? TRUE : FALSE);
