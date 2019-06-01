@@ -608,7 +608,7 @@ CREATE PROCEDURE `sp_InsertAuthUser` (`_Role` VARCHAR(2), `_VolunteerID` INT,
         _CreatedBy, CURRENT_TIMESTAMP, _CreatedBy
 	);
     
-    SELECT LAST_INSERT_ID();
+    SELECT LAST_INSERT_ID() as lastid;
     
 END$$
 
