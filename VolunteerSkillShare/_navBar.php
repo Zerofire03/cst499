@@ -113,7 +113,9 @@ elseif ($fileName == "orgprofile")
     }
   // org project search put into role tests
 }
-elseif ($fileName == "orgprofileedit")
+
+// consolidate the org profile edit and org project edit to show the org project edit nav
+elseif ($fileName == "orgprofileedit" || $fileName == "orgprojectedit")
 {
     // this should be viewed by orgs
     if(!$org)
@@ -152,7 +154,7 @@ elseif ($fileName == "orgproject")
     }
     // org project search put into role tests
 }
-
+/*
 elseif ($fileName == "orgprojectedit")
 {
     // this should be viewed by orgs
@@ -169,6 +171,7 @@ elseif ($fileName == "orgprojectedit")
     echo '<li role="presentation"><a href="volSearch.php">Volunteer Search</a></li>';
     echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
 }
+*/
 elseif ($fileName == "volprofile")
 {
     echo '<li role="presentation"><a href="index.php">Home</a></li>';

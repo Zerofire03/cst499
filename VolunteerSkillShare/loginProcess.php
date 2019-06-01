@@ -27,10 +27,12 @@
         */
         if($_SESSION['role'] == 'V')
         {
+            $_SESSION['volid'] = $userInfo['VolunteerID'];
             header("Location:volProfile.php");
         }
         elseif($_SESSION['role'] == 'O')
         {
+            $_SESSION['orgid'] = $userInfo['OrgID'];
             header("Location:orgProfile.php");
         }
     }

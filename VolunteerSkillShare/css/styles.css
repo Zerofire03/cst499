@@ -247,3 +247,23 @@ th, td {
 .volbio, .volinfo, .volskills{
     display:block;
 }
+
+.hiddenform {
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  font-weight: bold;
+  transition: 0.4s;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+.success {
+    color: #000;
+    font-weight: bold;
+}
