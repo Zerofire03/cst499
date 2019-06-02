@@ -11,48 +11,59 @@
        <table class= "biotable">
               <tr>
                      <td> First Name</td>
-                     <td><?php  echo '<input type="text" name="fname" value= ' . $authUser[FirstName] . ' >'; ?> </td>
+                     <td><input type="text" name="firstname" id="firstname" size="50"
+                value="<?php echo $authUser['FirstName']; ?>" maxlength="100" required> </td>
               </tr>
               <tr>
                      <td> Last Name</td>
-                     <td><?php  echo '<input type="text" name="lname" value= ' . $authUser[LastName] . ' >'; ?> </td>
+                     <td><input type="text" name="firstname" id="firstname" size="50"
+                value="<?php echo $authUser['LastName']; ?> } ?>" maxlength="100" required> </td>
               </tr>
               <tr>
-                     <td> Email Address</th>
-                     <td><?php  echo '<input type="text" name="email" value= ' . $authUser[UserName] . '>'; ?></td>
+                     <td> Email Address</td>
+                     <td><input type="email" name="email" id="email" size="50" value="<?php echo $authUser[UserName]; ?>"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                title="please enter valid email [test@test.com]"
+                maxlength="200"/></td>
+                     
               </tr>
               <tr>
-                     <td>Phone Number</th>
-                     <td><?php  echo '<input type="text" name="phone" >'; ?></td>
+                     <td>Phone Number</td>
+                     <td><input type="tel" name="phone" id="phone" size="20"
+                pattern="\d{3}[\-]\d{3}[\-]\d{4}"
+                maxlength="20" 
+                title="###-###-####"/></td>
               </tr>
               <tr>
-                     <td>Contact Preference</th>
-                     <input type="radio" name="contactPref" value="E"> Email 
+                     <td>Contact Preference</td>
+                     <td>
+                     <input type="radio" name="contactPref" value="E" required> Email 
                      <input type="radio" name="contactPref" value="P"> Phone
+                     </td>
               </tr>
               <tr>
                      <td> URL</td>
-                     <td><?php  echo '<input type="text" name="url">'; ?></td>
+                     <td><input type="text" name="url" id="url" size="50" maxlength="100"> </td>
               </tr>
               <tr>
                      <td> City </td>
-                     <td><?php  echo '<input type="text" name="city"'; ?></td>
+                     <td><input type="text" name="city" id="city" size="50" maxlength="100"> </td>
               </tr>
               <tr>
                      <td> Region</th>
-                     <td><?php  echo '<input type="text" name="region">'; ?></td>
+                     <td><input type="text" name="url" id="city" size="50" maxlength="100"> </td>
               </tr>
               <tr>
                      <td> State</th>
-                     <td><?php  echo '<input type="text" name="state">'; ?></td>
+                     <td><input type="text" name="state" id="state" size="50" maxlength="100"> </td>
               </tr>
               <tr>
                      <td> Country</th>
-                     <td><?php  echo '<input type="text" name="country">'; ?></td>
+                     <td><input type="text" name="country" id="country" size="50" maxlength="100"> </td>
               </tr>
               <tr>
                      <td> Postal Code</td>
-                     <td><?php  echo '<input type="text" name="postalcode">'; ?></td>
+                     <td><input type="text" name="url" id="url" size="50" maxlength="100"> </td>
               </tr>
        </table>
         
