@@ -9,7 +9,7 @@ echo '<nav class="navbar navbar-fixed-top">';
     echo '<div class="navbar-header">';
     // echo '<img src="/Images/teamwork-icon.jpg">';
       echo '<a class="navbar-brand image" href="#">
-        <img alt="Volunteer Skill Share" src="https://a121af0a084344629db4e685b409fe7f.vfs.cloud9.us-east-2.amazonaws.com/cst499/VolunteerSkillShare/Images/handShakeHeart.png">
+        <img alt="Volunteer Skill Share" src="./Images/handShakeHeart.png">
         </a>';
         echo '<a class="navbar-brand" href="#">
         Volunteer Skill Share

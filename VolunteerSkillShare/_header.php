@@ -16,13 +16,13 @@
     </head>
 
     <body id="activePage">
-            
-            <!--Navigation Bar-->
-            <?php include '_navBar.php'; ?>
-            
-            <div class="mainLogo">
-                <div class="centered">
-                    <h2>Welcome <?=$_SESSION['fname']?></h2>
-                </div>
-                <img alt="Volunteer Skill Share" src="https://a121af0a084344629db4e685b409fe7f.vfs.cloud9.us-east-2.amazonaws.com/cst499/VolunteerSkillShare/Images/hadnshake_Teamwork.png">
-            </div>  
+
+    <!--Navigation Bar-->
+    <?php include '_navBar.php'; ?>
+    
+    <div class="mainLogo">
+        <div class="centered">
+            <h2>Welcome <?=$_SESSION['fname']?></h2>
+        </div>
+        <img alt="Volunteer Skill Share" src="./Images/hadnshake_Teamwork.png">
+    </div>  
