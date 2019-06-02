@@ -280,7 +280,7 @@ include 'storedProcedureCalls.php';
 </table>
 <input type="hidden" name="orgid" value="<?php echo($orgid); ?>"/>
 <br/>
-<button class="btn btn-link" id="submit" name="submit" type="submit">Submit</button>
+<input type="submit" name="submit" id="submit" class="btn btn-primary" value="Submit Changes" title="Submit Org profile changes">
 
 </form>
 
