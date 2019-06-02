@@ -110,7 +110,7 @@
                 </tr>
             </table>
             <br/><br/>
-            <input type="submit" name="searchVols" id="searchVols" class="btn btn-primary editLink" value="Search Volunteers">
+            <input type="submit" name="searchVols" id="searchVols" class="btn btn-primary" value="Search Volunteers">
             </form>
 
             <div id="searchVolResults" name="searchVolResults" class="resultsDiv">

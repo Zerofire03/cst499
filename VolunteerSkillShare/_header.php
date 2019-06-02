@@ -16,10 +16,9 @@
     </head>
 
     <body id="activePage">
-        
         <div class="mainLogo">
             <h2>Welcome <?=$_SESSION['fname']?> To</h2>
-            <h1>VOLUNTEER SKILL SHARE</h1>   
+            <h1>VOLUNTEER SKILL SHARE</h1>
         </div>
         
         <!--Navigation Bar-->

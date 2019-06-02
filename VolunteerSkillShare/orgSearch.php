@@ -77,31 +77,31 @@
             <form id="orgsearch" name="orgsearch" method="post">
             <table class="tableInput">
                <tr>
-                    <th class="resultsThRight"><label class="inputHeading">Name: </label></th>
+                    <th class="resultsThRight"><label for="name">Name: </label></th>
                     <td class="resultsTdLeft"><input class="search" type="text" name="name" id="name"/></td>
                 </tr>
                 <tr>
-                    <th class="resultsThRight"><label class="inputHeading">Tax Identifier: </label></th>
+                    <th class="resultsThRight"><label for="taxidentifier">Tax Identifier: </label></th>
                     <td class="resultsTdLeft"><input class="search" type="text" name="taxidentifier" id="taxidentifier"/></td>
                 </tr>
                 <tr>
-                    <th class="resultsThRight"><label class="inputHeading">City: </label></th>
+                    <th class="resultsThRight"><label for="city">City: </label></th>
                     <td class="resultsTdLeft"><input class="search" type="text" name="city" id="city"/></td>
                 </tr>
                 <tr>
-                    <th class="resultsThRight"><label class="inputHeading">State: </label></th>
+                    <th class="resultsThRight"><label for="state">State: </label></th>
                     <td class="resultsTdLeft"><input class="search" type="text" name="state" id="state"/></td>
                 </tr>
                 <tr>
-                    <th class="resultsThRight"><label class="inputHeading">Region / Neighborhood: </label></th>
+                    <th class="resultsThRight"><label for="region">Region / Neighborhood: </label></th>
                     <td class="resultsTdLeft"><input class="search" type="text" name="region" id="region"/></td>
                 </tr>
                 <tr>
-                    <th class="resultsThRight"><label class="inputHeading">Country: </label></th>
+                    <th class="resultsThRight"><label for="country">Country: </label></th>
                     <td class="resultsTdLeft"><input class="search" type="text" name="country" id="country"/></td>
                 </tr>
                 <tr>
-                    <th class="resultsThRight"><label class="inputHeading">Postal Code: </label></th>
+                    <th class="resultsThRight"><label for="postalcode">Postal Code: </label></th>
                     <td class="resultsTdLeft"><input class="search" type="text" name="postalcode" id="postalcode"/></td>
                 </tr>
             </table>
@@ -196,36 +196,36 @@
             <form id="orgprojectsearch" name="orgprojectsearch" method="post">
             <table class="tableInput">
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">High Priority Project: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="checkbox" name="projectpriority" id="projectpriority"/></td>
+                    <th class="resultsThRight"><label for="projectpriority">High Priority Project: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="checkbox" name="projectpriority" id="projectpriority"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Date Range - Start: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="date" name="startdatebegin" id="startdatebegin"/></td>
+                    <th class="resultsThRight"><label for="startdatebegin">Date Range - Start: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="date" name="startdatebegin" id="startdatebegin"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Date Range - End: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="date" name="startdateend" id="startdateend"/></td>
+                    <th class="resultsThRight"><label for="startdateend">Date Range - End: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="date" name="startdateend" id="startdateend"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">City: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="projectcity" id="projectcity"/></td>
+                    <th class="resultsThRight"><label for="projectcity">City: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="projectcity" id="projectcity"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">State: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="projectstate" id="projectstate"/></td>
+                    <th class="resultsThRight"><label for="projectstate">State: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="projectstate" id="projectstate"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Region / Neighborhood: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="projectregion" id="projectregion"/></td>
+                    <th class="resultsThRight"><label for="projectregion">Region / Neighborhood: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="projectregion" id="projectregion"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Country: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="projectcountry" id="projectcountry"/></td>
+                    <th class="resultsThRight"><label for="projectcountry">Country: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="projectcountry" id="projectcountry"/></td>
                 </tr>
                 <tr>
-                    <td class="tdRightAlign"><label class="inputHeading">Postal Code: </label></td>
-                    <td class="tdLeftAlign"><input class="search" type="text" name="projectpostalcode" id="projectpostalcode"/></td>
+                    <th class="resultsThRight"><label for="projectpostalcode">Postal Code: </label></th>
+                    <td class="resultsTdLeft"><input class="search" type="text" name="projectpostalcode" id="projectpostalcode"/></td>
                 </tr>
             </table>
             <br/><br/>

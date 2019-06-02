@@ -30,7 +30,7 @@
     }
     
     // check for adduser post
-    if (isset($_REQUEST['email']))
+    if (isset($_REQUEST['submitUser']))
     {
         $fname = $_REQUEST['fname'];
         $lname = $_REQUEST['lname'];
@@ -179,7 +179,7 @@
             </div>
         </div>
         <br/>
-        <a href="orgProfileEdit.php?orgid=<?php echo($orgid) ?>" title="Click here to edit" class="editLink">Edit Profile</a>
+        <a href="orgProfileEdit.php?orgid=<?php echo($orgid) ?>"><input type="button" name="editProfile" id="editProfile" class="btn btn-primary" value="Edit Profile" title="Edit Org profile"/></a>
         <br/><br/>
     </div>
     <br/>
@@ -223,11 +223,11 @@
         echo "</tr>";
     }
 ?>
-
         </table>
     </div>
-    <br/>
-    <a class="editLink hiddenform" id="useraddPanel" title="Add a new user">Add User</a>
+    <a class="hiddenform" id="useraddPanel" title="Add a new user">
+        <input type="button" name="adduserbtn" id="adduserbtn" class="btn btn-primary" value="Add User" title="Add User">
+    </a>
     <div class="panel">
         <form method="post" name="addUser" action="orgProfile.php">
         
@@ -250,12 +250,12 @@
                 <th class="resultsTh"><h4>Password:</h4></th>
                 <td class='resultsTdLeft'><input type="password" name="pass" id="pass" size="50" required/></td>
             </tr>
+            <input type="hidden" name="orgid" value="<?php echo($orgid); ?>"/>
         </table>
-        <input type="hidden" name="orgid" value="<?php echo($orgid); ?>"/>
         <br/>
-        <button class="btn btn-link editLink" type="submit" title="Add the new user">Add</button>
-        
+        <input type="submit" name="submitUser" id="submitUser" class="btn btn-primary" value="Add New User" title="Add New User">
         </form>
+        <br/>
     </div>
     <br/>
     
@@ -315,7 +315,7 @@
 ?>
         </table>
         <br/><br/>
-        <a href="orgProjectEdit.php?orgid=<?php echo($orgid) ?>" class="editLink" title="Add a new project">Add Project</a>
+        <a href="orgProjectEdit.php"><input type="button" name="addproject" id="addproject" class="btn btn-primary" value="Add Project" title="Add Org Project"/></a>
         <br/>
         <br/>
 

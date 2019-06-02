@@ -1,27 +1,29 @@
 @charset "UTF-8";
 
 #activePage{
+    vertical-align: top;
     text-align: center;
     color: black;
     font-family: 'Fira Sans Extra Condensed', sans-serif;
     background-image: url("../Images/pageBackground.jpg");
+    /*background-image: url("../Images/handshakre_Team.jpg");*/
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    height: 50px;
     max-width: 100%;
-
 }
 
 /*Header Image*/
 .mainLogo {
-   /*The image used */
-  background-image: url("../Images/hadnshake_Teamwork.png");
-  height: 480px;
-
-   /*Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  /*background-size: 800px;*/
+    /*The image used */
+    background-image: url("../Images/handshake_Teamwork_updated.png");
+    height: 400px;
+    vertical-align: top;
+    /*Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-size: 800px;*/
     background-size: contain;
 }
 
@@ -38,20 +40,23 @@ h2{
  
 /* Nav Bar */
 #navBar {
-    /*position: absolute;*/
+    display: inline-block;
+    /*position: float;*/
     margin: 20px;
+    text-align: center;
     width: auto;
     font-size: 25px;
-    box-shadow: 0em 0em 2em 0em rgb(200,181,38);
+    /*box-shadow: 0em 0em 2em 0em rgb(200,181,38);*/
+    /*border: 1px solid lightgrey;*/
 }
 .nav li a{
     color: black;
+    text-align: center;
 }
 li a:hover {
   background-color: #555;
   color: green;
 }
-
 
 
 /*Carousel*/
@@ -139,15 +144,21 @@ h5{
 .resultsTh {
     font-weight: bold;
     padding: 10px;
-    text-align: Left;
+    text-align: left;
     border: 2px solid white;
 }
 .resultsThRight {
     font-weight: bold;
     padding: 10px;
-    text-align: Right;
+    text-align: right;
     border: 2px solid white;
     
+}
+.resultsThCenter {
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid white;
 }
 
 .resultsTdLeft {
@@ -155,9 +166,13 @@ h5{
     text-align: left;
     border: 2px solid white;
     width: auto;
-    
 }
-
+.resultsTdCenter {
+    padding: 10px;
+    text-align: center;
+    border: 2px solid white;
+    width: auto;
+}
 .inputHeading {
     margin-top: 10px;
     margin-left: 20px;
@@ -199,7 +214,6 @@ h3{
   border: none;
   text-align: center;
   outline: none;
-  font-size: 15px;
   font-weight: bold;
   transition: 0.4s;
   font-size: 25px;
@@ -211,11 +225,12 @@ h3{
 
 .panel {
   padding: 0 18px;
-  background-color: rgb(191,189,190, 0.5);
+  /*background-color: rgb(191,189,190, 0.5);*/
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   text-align: center;
+  border: none;
 }
 
 .fixedheader {
@@ -237,6 +252,7 @@ h3{
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   text-align: center;
+  border: none;
 }
 
 .accordion:after {
@@ -246,6 +262,7 @@ h3{
   color: #777;
   float: right;
   margin-left: 5px;
+  border: none;
 }
 
 .open:after {
