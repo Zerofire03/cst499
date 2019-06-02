@@ -655,7 +655,7 @@ CREATE PROCEDURE `sp_InsertOrgProfile` (`_Name` VARCHAR(100), `_Description` TEX
         _LinkedIn, CURRENT_TIMESTAMP, _CreatedBy, CURRENT_TIMESTAMP, _CreatedBy
 	);
     
-    SELECT LAST_INSERT_ID();
+    SELECT LAST_INSERT_ID() as lastid;
     
 END$$
 
@@ -683,7 +683,7 @@ CREATE PROCEDURE `sp_InsertOrgProject` (`_OrgID` INT, `_Name` VARCHAR(100),
         _CreatedBy
 	);
     
-    SELECT LAST_INSERT_ID();
+    SELECT LAST_INSERT_ID() as lastid;
     
 END$$
 
