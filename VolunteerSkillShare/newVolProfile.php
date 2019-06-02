@@ -12,16 +12,16 @@
               <tr>
                      <td> First Name</td>
                      <td><input type="text" name="firstname" id="firstname" size="50"
-                value="<?php if(isset($authUser)){ echo($authUser['FirstName']); } ?>" maxlength="100" required> </td>
+                value="<?php echo $authUser['FirstName']; ?>" maxlength="100" required> </td>
               </tr>
               <tr>
                      <td> Last Name</td>
                      <td><input type="text" name="firstname" id="firstname" size="50"
-                value="<?php if(isset($authUser)){ echo($authUser['LastName']); } ?>" maxlength="100" required> </td>
+                value="<?php echo $authUser['LastName']; ?> } ?>" maxlength="100" required> </td>
               </tr>
               <tr>
                      <td> Email Address</td>
-                     <td><input type="email" name="email" id="email" size="50"
+                     <td><input type="email" name="email" id="email" size="50" value="<?php echo $authUser[UserName]; ?>"
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                 title="please enter valid email [test@test.com]"
                 maxlength="200"/></td>
@@ -63,7 +63,7 @@
               </tr>
               <tr>
                      <td> Postal Code</td>
-                     <td><?php  echo '<input type="text" name="postalcode">'; ?></td>
+                     <td><input type="text" name="url" id="url" size="50" maxlength="100"> </td>
               </tr>
        </table>
         
