@@ -16,10 +16,33 @@
     </head>
 
     <body id="activePage">
-        <div class="mainLogo">
-            <h2>Welcome <?=$_SESSION['fname']?> To</h2>
-            <h1>VOLUNTEER SKILL SHARE</h1>
-        </div>
         
-        <!--Navigation Bar-->
-        <?php include '_navBar.php'; ?>
+        <!--<div class="header">-->
+        <!--    <p id="my-image"><img src= > -->
+        <!--    </p> -->
+        <!--    <div class="mainLogo">-->
+                <!--<h2>Welcome <?=$_SESSION['fname']?></h2>-->
+                <!--<h1>VOLUNTEER SKILL SHARE</h1>   -->
+            <!--</div>-->
+            
+            <!--Navigation Bar-->
+            <?php include '_navBar.php'; ?>
+        <!--</div> -->
+        
+        
+        
+         <!--Navigation Bar-->
+        <!--    <?php include '_navBar.php'; ?>-->
+        <!--    <br> -->
+            
+        <!--<div class="jumbotron">-->
+           
+            
+            <div class="mainLogo">
+                <div class="centered">
+                    <h2>Welcome <?=$_SESSION['fname']?></h2>
+                </div>
+                <img alt="Volunteer Skill Share" src="https://a121af0a084344629db4e685b409fe7f.vfs.cloud9.us-east-2.amazonaws.com/cst499/VolunteerSkillShare/Images/hadnshake_Teamwork.png">
+                <!--<h1>VOLUNTEER SKILL SHARE</h1>   -->
+            </div>  
+        <!--</div>-->

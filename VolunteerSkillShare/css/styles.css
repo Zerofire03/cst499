@@ -1,62 +1,96 @@
 @charset "UTF-8";
 
 #activePage{
-    vertical-align: top;
     text-align: center;
     color: black;
     font-family: 'Fira Sans Extra Condensed', sans-serif;
-    background-image: url("../Images/pageBackground.jpg");
-    /*background-image: url("../Images/handshakre_Team.jpg");*/
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 50px;
-    max-width: 100%;
+    /*background-image: url("../Images/pageBackground.jpg");*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+    /*max-width: 100%;*/
+
 }
+
+/*.header{*/
+/*    padding: 5em inherit;*/
+    
+/*    background-image: url("../Images/handNcity.jpg");*/
+/*    background-position: center;*/
+/*    background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+/*    max-width: 100%;*/
+/*    max-height: auto;*/
+/*}*/
 
 /*Header Image*/
 .mainLogo {
-    /*The image used */
-    background-image: url("../Images/handshake_Teamwork_updated.png");
-    height: 400px;
-    vertical-align: top;
-    /*Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    /*background-size: 800px;*/
-    background-size: contain;
+   /*The image used */
+  /*background-image: url("../Images/handNcity.jpg");*/
+    /*max-width: 100%;*/
+    /*max-height: auto;*/
+    
+   /*Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  /*background-size: 800px;*/
+    /*background-size: contain;*/
+    /*padding-top: 10px;*/
 }
 
-
-/*Volunteer Skill Share*/
-h1{
-    font-size: 40px;
+/*Adjust the welcome text*/
+.centered {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 /*Welcom User*/
 h2{
-    font-size: 20px; 
+    font-size: 30px; 
  }
+
+h1{
+    font-size: 40px;
+}
+
  
  
 /* Nav Bar */
-#navBar {
-    display: inline-block;
-    /*position: float;*/
-    margin: 20px;
-    text-align: center;
+/*#navBar {*/
+.navbar-fixed-top{
+    /*position: absolute;*/
+    /*margin: 20px;*/
     width: auto;
-    font-size: 25px;
-    /*box-shadow: 0em 0em 2em 0em rgb(200,181,38);*/
-    /*border: 1px solid lightgrey;*/
+    font-size: 15px;
+    background: rgb(255,255,255, 0.95);
+    /*box-shadow: 0em 0em 0em 0em rgb(200,181,38);*/
+    height: 50px; 
+    padding-top: 5px;
 }
 .nav li a{
     color: black;
-    text-align: center;
 }
 li a:hover {
   background-color: #555;
   color: green;
 }
+.navbar-brand image{
+    /*text-align: center;*/
+    /*font-size: 20px;*/
+    height: auto;
+    /*position: relative;*/
+    /*padding-bottom: 10px;*/
+    padding-top: 0px;
+}
+.navbar-brand{
+    /*text-align: center;*/
+    font-size: 30px;
+    height: auto;
+    /*position: relative;*/
+    /*padding-bottom: 10px;*/
+}
+
 
 
 /*Carousel*/
@@ -144,21 +178,15 @@ h5{
 .resultsTh {
     font-weight: bold;
     padding: 10px;
-    text-align: left;
+    text-align: Left;
     border: 2px solid white;
 }
 .resultsThRight {
     font-weight: bold;
     padding: 10px;
-    text-align: right;
+    text-align: Right;
     border: 2px solid white;
     
-}
-.resultsThCenter {
-    font-weight: bold;
-    padding: 10px;
-    text-align: center;
-    border: 2px solid white;
 }
 
 .resultsTdLeft {
@@ -166,13 +194,9 @@ h5{
     text-align: left;
     border: 2px solid white;
     width: auto;
+    
 }
-.resultsTdCenter {
-    padding: 10px;
-    text-align: center;
-    border: 2px solid white;
-    width: auto;
-}
+
 .inputHeading {
     margin-top: 10px;
     margin-left: 20px;
@@ -182,12 +206,12 @@ h5{
 
 .tdRightAlign {
     text-align: right;
-    border: 1px solid rgb(109, 109, 105);
+    /*border: 1px solid rgb(109, 109, 105);*/
 }
 
 .tdLeftAlign {
     text-align: left;
-    border: 1px solid rgb(109, 109, 105);
+    /*border: 1px solid rgb(109, 109, 105);*/
 }
 
 .search {
@@ -198,7 +222,7 @@ h5{
 
 .editLink{
     font-size: 20px;
-    box-shadow: 0em 0em 2em 0em rgb(200,181,38);
+    /*box-shadow: 0em 0em 2em 0em rgb(200,181,38);*/
 }
 
 h3{
@@ -214,6 +238,7 @@ h3{
   border: none;
   text-align: center;
   outline: none;
+  font-size: 15px;
   font-weight: bold;
   transition: 0.4s;
   font-size: 25px;
@@ -230,7 +255,6 @@ h3{
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   text-align: center;
-  border: none;
 }
 
 .fixedheader {
@@ -252,7 +276,6 @@ h3{
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   text-align: center;
-  border: none;
 }
 
 .accordion:after {
@@ -262,7 +285,6 @@ h3{
   color: #777;
   float: right;
   margin-left: 5px;
-  border: none;
 }
 
 .open:after {
