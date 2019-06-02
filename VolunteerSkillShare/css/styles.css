@@ -29,8 +29,10 @@ h1{
     font-size: 40px;
 }
 
- 
- 
+.testborder {
+    border: 1px solid #000;
+}
+
 /* Nav Bar */
 /*#navBar {*/
 .navbar-fixed-top{
@@ -39,6 +41,7 @@ h1{
     background: white;
     height: 50px; 
     padding-top: 5px;
+    vertical-align: top;
 }
 .nav li a{
     color: black;
@@ -47,16 +50,22 @@ li a:hover {
   background-color: #555;
   color: green;
 }
-.navbar-brand image{
+.navbar-brand-image{
     height: auto;
-    padding-top: 0px;
+    padding: 0px 5px 0px 10px;
+    margin: 0px;
+    vertical-align: top;
+    text-align: left;
 }
-.navbar-brand{
+.navbar-brand {
     font-size: 30px;
-    height: auto;
+    vertical-align: middle;
+    /*height: auto;*/
 }
 
-
+.nav-spacer {
+    padding-right: 30px;
+}
 
 /*Carousel*/
 .item{
