@@ -288,12 +288,12 @@
     foreach($orgproject as $item)
     {
         echo "<tr>";
-        echo "<td class='resultsTdLeft'>" . $item['Name'] . "</td>";
+        echo "<td class='resultsTdLeft'><a href='orgProject.php?orgprojectid=". $item['OrgProjectID'] . "'>" . $item['Name'] . "</a></td>";
         echo "<td class='resultsTdLeft'>" . substr($item['Description'], 0, 20) . "...</td>";
         echo "<td class='resultsTdLeft'>" . $item['IsActive'] . "</td>";
         echo "<td class='resultsTdLeft'>" . $item['Priority'] . "</td>";
         echo "<td class='resultsTdLeft'>" . date('m-d-Y',strtotime($item['StartDate'])) . "</td>";
-        echo "<td class='resultsTdLeft'>" . substr($item['TimelineDescription'], 0, 20) . "</td>";
+        echo "<td class='resultsTdLeft'>" . substr($item['TimelineDescription'], 0, 20) . "...</td>";
         echo "<td class='resultsTdLeft'>" . $item['City'] . "</td>";
         echo "<td class='resultsTdLeft'>" . $item['State'] . "</td>";
         echo "<td class='resultsTdLeft'>" . $item['Region'] . "</td>";

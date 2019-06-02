@@ -734,7 +734,7 @@
      * Get GetOrgProjectsByOrgProjectID
      * @param $orgProjectID
      */
-    function GetOrgProjectsByOrgProjectID($orgProjectID)
+    function GetOrgProjectByOrgProjectID($orgProjectID)
     {
         global $dbName;
         $conn = getDatabaseConnection($dbName);
@@ -752,11 +752,12 @@
             $stmt->bindValue(':_OrgProjectID', $orgProjectID, PDO::PARAM_INT);
 
             // execute the stored procedure
+            // execute the stored procedure
             $stmt->execute();
-            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            return $records;
-            
+            $return_value = $stmt->fetch();
+     
+            $stmt->closeCursor();
+            return $return_value;
         }
         catch (PDOException $e)
         {
@@ -909,10 +910,14 @@
      
             // execute the stored procedure - retrieve the resulting ID
             $stmt->execute();
-            $return_value = $stmt->fetch();
-     
-            $stmt->closeCursor();
-            return $return_value;
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (isset($records) && count($records) > 0)
+            {
+                return $records[0]['lastid'];
+            }
+
+            return 0;
         }
         catch (PDOException $e)
         {
@@ -973,10 +978,14 @@
      
             // execute the stored procedure - retrieve the resulting ID
             $stmt->execute();
-            $return_value = $stmt->fetch();
-     
-            $stmt->closeCursor();
-            return $return_value;
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (isset($records) && count($records) > 0)
+            {
+                return $records[0]['lastid'];
+            }
+
+            return 0;
         }
         catch (PDOException $e)
         {
@@ -1017,10 +1026,8 @@
      
             // execute the stored procedure - retrieve the resulting ID
             $stmt->execute();
-            $return_value = $stmt->fetch();
      
             $stmt->closeCursor();
-            return $return_value;
         }
         catch (PDOException $e)
         {

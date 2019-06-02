@@ -4,9 +4,12 @@
     session_start();
     
     $authUser = getAuthUserByUserName($_SESSION['username']);
+
+    UpdateVolProfile($authUser[VolunteerID], $_POST['city'], $_POST['state'], 
+                        $_POST['region'], $_POST['country'], $_POST['postalcode'], 
+                        $_POST['url'], $_POST['email'], $_POST['phone'], 
+                        $_POST['contactPref']);
     
-    
-    UpdateVolProfile($authUser[VolunteerID], $_POST['city'], $_POST['state'], $_POST['region'], $_POST['country'], $_POST['postalcode'], $_POST['url'], $_POST['email'], $_POST['phone'], $_POST['contactPref']);
     UpdateVolBio($authUser[VolunteerID], $_POST['description'], $_POST['workHistory'], $_POST['interests']);
     UpdateAuthUser($authUser[UserID], NULL, NULL, NULL, $_POST['fname'], $_POST['lname'], NULL, NULL, NULL, NULL);
     

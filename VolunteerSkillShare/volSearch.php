@@ -40,80 +40,80 @@
     */
 
 ?>
-        <!-- code -->
+    <!-- code -->
+    <br/>
+    <div class="fixedheader">Volunteer Search</div>
+    <div class="fixedpanel">
         <br/>
-        <div class="fixedheader">Volunteer Search</div>
-        <div class="fixedpanel">
-            <br/>
-            <form id="volsearch" name="volsearch" method="post">
-            <table class="resultsTbl">
-                <tr>
-                    <th class="resultsThRight"><label for="city">City: </label></th>
-                    <td class="resultsTdLeft"><input class="search" type="text" name="city" id="city"/></td>
-                </tr>
-                <tr>
-                    <th class="resultsThRight"><label for="state">State: </label></th>
-                    <td class="resultsTdLeft"><input class="search" type="text" name="state" id="state"/></td>
-                </tr>
-                <tr>
-                    <th class="resultsThRight"><label for="region">Region / Neighborhood: </label></th>
-                    <td class="resultsTdLeft"><input class="search" type="text" name="region" id="region"/></td>
-                </tr>
-                <tr>
-                    <th class="resultsThRight"><label for="country">Country: </label></th>
-                    <td class="resultsTdLeft"><input class="search" type="text" name="country" id="country"/></td>
-                </tr>
-                <tr>
-                    <th class="resultsThRight"><label for="postalcode">Postal Code: </label></th>
-                    <td class="resultsTdLeft"><input class="search" type="text" name="postalcode" id="postalcode"/></td>
-                </tr>
-                <tr>
-                    <th class="resultsThRight"><label for="skills">Skill: </label></th>
-                    <td class="resultsTdLeft">
-                        <select class="search" name='skills' id='skills'>
-                            <option value = "">Select One</option>
-                        <?php
-                            if (isset($skillsList))
+        <form id="volsearch" name="volsearch" method="post">
+        <table class="resultsTbl">
+            <tr>
+                <th class="resultsThRight"><label for="city">City: </label></th>
+                <td class="resultsTdLeft"><input class="search" type="text" name="city" id="city"/></td>
+            </tr>
+            <tr>
+                <th class="resultsThRight"><label for="state">State: </label></th>
+                <td class="resultsTdLeft"><input class="search" type="text" name="state" id="state"/></td>
+            </tr>
+            <tr>
+                <th class="resultsThRight"><label for="region">Region / Neighborhood: </label></th>
+                <td class="resultsTdLeft"><input class="search" type="text" name="region" id="region"/></td>
+            </tr>
+            <tr>
+                <th class="resultsThRight"><label for="country">Country: </label></th>
+                <td class="resultsTdLeft"><input class="search" type="text" name="country" id="country"/></td>
+            </tr>
+            <tr>
+                <th class="resultsThRight"><label for="postalcode">Postal Code: </label></th>
+                <td class="resultsTdLeft"><input class="search" type="text" name="postalcode" id="postalcode"/></td>
+            </tr>
+            <tr>
+                <th class="resultsThRight"><label for="skills">Skill: </label></th>
+                <td class="resultsTdLeft">
+                    <select class="search" name='skills' id='skills'>
+                        <option value = "">Select One</option>
+                    <?php
+                        if (isset($skillsList))
+                        {
+                            // build the select list from the $skillsList
+                            foreach ($skillsList as $item)
                             {
-                                // build the select list from the $skillsList
-                                foreach ($skillsList as $item)
-                                {
-                                    echo "<option value='" .$item['SkillID']."'";
-                                    echo ">".$item['Name']."</option>";
-                                }
+                                echo "<option value='" .$item['SkillID']."'";
+                                echo ">".$item['Name']."</option>";
                             }
-                        ?>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="resultsThRight"><label for="experienceLevel">Min Experience:<br/>(1-low < 10-high) </label></th>
-                    <td class="resultsTdLeft">
-                        <select class="search" name="experienceLevel" id="experienceLevel">
-                            <option value="">Select Level</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="resultsThRight"><label for="skillCurrent">Current Skill: </label></th>
-                    <td class="resultsTdLeft"><input class="search" type="checkbox" name="skillCurrent" id="skillCurrent"></td>
-                </tr>
-            </table>
-            <br/><br/>
-            <input type="submit" name="searchVols" id="searchVols" class="btn btn-primary" value="Search Volunteers">
-            </form>
+                        }
+                    ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="resultsThRight"><label for="experienceLevel">Min Experience:<br/>(1-low < 10-high) </label></th>
+                <td class="resultsTdLeft">
+                    <select class="search" name="experienceLevel" id="experienceLevel">
+                        <option value="">Select Level</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="resultsThRight"><label for="skillCurrent">Current Skill: </label></th>
+                <td class="resultsTdLeft"><input class="search" type="checkbox" name="skillCurrent" id="skillCurrent"></td>
+            </tr>
+        </table>
+        <br/><br/>
+        <input type="submit" name="searchVols" id="searchVols" class="btn btn-primary" value="Search Volunteers">
+        </form>
 
-            <div id="searchVolResults" name="searchVolResults" class="resultsDiv">
+        <div id="searchVolResults" name="searchVolResults" class="resultsDiv">
 <?php
 
     // test for search button press
@@ -203,9 +203,9 @@
         echo "</table>";
     }
 ?>
-            </div>
         </div>
-        <br/>
+    </div>
+    <br/>
         
 <!-- This is the footer -->
 <?php include '_footer.php';

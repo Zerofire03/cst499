@@ -12,6 +12,7 @@
                 </figure>
             
         </footer>
+        <br/>
         <!-- closing footer -->
     </body>
     
