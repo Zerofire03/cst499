@@ -4,38 +4,13 @@
     text-align: center;
     color: black;
     font-family: 'Fira Sans Extra Condensed', sans-serif;
-    /*background-image: url("../Images/pageBackground.jpg");*/
-    /*background-position: center;*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: cover;*/
-    /*max-width: 100%;*/
-
 }
-
-/*.header{*/
-/*    padding: 5em inherit;*/
-    
-/*    background-image: url("../Images/handNcity.jpg");*/
-/*    background-position: center;*/
-/*    background-repeat: no-repeat;*/
-    /*background-size: cover;*/
-/*    max-width: 100%;*/
-/*    max-height: auto;*/
-/*}*/
 
 /*Header Image*/
 .mainLogo {
-   /*The image used */
-  /*background-image: url("../Images/handNcity.jpg");*/
-    /*max-width: 100%;*/
-    /*max-height: auto;*/
-    
    /*Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
-  /*background-size: 800px;*/
-    /*background-size: contain;*/
-    /*padding-top: 10px;*/
 }
 
 /*Adjust the welcome text*/
@@ -59,12 +34,9 @@ h1{
 /* Nav Bar */
 /*#navBar {*/
 .navbar-fixed-top{
-    /*position: absolute;*/
-    /*margin: 20px;*/
     width: auto;
     font-size: 15px;
-    background: rgb(255,255,255, 0.95);
-    /*box-shadow: 0em 0em 0em 0em rgb(200,181,38);*/
+    background: white;
     height: 50px; 
     padding-top: 5px;
 }
@@ -76,19 +48,12 @@ li a:hover {
   color: green;
 }
 .navbar-brand image{
-    /*text-align: center;*/
-    /*font-size: 20px;*/
     height: auto;
-    /*position: relative;*/
-    /*padding-bottom: 10px;*/
     padding-top: 0px;
 }
 .navbar-brand{
-    /*text-align: center;*/
     font-size: 30px;
     height: auto;
-    /*position: relative;*/
-    /*padding-bottom: 10px;*/
 }
 
 
@@ -222,7 +187,6 @@ h5{
 
 .editLink{
     font-size: 20px;
-    /*box-shadow: 0em 0em 2em 0em rgb(200,181,38);*/
 }
 
 h3{
@@ -250,7 +214,6 @@ h3{
 
 .panel {
   padding: 0 18px;
-  /*background-color: rgb(191,189,190, 0.5);*/
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
