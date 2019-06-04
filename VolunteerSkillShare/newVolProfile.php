@@ -30,7 +30,7 @@
               </tr>
               <tr>
                      <td>Phone Number</td>
-                     <td><input type="tel" name="phone" id="phone" size="20"
+                     <td><input type="tel" name="phone" id="phone" size="50"
                 pattern="\d{3}[\-]\d{3}[\-]\d{4}"
                 maxlength="20" 
                 title="###-###-####"/></td>
@@ -64,7 +64,7 @@
               </tr>
               <tr>
                      <td> Postal Code</td>
-                     <td><input type="text" name="url" id="url" size="50" maxlength="100"> </td>
+                     <td><input type="text" name="url" id="url" size="5" maxlength="100"> </td>
               </tr>
        </table>
         
