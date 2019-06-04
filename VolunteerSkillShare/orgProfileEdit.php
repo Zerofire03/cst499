@@ -67,7 +67,7 @@ include 'storedProcedureCalls.php';
                         $address2, $city, $state, $region, $country, $postalcode,
                         $email, $phone, $twitter, $linkedin);
                 
-                echo("<br/><span class='success'><h4>Org updated successfully</h4></span><br/>");
+                echo("<br/><span class='success'><h4>Organization profile updated successfully</h4></span>");
             }
             catch (Exception $e)
             {
@@ -83,6 +83,9 @@ include 'storedProcedureCalls.php';
                         $contactname, $contactemail, $contactphone, $address1,
                         $address2, $city, $state, $region, $country, $postalcode,
                         $email, $phone, $twitter, $linkedin);
+                
+                // update the user account with the new orgid
+                UpdateAuthUser($_SESSION['userid'], 'O', null, $orgid, null, null, null, null, null, null);
                 
                 if (isset($orgid) && $orgid <= 0)
                 {

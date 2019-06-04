@@ -260,7 +260,6 @@
      * Delete OrgProject record
      * @param int $orgID
      * @param int $orgProjectID
-     * @return int
      */
     function deleteOrgProject($orgID, $orgProjectID)
     {
@@ -283,6 +282,69 @@
             // execute the stored procedure
             $stmt->execute();
 
+            $stmt->closeCursor();
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * Delete OrgProject Skills records
+     * @param int $orgProjectID
+     */
+    function deleteOrgProjectSkills($orgProjectID)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+     
+            // calling stored procedure command
+            $sql = 'CALL sp_DeleteOrgProjectSkills(:_OrgProjectID)';
+            
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+     
+            // pass value to the command
+            $stmt->bindValue(':_OrgProjectID', $orgProjectID, PDO::PARAM_INT);
+     
+            // execute the stored procedure
+            $stmt->execute();
+            $stmt->closeCursor();
+        }
+        catch (PDOException $e)
+        {
+            die("Error occurred:" . $e->getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * Delete Volunteer Skills records
+     * @param int $volID
+     */
+    function deleteVolSkills($volID)
+    {
+        global $dbName;
+        $conn = getDatabaseConnection($dbName);
+        
+        try
+        {
+            // calling stored procedure command
+            $sql = 'CALL sp_DeleteVolSkills(:_VolunteerID)';
+            
+            // prepare for execution of the stored procedure
+            $stmt = $conn->prepare($sql);
+
+            // pass value to the command
+            $stmt->bindValue(':_VolunteerID', $volID, PDO::PARAM_INT);
+
+            // execute the stored procedure
+            $stmt->execute();
             $stmt->closeCursor();
         }
         catch (PDOException $e)
@@ -845,7 +907,7 @@
     
     /**
      * InsertOrgProfile
-     * @param orgName
+     * @param name
      * @param description
      * @param mission
      * @param taxIdentifier
@@ -865,7 +927,7 @@
      * @param linkedIn
      * @return int - newly generated id
      */
-    function InsertOrgProfile($orgName, $description, $mission, $taxIdentifier,
+    function InsertOrgProfile($name, $description, $mission, $taxIdentifier,
             $contactName, $contactEmail, $contactPhone, $address1, $address2,
             $city, $state, $region, $country, $postalCode, $emailAddress,
             $phoneNumber, $twitter, $linkedIn)

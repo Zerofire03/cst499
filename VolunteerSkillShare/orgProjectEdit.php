@@ -35,6 +35,9 @@ include 'storedProcedureCalls.php';
                     trim($_POST['state']), trim($_POST['region']), trim($_POST['country']),
                     trim($_POST['postalcode']));
 
+                // delete the current skills list
+                deleteOrgProjectSkills($orgprojectid);
+
                 // insert the newly selected skills                
                 if(isset($_POST['skill_list']))
                 {
@@ -203,38 +206,6 @@ include 'storedProcedureCalls.php';
     <input type="hidden" name="orgprojectid" id="orgprojectid" value="<?php echo($orgprojectid); ?>" />
 </div>
 <br/>
-<div class="fixedheader" title="Current skills data">Skills List - Current</div>
-<div class="fixedpanel">
-    <br/>
-    <table class="resultsTbl">
-    <tr>
-        <th class="resultsThCenter">Skill Name</th>
-        <th class="resultsThCenter">Experience Level</th>
-        <th class="resultsThCenter">Required</th>
-    </tr>
-    <?php
-        foreach($orgprojectskills as $skill)
-        {
-            echo "<tr>
-                <td class='resultsTdLeft'>" . $skill['SkillName'] . "</td>
-                <td class='resultsTdCenter'><textarea rows='3' cols='50' readonly>" . $skill['Description'] . "</textarea></td>
-                <td class='resultsTdCenter'>";
-
-            if($skill['IsRequired'] == 1)
-            {
-                  echo "Yes";
-            }
-            else
-            {
-                  echo "No";
-            }
-            echo "</td>";
-            echo "</tr>";
-        }
-    ?>
-    </table>
-</div>
-<br/>
 <div class="fixedheader">Add Skills</div>
 <div class="fixedpanel">
     <br/>
@@ -246,14 +217,41 @@ include 'storedProcedureCalls.php';
             <th class="resultsThCenter">Required</th>
         </tr>
     <?php
-        echo "";
-        $count = 1;
         $skills = getSkills();
-        $skillNames = array_column($orgprojectskills, 'SkillName');
+        $skillNames = null;
+        
+        //echo($skills[0]['Name']);
+        
+        if (isset($orgprojectskills) && count($orgprojectskills) > 0)
+        {
+            $skillNames = array_column($orgprojectskills, 'SkillName');
+            
+            foreach($orgprojectskills as $skill)
+            {
+                echo '<tr>
+                <td class="resultsTdCenter"><input type="checkbox" name="skill_list[]" value="' . $skill['SkillID'] . '" checked></td>
+                <td class="resultsTdLeft">' . $skill['SkillName'] . '</td>
+                <td class="resultsTdCenter">
+                    <textarea rows="3" cols="30" name="description' . $skill['SkillID'] . '" id="description' . $skill['SkillID'] . '">' . $skill['Description'] . '</textarea>
+                </td>
+                <td class="resultsTdCenter">
+                    <select name="required' . $skill['SkillID'] . '">
+                        <option value="1" ' . ($skill['IsRequired']==1 ? 'selected' : '') . '>Yes</option>
+                        <option value="0" ' . ($skill['IsRequired']==0 ? 'selected' : '') . '>No</option>
+                    </select>
+                </td>';
+            }
+        }
+        else
+        {
+            $skillNames = array("_+__+_");
+            //echo ($skillNames);
+        }
         
         foreach($skills as $skill)
         {
-            if(!(array_search($skill['Name'], $skillNames)))
+            // -- check the array
+            if(array_search($skill['Name'], $skillNames) === false)
             {
                 echo '<tr>
                     <td class="resultsTdCenter"><input type="checkbox" name="skill_list[]" value="' . $skill['SkillID'] . '"</td>
@@ -268,7 +266,6 @@ include 'storedProcedureCalls.php';
                         </select>
                     </td>';
             }
-            $count++;
         }
     ?>
     </table>

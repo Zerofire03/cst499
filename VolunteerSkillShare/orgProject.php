@@ -121,6 +121,7 @@ if ($processfail)
 ?>
 
 <!-- code -->
+<br/>
 <button class="accordion" id="listPanel" title="Organization Project list">Org Projects</button>
 <div class="panel">
     <br/>
@@ -233,6 +234,7 @@ if ($processfail)
             <td class="resultsTdLeft"><?php echo($orgproject['PostalCode']); ?></td>
         </tr>
     </table>
+    <br/>
     <br/>
     <p class="description">Skills</p>
     <table class='resultsTbl'>

@@ -32,6 +32,9 @@
             // bio info
             UpdateVolBio($authUser[VolunteerID], trim($_POST['description']), trim($_POST['workHistory']), trim($_POST['interests']));
 
+            // delete the existing skills
+            deleteVolSkills($authUser['VolunteerID']);
+
             if(isset($_POST['skill_list']))
             {
                 $array = $_POST['skill_list'];
@@ -44,7 +47,7 @@
                 }
             }
 
-            echo("<br/><span class='success'><h4>Org inserted successfully</h4></span><br/>");
+            echo("<br/><span class='success'><h4>Profile updated successfully</h4></span>");
         }
         catch (Exception $e)
         {
@@ -59,9 +62,11 @@
     $volSkills = GetVolSkillsByVolunteerID($authUser[VolunteerID]);
    
 ?>
+<br/>
 <form id="volProfileEdit" method="post" action="">
     <div class="fixedheader" title="Contact Information">Contact Info</div>
     <div class="fixedpanel">
+        <br/>
         <table class="resultsTbl">
             <tr>
                 <th class="resultsThRight"><label for="fname">First Name:</label></th>
@@ -150,6 +155,7 @@
     
     <div class="fixedheader" title="Work History Information">Work History Info</div>
     <div class="fixedpanel">
+        <br/>
         <table class="resultsTbl">
             <tr>
                 <th class="resultsThRight"><label for="description">Description</label></th>
@@ -172,41 +178,9 @@
         </table>
     </div>
     <br/>
-    
-    <div class="fixedheader" title="Current skills data">Skills List - Current</div>
-    <div class="fixedpanel">
-        <table class="resultsTbl">
-        <tr>
-            <th class="resultsThCenter">Skill Name</th>
-            <th class="resultsThCenter">Experience Level</th>
-            <th class="resultsThCenter">Current</th>
-        </tr>
-        <?php
-            foreach($volSkills as $skill)
-            {
-                echo "<tr>
-                    <td class='resultsTdLeft'>" . $skill['SkillName'] . "</td>
-                    <td class='resultsTdCenter'>" . $skill['ExperienceLevel'] . "</td>
-                    <td class='resultsTdCenter'>";
-    
-                if($skill[IsCurrent] == 1)
-                {
-                      echo "Yes";
-                }
-                else
-                {
-                      echo "No";
-                }
-                echo "</td>";
-                echo "</tr>";
-            }
-        ?>
-        </table>
-    </div>
-    <br/>
-    
     <div class="fixedheader">Add Skills</div>
     <div class="fixedpanel">
+        <br/>
         <table class="resultsTbl">
             <tr>
                 <th class="resultsThCenter">Add Skill</th>
@@ -215,14 +189,47 @@
                 <th class="resultsThCenter">Current</th>
             </tr>
         <?php
-            echo "";
-            $count = 1;
             $skills = getSkills();
-            $skillNames = array_column($volSkills, 'SkillName');
+
+            if (isset($volSkills) && count($volSkills) > 0)
+            {
+                $skillNames = array_column($volSkills, 'SkillName');
+            
+                foreach($volSkills as $skill)
+                {
+                    echo '<tr>
+                    <td class="resultsTdCenter"><input type="checkbox" name="skill_list[]" value="' . $skill['SkillID'] . '" checked></td>
+                    <td class="resultsTdLeft">' . $skill['SkillName'] . '</td>
+                    <td class="resultsTdCenter">
+                        <select name="experience' . $skill['SkillID'] . '">
+                            <option value="1" ' . ($skill['ExperienceLevel']==1 ? 'selected' : '') . '>1</option>
+                            <option value="2" ' . ($skill['ExperienceLevel']==2 ? 'selected' : '') . '>2</option>
+                            <option value="3" ' . ($skill['ExperienceLevel']==3 ? 'selected' : '') . '>3</option>
+                            <option value="4" ' . ($skill['ExperienceLevel']==4 ? 'selected' : '') . '>4</option>
+                            <option value="5" ' . ($skill['ExperienceLevel']==5 ? 'selected' : '') . '>5</option>
+                            <option value="6" ' . ($skill['ExperienceLevel']==6 ? 'selected' : '') . '>6</option>
+                            <option value="7" ' . ($skill['ExperienceLevel']==7 ? 'selected' : '') . '>7</option>
+                            <option value="8" ' . ($skill['ExperienceLevel']==8 ? 'selected' : '') . '>8</option>
+                            <option value="9" ' . ($skill['ExperienceLevel']==9 ? 'selected' : '') . '>9</option>
+                            <option value="10" ' . ($skill['ExperienceLevel']==10 ? 'selected' : '') . '>10</option>
+                        </select>
+                    </td>
+                    <td class="resultsTdCenter">
+                        <select name="current' . $skill['SkillID'] . '">
+                            <option value="1" ' . ($skill['IsCurrent']==1 ? 'selected' : '') . '>Yes</option>
+                            <option value="0" ' . ($skill['IsCurrent']==0 ? 'selected' : '') . '>No</option>
+                        </select>
+                    </td>';
+                }
+            }
+            else
+            {
+                $skillNames = array("_+__+_");
+            }
             
             foreach($skills as $skill)
             {
-                if(!(array_search($skill['Name'], $skillNames)))
+                if(array_search($skill['Name'], $skillNames) === false)
                 {
                     echo '<tr>
                         <td class="resultsTdCenter"><input type="checkbox" name="skill_list[]" value="' . $skill['SkillID'] . '"</td>
@@ -248,7 +255,6 @@
                             </select>
                         </td>';
                 }
-                $count++;
             }
         ?>
         </table>
