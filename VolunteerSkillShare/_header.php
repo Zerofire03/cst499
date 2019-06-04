@@ -12,7 +12,7 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
         <style>@import url("css/styles.css");</style>
-        <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:bold,italic,bolditalic&display=swap" rel="stylesheet">
     </head>
 
     <body id="activePage">
@@ -22,7 +22,7 @@
     
     <div class="mainLogo">
         <div class="centered">
-            <h2>Welcome <?=$_SESSION['fname']?></h2>
+            <h2>Welcome <b><?=$_SESSION['fname']?></b></h2>
         </div>
         <br/><br/>
         <img alt="Volunteer Skill Share" src="./Images/handshake_Teamwork_updated.png">

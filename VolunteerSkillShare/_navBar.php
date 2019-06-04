@@ -17,9 +17,6 @@ echo '<nav class="navbar navbar-fixed-top">';
     $vol = ($_SESSION['role'] == "V" ? TRUE : FALSE);
     $org = ($_SESSION['role'] == "O" ? TRUE : FALSE);
     
-    // test the page names
-    //echo "TESTTESTTEST - " . $fileName;
-    
     if ($fileName == 'index')
     {
         // add top level items for volunteer or org

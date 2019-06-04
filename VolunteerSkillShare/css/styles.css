@@ -3,7 +3,9 @@
 #activePage{
     text-align: center;
     color: black;
-    font-family: 'Fira Sans Extra Condensed', sans-serif;
+    font-family: 'Fira Sans Condensed', sans-serif;
+    /*font-family: 'Fira Sans Extra Condensed', sans-serif;*/
+    /*font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;*/ 
 }
 
 /*Header Image*/
@@ -12,6 +14,7 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
 
 /*Adjust the welcome text*/
 .centered {
@@ -114,14 +117,14 @@ footer, #hr_footer, #csumb{
 .text-body{
     width: auto;
     display: inline-block;
-    font-size:20px;
+    font-size:18px;
     text-align: left;
     padding-top: 20px;
     padding-right: 50px;
     padding-left: 50px;
     padding-bottom: 20px;
     border: 1px solid lightgrey;
-    background-color: rgb(242,243,245);
+    background-color: rgb(69,173,215);
 }
 
 .media-heading{

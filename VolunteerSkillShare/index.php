@@ -20,7 +20,7 @@ include '_header.php';
         <br>
         
         <div>
-            <h2>Volunteer Skill Share</h2>
+            <h2><b>Volunteer Skill Share</b></h2>
         </div>
         <p class="text-body testborder">
         Elements such as growing income inequality, weather events related to<br/>
@@ -36,7 +36,7 @@ include '_header.php';
         making it more difficult than ever to find people to fill skills gaps<br/>
         in their own teams.<br/>
         <br/>
-        <span style="text-align: center;"><b>Volunteer Skill Share</b></span><br/>
+        <b>Volunteer Skill Share</b><br/>
         <br/>
         Connecting skilled <b>Volunteers</b> and <b>nonprofit organizations</b>!
         </p>
