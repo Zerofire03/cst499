@@ -39,7 +39,7 @@
         }
         elseif($_SESSION['role'] == 'O')
         {
-            header("Location:newOrgProfile.php");
+            header("Location:orgProfileEdit.php");
         }
     }
     else

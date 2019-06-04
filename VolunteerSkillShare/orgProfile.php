@@ -25,6 +25,9 @@
     // check for project delete -- delprojectid
     if (isset($_REQUEST['delprojectid']))
     {
+        // delete the skills
+        deleteOrgProjectSkills($_REQUEST['delprojectid']);
+        
         // delete the project
         deleteOrgProject($orgid, $_REQUEST['delprojectid']);
     }

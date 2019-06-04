@@ -24,5 +24,6 @@
         <div class="centered">
             <h2>Welcome <?=$_SESSION['fname']?></h2>
         </div>
-        <img alt="Volunteer Skill Share" src="./Images/hadnshake_Teamwork.png">
+        <br/><br/>
+        <img alt="Volunteer Skill Share" src="./Images/handshake_Teamwork_updated.png">
     </div>  
