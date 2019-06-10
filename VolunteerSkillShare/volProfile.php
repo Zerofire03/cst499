@@ -19,7 +19,7 @@
     
 ?>
 <br/>
-<button class="accordion" id="contactPanel" title="Expand to display volunteer contact info">Contact Info</button>
+<button class="accordion" id="contactPanel" title="Expand to display volunteer contact info">Volunteer Contact Info</button>
 <div class="panel">
     <br/>
     <table class="resultsTbl">

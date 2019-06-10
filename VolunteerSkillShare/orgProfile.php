@@ -181,86 +181,103 @@
                 </table>
             </div>
         </div>
-        <br/>
-        <a href="orgProfileEdit.php?orgid=<?php echo($orgid) ?>"><input type="button" name="editProfile" id="editProfile" class="btn btn-primary" value="Edit Profile" title="Edit Org profile"/></a>
-        <br/><br/>
+        
+    <?php
+        // org edit should only be available to logged in org users
+        if ($_SESSION['orgid'] == $orgid && strtoupper($_SESSION['role']) == 'O')
+        {
+            echo ('<br/>
+            <a href="orgProfileEdit.php?orgid=' . $orgid . '"><input type="button" name="editProfile" id="editProfile" class="btn btn-primary" value="Edit Profile" title="Edit Org profile"/></a>
+            <br/><br/>');
+        }
+    ?>
     </div>
     <br/>
-
-    <button class="accordion" id="usersPanel" title="Org user list - add or delete users below">Org Users</button>
-    <div class="panel">
-        <br/>
-        <table class="resultsTbl">
-            <tr>
-                <th class="resultsTh"><h4>UserName</h4></th>
-                <th class="resultsTh"><h4>First Name</h4></th>
-                <th class="resultsTh"><h4>Last Name</h4></th>
-                <th class="resultsTh"><h4>Last Login</h4></th>
-                <th class="resultsTh"><h4>Updated Date</h4></th>
-                <th class="resultsTh"><h4>Actions</h4></th>
-            </tr>
 
 <?php
-    // show the user records
-    foreach($orgusers as $item)
+    // org edit should only be available to logged in org users
+    if ($_SESSION['orgid'] == $orgid && strtoupper($_SESSION['role']) == 'O')
     {
-        echo "<tr>";
-        echo "<td class='resultsTdLeft'>" . $item['UserName'] . "</td>";
-        echo "<td class='resultsTdLeft'>" . $item['FirstName'] . "</td>";
-        echo "<td class='resultsTdLeft'>" . $item['LastName'] . "</td>";
-        echo "<td class='resultsTdLeft'>" . (isset($item['LastLogin']) ? date('m-d-Y',strtotime($item['LastLogin'])) : "N/A") . "</td>";
-        echo "<td class='resultsTdLeft'>" . (isset($item['UpdatedDate']) ? date('m-d-Y',strtotime($item['UpdatedDate'])) : "N/A") . "</td>";
+        echo('<button class="accordion" id="usersPanel" title="Org user list - add or delete users below">Org Users</button>');
         
-        // user can't delete themself
-        if ($item['UserID'] != $_SESSION['userid'])
+        echo('<div class="panel">
+            <br/>
+            <table class="resultsTbl">
+                <tr>
+                    <th class="resultsTh"><h4>UserName</h4></th>
+                    <th class="resultsTh"><h4>First Name</h4></th>
+                    <th class="resultsTh"><h4>Last Name</h4></th>
+                    <th class="resultsTh"><h4>Last Login</h4></th>
+                    <th class="resultsTh"><h4>Updated Date</h4></th>
+                    <th class="resultsTh"><h4>Actions</h4></th>
+                </tr>');
+
+        // show the user records
+        foreach($orgusers as $item)
         {
-            echo "<td class='resultsTdLeft'><a href='orgProfile.php?orgid=" . $orgid . 
-                "&deleteuserid=" . $item['UserID'] . 
-                "' onclick='return confirm(\"Delete User - <" . $item['UserName'] . ">?\")' title='delete user - " . $item['UserName'] . "'>delete</a></td>";
+            echo "<tr>";
+            echo "<td class='resultsTdLeft'>" . $item['UserName'] . "</td>";
+            echo "<td class='resultsTdLeft'>" . $item['FirstName'] . "</td>";
+            echo "<td class='resultsTdLeft'>" . $item['LastName'] . "</td>";
+            echo "<td class='resultsTdLeft'>" . (isset($item['LastLogin']) ? date('m-d-Y',strtotime($item['LastLogin'])) : "N/A") . "</td>";
+            echo "<td class='resultsTdLeft'>" . (isset($item['UpdatedDate']) ? date('m-d-Y',strtotime($item['UpdatedDate'])) : "N/A") . "</td>";
+            
+            // user can't delete themself
+            if ($item['UserID'] != $_SESSION['userid'])
+            {
+                echo "<td class='resultsTdLeft'>";
+                echo "<a href='orgProfile.php?orgid=" . $orgid . "&deleteuserid=" . $item['UserID'];
+                echo "' onclick='return confirm(\"Delete User - <" . $item['UserName'] . ">?\")' title='delete user - " . $item['UserName'] . "'>delete</a></td>";
+            }
+            else
+            {
+                echo "<td class='resultsTdLeft'></td>";
+            }
+            
+            echo "</tr>";
         }
-        else
-        {
-            echo "<td class='resultsTdLeft'></td>";
-        }
-        
-        echo "</tr>";
+
+        echo('</table>
+        </div>');
+    
+        echo('
+        <a class="hiddenform" id="useraddPanel" title="Add a new user">
+            <input type="button" name="adduserbtn" id="adduserbtn" class="btn btn-primary" value="Add User" title="Add User">
+        </a>
+        <div class="panel">
+            <br/>
+            <form method="post" name="addUser" action="orgProfile.php">
+            
+            <table class="resultsTbl">
+                <tr>
+                    <th class="resultsTh"><h4>First Name:</h4></th>
+                    <td class="resultsTdLeft"><input type="text" name="fname" id="fname" size="50" required/></td>
+                </tr>
+                <tr>
+                    <th class="resultsTh"><h4>Last Name:</h4></th>
+                    <td class="resultsTdLeft"><input type="text" name="lname" id="lname" size="50" required/></td>
+                </tr>
+                <tr>
+                    <th class="resultsTh"><h4>Email Address:</h4></th>
+                    <td class="resultsTdLeft"><input type="email" name="email" id="email" 
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="please enter valid email [test@test.com]"
+                                size="50" required/></td>
+                </tr>
+                <tr>
+                    <th class="resultsTh"><h4>Password:</h4></th>
+                    <td class="resultsTdLeft"><input type="password" name="pass" id="pass" size="50" required/></td>
+                </tr>
+                <input type="hidden" name="orgid" value="' . $orgid . '"/>
+            </table>
+            <br/>
+            <br/>
+            <input type="submit" name="submitUser" id="submitUser" class="btn btn-primary" value="Add New User" title="Add New User">
+            </form>
+            <br/>
+        </div>
+        <br/>');
     }
 ?>
-        </table>
-    </div>
-    <a class="hiddenform" id="useraddPanel" title="Add a new user">
-        <input type="button" name="adduserbtn" id="adduserbtn" class="btn btn-primary" value="Add User" title="Add User">
-    </a>
-    <div class="panel">
-        <form method="post" name="addUser" action="orgProfile.php">
-        
-        <table class="resultsTbl">
-            <tr>
-                <th class="resultsTh"><h4>First Name:</h4></th>
-                <td class='resultsTdLeft'><input type="text" name="fname" id="fname" size="50" required/></td>
-            </tr>
-            <tr>
-                <th class="resultsTh"><h4>Last Name:</h4></th>
-                <td class='resultsTdLeft'><input type="text" name="lname" id="lname" size="50" required/></td>
-            </tr>
-            <tr>
-                <th class="resultsTh"><h4>Email Address:</h4></th>
-                <td class='resultsTdLeft'><input type="email" name="email" id="email" 
-                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="please enter valid email [test@test.com]"
-                            size="50" required/></td>
-            </tr>
-            <tr>
-                <th class="resultsTh"><h4>Password:</h4></th>
-                <td class='resultsTdLeft'><input type="password" name="pass" id="pass" size="50" required/></td>
-            </tr>
-            <input type="hidden" name="orgid" value="<?php echo($orgid); ?>"/>
-        </table>
-        <br/>
-        <input type="submit" name="submitUser" id="submitUser" class="btn btn-primary" value="Add New User" title="Add New User">
-        </form>
-        <br/>
-    </div>
-    <br/>
     
     <button class="accordion" id="projectsPanel" title="Projects available for volunteer search - add or delete projects below">Org Projects</button>
     <div class="panel">
@@ -283,7 +300,15 @@
                 <th class="resultsTh"><h4>Country</h4></th>
                 <th class="resultsTh"><h4>Postal Code</h4></th>
                 <th class="resultsTh"><h4>Updated Date</h4></th>
-                <th class="resultsTh"><h4>Actions</h4></th>
+
+<!-- reinsert here -->
+<?php
+    // org edit should only be available to logged in org users
+    if ($_SESSION['orgid'] == $orgid && strtoupper($_SESSION['role']) == 'O')
+    {
+        echo ('<th class="resultsTh"><h4>Actions</h4></th>');
+    }
+?>
             </tr>
 
 <?php
@@ -304,23 +329,32 @@
         echo "<td class='resultsTdLeft'>" . $item['PostalCode'] . "</td>";
         echo "<td class='resultsTdLeft'>" . date('m-d-Y',strtotime($item['UpdatedDate'])) . "</td>";
         
-        // delete comes back to this page
-        // project edit links to projectedit page
-        echo "<td class='resultsTdLeft'>";
-        echo "<a href='orgProjectEdit.php?orgprojectid=" . $item['OrgProjectID'] . "' title='edit project - " . $item['Name'] . "'>edit</a>";
-        echo "&nbsp;&nbsp;";
-        echo "<a href='orgProfile.php?orgid=" . $orgid . 
-                    "&delprojectid=" . $item['OrgProjectID'] . 
-                    "' onclick='return confirm(\"Delete Project - <" . $item['Name'] . ">?\")' title='delete project - " . $item['Name'] . "'>delete</a>";
-        echo "</td>";
+        // actions only available to logged in org matching org id
+        if ($_SESSION['orgid'] == $orgid && strtoupper($_SESSION['role']) == 'O')
+        {
+            // delete comes back to this page
+            // project edit links to projectedit page
+            echo "<td class='resultsTdLeft'>";
+            echo "<a href='orgProjectEdit.php?orgprojectid=" . $item['OrgProjectID'] . "' title='edit project - " . $item['Name'] . "'>edit</a>";
+            echo "&nbsp;&nbsp;";
+            echo "<a href='orgProfile.php?orgid=" . $orgid . 
+                        "&delprojectid=" . $item['OrgProjectID'] . 
+                        "' onclick='return confirm(\"Delete Project - <" . $item['Name'] . ">?\")' title='delete project - " . $item['Name'] . "'>delete</a>";
+            echo "</td>";
+        }
         echo "</tr>";
     }
 ?>
         </table>
         <br/><br/>
-        <a href="orgProjectEdit.php"><input type="button" name="addproject" id="addproject" class="btn btn-primary" value="Add Project" title="Add Org Project"/></a>
-        <br/>
-        <br/>
+<?php
+    // actions only available to logged in org matching org id
+    if ($_SESSION['orgid'] == $orgid && strtoupper($_SESSION['role']) == 'O')
+    {
+        echo('<a href="orgProjectEdit.php"><input type="button" name="addproject" id="addproject" class="btn btn-primary" value="Add Project" title="Add Org Project"/></a>
+        <br/><br/>');
+    }
+?>
 
     </div>
 
@@ -341,4 +375,4 @@
 ?>
 
 <!-- This is the footer -->
-<?php include '_footer.php';
+<?php include '_footer.php'; ?>

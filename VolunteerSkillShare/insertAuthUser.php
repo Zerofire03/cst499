@@ -35,10 +35,14 @@
         
         if($_SESSION['role'] == 'V')
         {
+            $_SESSION['orgid'] = null;
+            $_SESSION['volid'] = $userInfo['VolunteerID'];
             header("Location:newVolProfile.php");
         }
         elseif($_SESSION['role'] == 'O')
         {
+            $_SESSION['orgid'] = $userInfo['OrgID'];
+            $_SESSION['volid'] = null;
             header("Location:orgProfileEdit.php");
         }
     }

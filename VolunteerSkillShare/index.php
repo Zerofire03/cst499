@@ -9,7 +9,10 @@ include '_header.php';
         <br>
 
         <div id="Home Page Quote">
-            <h4 class="media-heading">“You make a living by what you get. You make a life by what you give.”</h4>
+            <h4 class="media-heading">
+                “You make a living by what you get.<br/>
+                You make a life by what you give.”
+            </h4>
             <h5>~Winston Churchill</h5>
         </div>
         <br/>

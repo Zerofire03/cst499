@@ -43,19 +43,23 @@ echo '<nav class="navbar navbar-fixed-top">';
     {
         // available to all, including anonymous
         echo '<li role="presentation"><a href="index.php">Home</a></li>';
-        echo '<li role="presentation" class="active"><a href="login.php">Login</a></li>';
         if($vol)
         {
             echo '<li role="presentation"><a href="volProfile.php">My Profile</a></li>';
             echo '<li role="presentation"><a href="volProfileEdit.php">My Profile Edit</a></li>';
         }
-        if($org)
+        elseif($org)
         {
             echo '<li role="presentation"><a href="orgProfile.php">Org Profile</a></li>';
             echo '<li role="presentation"><a href="orgProfileEdit.php">Org Profile Edit</a></li>';
             echo '<li role="presentation"><a href="orgProject.php">Org Projects</a></li>';  
             echo '<li role="presentation"><a href="volSearch.php">Volunteer Search</a></li>';
         }
+        else
+        {
+            echo '<li role="presentation" class="active"><a href="login.php">Login</a></li>';
+        }
+        
         echo '<li role="presentation"><a href="orgSearch.php">Active Project Search</a></li>';
     }
     
@@ -63,18 +67,21 @@ echo '<nav class="navbar navbar-fixed-top">';
     {
         // available to all, including anonymous
         echo '<li role="presentation"><a href="index.php">Home</a></li>';
-        echo '<li role="presentation"><a href="login.php">Login</a></li>';
         if($vol)
         {
             echo '<li role="presentation"><a href="volProfile.php">My Profile</a></li>';
             echo '<li role="presentation"><a href="volProfileEdit.php">My Profile Edit</a></li>';
         }
-        if($org)
+        elseif($org)
         {
             echo '<li role="presentation"><a href="orgProfile.php">Org Profile</a></li>';
             echo '<li role="presentation"><a href="orgProfileEdit.php">Org Profile Edit</a></li>';
             echo '<li role="presentation"><a href="orgProject.php">Org Projects</a></li>';  
             echo '<li role="presentation"><a href="volSearch.php">Volunteer Search</a></li>';
+        }
+        else
+        {
+            echo '<li role="presentation"><a href="login.php">Login</a></li>';
         }
         echo '<li role="presentation" class="active"><a href="orgSearch.php">Active Project Search</a></li>';
     }
@@ -114,6 +121,7 @@ echo '<nav class="navbar navbar-fixed-top">';
         }
         else
         {
+            echo '<li role="presentation"><a href="login.php">Login</a></li>';
             echo '<li role="presentation" class="active"><a href="orgSearch.php">Active Project Search</a></li>';
         }
       // org project search put into role tests
