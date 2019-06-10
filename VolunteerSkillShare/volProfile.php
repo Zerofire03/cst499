@@ -116,8 +116,10 @@
     ?>
     </table>
     <br>
+    <br>
 </div>
 <script src="scripts/vss_scripts.js"></script>
+    
     
 <?php
     // expand the accordian boxes and scroll to page top
@@ -131,5 +133,5 @@
             });
         </script>");
 ?>
-    
+
 <?php include '_footer.php'; ?>

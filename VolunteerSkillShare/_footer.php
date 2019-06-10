@@ -8,7 +8,7 @@
                 It is used for academic purposes only.
                 
                 <figure id="csumb">
-                    <img src="Images/csumb_wide_logo_black.png" height="80" alt="CSUMB Logo">
+                    <img src="Images/CSUMB_Logo_540_Bay_Blue.png" alt="CSUMB Logo">
                 </figure>
             
         </footer>
